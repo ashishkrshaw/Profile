@@ -1,0 +1,230 @@
+/* Enhanced Research Page */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --dark: #0a0a0a;
+    --card: #151515;
+    --border: #252525;
+    --light: #ffffff;
+    --muted: #888;
+    --accent: #1595b6;
+}
+
+.page {
+    background: linear-gradient(180deg, var(--dark) 0%, #0d1117 100%);
+    color: var(--light);
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 30px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+}
+
+.backBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9em;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.backBtn:hover {
+    color: var(--light);
+    border-color: var(--accent);
+    transform: translateX(-4px);
+}
+
+.header h1 {
+    font-size: 1.8em;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--light), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 0.9em;
+    margin-top: 4px;
+}
+
+.section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 5%;
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.sectionIcon {
+    font-size: 1.5em;
+    color: var(--accent);
+}
+
+.sectionHeader h2 {
+    font-size: 1.4em;
+    font-weight: 700;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    transition: all 0.3s;
+}
+
+.card:hover {
+    border-color: rgba(21, 149, 182, 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.cardIcon {
+    width: 80px;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8em;
+    color: var(--light);
+    flex-shrink: 0;
+}
+
+.cardContent {
+    padding: 24px;
+    flex: 1;
+}
+
+.course {
+    display: inline-block;
+    background: var(--border);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 0.9em;
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.skills span {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    border: 1px solid;
+    background: transparent;
+    font-weight: 500;
+}
+
+.link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--light);
+    font-size: 0.85em;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.link:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 5%;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.footerIcon {
+    font-size: 1.5em;
+    color: var(--accent);
+}
+
+.footer p {
+    color: var(--muted);
+    font-size: 0.95em;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .card {
+        flex-direction: column;
+    }
+
+    .cardIcon {
+        width: 100%;
+        height: 60px;
+    }
+
+    .header h1 {
+        font-size: 1.4em;
+    }
+}
