@@ -193,14 +193,12 @@ export default function Home() {
 
                     {/* DevOps & Tools */}
                     <div className={styles.skillCategory}>
-                        <h3><FaDocker /> DevOps & Tools</h3>
+                        <h3><FaDocker />Tools</h3>
                         <div className={styles.skillTags}>
                             <span>Git</span>
                             <span>GitHub Actions</span>
                             <span>Linux</span>
                             <span>Docker</span>
-                            <span>Terraform</span>
-                            <span>Jenkins</span>
                         </div>
                     </div>
 
@@ -235,11 +233,21 @@ export default function Home() {
                 <div className={styles.expGrid}>
                     <div className={styles.expCard}>
                         <div className={styles.expIcon}><FaBriefcase /></div>
-                        <div><h3>Cloud Security Intern</h3><p className={styles.expMeta}>TCS iON • 2024</p><p>Secured Docker on AWS. IAM policies, Security Groups, Trivy scanning.</p></div>
+                        <div>
+                            <h3>Cloud Security Intern</h3>
+                            <p className={styles.expMeta}>TCS iON • 2024</p>
+                            <p>Secured Docker on AWS. IAM policies, Security Groups, Trivy scanning.</p>
+                            <Link to="/experience" className={styles.expDetailsBtn}><FaInfoCircle /> Details</Link>
+                        </div>
                     </div>
                     <div className={styles.expCard}>
                         <div className={styles.expIcon}><FaServer /></div>
-                        <div><h3>Personal Cloud Infrastructure</h3><p className={styles.expMeta}>Self-Hosted • 2023-Present</p><p>Built & managed home lab with AWS, Terraform, Docker. Deployed serverless apps, CI/CD pipelines, and monitoring stacks.</p></div>
+                        <div>
+                            <h3>Personal Cloud Infrastructure</h3>
+                            <p className={styles.expMeta}>Self-Hosted • 2023-Present</p>
+                            <p>Built & managed home lab with AWS, Docker. Deployed serverless apps, CI/CD pipelines.</p>
+                            <Link to="/experience" className={styles.expDetailsBtn}><FaInfoCircle /> Details</Link>
+                        </div>
                     </div>
                 </div>
             </section>
