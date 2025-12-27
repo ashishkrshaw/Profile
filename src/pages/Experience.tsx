@@ -10,7 +10,7 @@ const experiences = [
         period: 'June 2024 - August 2024',
         type: 'Internship',
         icon: <FaBriefcase />,
-        color: '#FF9900',
+        color: 'var(--accent)',
         description: 'Worked on securing containerized applications deployed on AWS infrastructure. Implemented security best practices for Docker containers and cloud resources.',
         responsibilities: [
             'Configured IAM policies and Security Groups for AWS resources',
@@ -33,7 +33,7 @@ const experiences = [
         period: '2023 - Present',
         type: 'Personal Project',
         icon: <FaServer />,
-        color: '#10B981',
+        color: 'var(--accent-light)',
         description: 'Built and maintain a personal cloud infrastructure for learning and hosting personal projects. Focus on AWS services, containerization, and DevOps practices.',
         responsibilities: [
             'Designed and deployed serverless applications on AWS Lambda',
@@ -63,7 +63,7 @@ export default function Experience() {
             <main className={styles.main}>
                 {experiences.map(exp => (
                     <section key={exp.id} className={styles.expSection}>
-                        <div className={styles.expHeader} style={{ borderColor: exp.color }}>
+                        <div className={styles.expHeader} style={{ borderLeftColor: exp.color }}>
                             <div className={styles.expIcon} style={{ background: exp.color }}>{exp.icon}</div>
                             <div>
                                 <h2>{exp.title}</h2>

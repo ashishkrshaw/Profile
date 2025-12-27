@@ -1,7 +1,7 @@
 .contactPage {
     padding-top: 100px;
     min-height: 100vh;
-    background: var(--bg-white);
+    background: var(--bg-dark);
 }
 
 .hero {
@@ -18,23 +18,25 @@
 .sectionLabel {
     font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--accent-red);
+    letter-spacing: 0.2em;
+    color: var(--accent-light);
     font-weight: 600;
     margin-bottom: 12px;
+    font-family: var(--font-jp);
 }
 
 .sectionTitle {
     font-size: clamp(32px, 5vw, 48px);
     font-weight: 800;
     letter-spacing: -0.03em;
-    color: var(--text-primary);
+    color: var(--text-white);
     margin-bottom: 16px;
+    font-family: var(--font-jp);
 }
 
 .sectionDesc {
     font-size: 18px;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     max-width: 500px;
     margin: 0 auto;
 }
@@ -46,18 +48,20 @@
 }
 
 .infoSection {
-    background: var(--bg-off-white);
-    border: 1px solid var(--border-light);
-    border-radius: 16px;
+    background: var(--bg-darker);
+    border: 1px solid var(--border);
+    border-radius: 4px;
     padding: 40px;
     height: fit-content;
+    border-left: 4px solid var(--accent);
 }
 
 .infoSection h2 {
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 32px;
-    color: var(--text-primary);
+    color: var(--text-white);
+    font-family: var(--font-jp);
 }
 
 .infoItem {
@@ -69,23 +73,25 @@
 
 .infoIcon {
     font-size: 20px;
-    color: var(--accent-blue);
+    color: var(--accent);
 }
 
 .infoItem a {
-    color: var(--text-secondary);
+    color: var(--text-muted);
     font-size: 15px;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .infoItem a:hover {
-    color: var(--accent-red);
+    color: var(--accent-light);
+    transform: translateX(5px);
 }
 
 .formSection {
-    background: var(--bg-off-white);
-    border: 1px solid var(--border-light);
-    border-radius: 16px;
+    background: var(--bg-darker);
+    border: 1px solid var(--border);
+    border-radius: 4px;
     padding: 40px;
 }
 
@@ -104,23 +110,24 @@
 .formGroup {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .formGroup label {
     font-size: 14px;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--text-white);
+    font-family: var(--font-jp);
 }
 
 .formGroup input,
 .formGroup textarea {
     padding: 14px 18px;
-    border: 1px solid var(--border-light);
-    border-radius: 12px;
-    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.03);
     font-size: 15px;
-    color: var(--text-primary);
+    color: var(--text-white);
     font-family: inherit;
     transition: all 0.3s ease;
 }
@@ -128,46 +135,53 @@
 .formGroup input:focus,
 .formGroup textarea:focus {
     outline: none;
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .formGroup textarea {
     resize: vertical;
-    min-height: 120px;
+    min-height: 150px;
 }
 
 .submitBtn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 16px 32px;
+    gap: 12px;
+    padding: 16px 40px;
     font-size: 16px;
     font-weight: 600;
-    border-radius: 100px;
-    background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+    border-radius: 4px;
+    background: var(--accent);
     color: white;
-    border: none;
+    border: 1px solid var(--accent);
     cursor: pointer;
     transition: all 0.3s ease;
+    font-family: var(--font-jp);
+    width: fit-content;
 }
 
 .submitBtn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+    background: var(--accent-light);
+    border-color: var(--accent-light);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 168, 204, 0.3);
 }
 
 .submitBtn:disabled {
-    opacity: 0.7;
+    opacity: 0.5;
     cursor: not-allowed;
 }
 
 .successMsg {
-    color: #10B981;
-    font-size: 14px;
+    color: var(--accent-light);
+    font-size: 15px;
     font-weight: 500;
     text-align: center;
+    padding: 15px;
+    background: rgba(0, 168, 204, 0.1);
+    border-radius: 4px;
 }
 
 @media (max-width: 900px) {
@@ -182,5 +196,9 @@
 
     .formRow {
         grid-template-columns: 1fr;
+    }
+
+    .submitBtn {
+        width: 100%;
     }
 }

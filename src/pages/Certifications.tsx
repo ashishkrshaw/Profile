@@ -61,12 +61,12 @@ export default function Certifications() {
                         <motion.a key={cert.id} href={cert.link} target="_blank" rel="noopener noreferrer" className={styles.certCard} variants={itemVariants} whileHover={{ y: -8, scale: 1.02 }}>
                             <div className={styles.certImage}>
                                 <img src={cert.image} alt={cert.title} onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/400x300/151515/666?text=Certificate'; }} />
-                                <div className={styles.overlay} style={{ background: cert.color }}>
+                                <div className={styles.overlay}>
                                     <FaExternalLinkAlt /> View Certificate
                                 </div>
                             </div>
                             <div className={styles.certInfo}>
-                                <span className={styles.certIcon} style={{ background: cert.color }}>{cert.icon}</span>
+                                <span className={styles.certIcon}>{cert.icon}</span>
                                 <div>
                                     <h3>{cert.title}</h3>
                                     <p>{cert.issuer} • {cert.year}</p>
@@ -86,7 +86,7 @@ export default function Certifications() {
                 <motion.div className={styles.badgesGrid} variants={containerVariants} initial="hidden" animate="visible">
                     {badges.map(badge => (
                         <motion.a key={badge.id} href={badge.link} target="_blank" rel="noopener noreferrer" className={styles.badgeCard} variants={itemVariants} whileHover={{ y: -4 }}>
-                            <div className={styles.badgeIcon} style={{ background: badge.color }}><FaAws /></div>
+                            <div className={styles.badgeIcon}><FaAws /></div>
                             <div className={styles.badgeInfo}>
                                 <h4>{badge.title}</h4>
                                 <p>{badge.issuer}</p>

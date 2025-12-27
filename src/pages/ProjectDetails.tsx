@@ -26,11 +26,11 @@ const projectsData: Record<string, {
             '90% reduction in manual content effort'
         ],
         stack: [
-            { name: 'React', color: '#61DAFB' },
-            { name: 'AWS Amplify', color: '#FF9900' },
-            { name: 'API Gateway', color: '#FF9900' },
-            { name: 'Lambda', color: '#FF9900' },
-            { name: 'DynamoDB', color: '#4053D6' },
+            { name: 'React', color: 'var(--accent-light)' },
+            { name: 'AWS Amplify', color: 'var(--accent)' },
+            { name: 'API Gateway', color: 'var(--accent)' },
+            { name: 'Lambda', color: 'var(--accent)' },
+            { name: 'DynamoDB', color: 'var(--accent-light)' },
             { name: 'Perplexity AI', color: '#7C3AED' }
         ],
         stats: [
@@ -47,9 +47,9 @@ const projectsData: Record<string, {
             { title: 'DynamoDB', desc: 'Facts Storage', icon: '💾' }
         ],
         impact: [
-            { label: 'Manual Effort Saved', value: '90%', color: '#10B981' },
-            { label: 'Content Freshness', value: 'Daily', color: '#3B82F6' },
-            { label: 'Cost per Request', value: '$0.0001', color: '#8B5CF6' }
+            { label: 'Manual Effort Saved', value: '90%', color: 'var(--accent-light)' },
+            { label: 'Content Freshness', value: 'Daily', color: 'var(--accent-light)' },
+            { label: 'Cost per Request', value: '$0.0001', color: 'var(--accent)' }
         ]
     },
     'secure-s3-file-uploader': {
@@ -67,10 +67,10 @@ const projectsData: Record<string, {
             'JSON scan reports with 56-engine summaries'
         ],
         stack: [
-            { name: 'AWS S3', color: '#569A31' },
-            { name: 'Lambda', color: '#FF9900' },
+            { name: 'AWS S3', color: 'var(--accent)' },
+            { name: 'Lambda', color: 'var(--accent)' },
             { name: 'VirusTotal API', color: '#DC2626' },
-            { name: 'CloudFront', color: '#FF9900' },
+            { name: 'CloudFront', color: 'var(--accent)' },
             { name: 'Terraform', color: '#7B42BC' },
             { name: 'Jenkins CI/CD', color: '#D33833' }
         ],
@@ -89,9 +89,9 @@ const projectsData: Record<string, {
             { title: 'S3 + CloudFront', desc: 'Clean Files Only', icon: '☁️' }
         ],
         impact: [
-            { label: 'Breach Attempts Stopped', value: '18', color: '#10B981' },
-            { label: 'Manual Review Reduced', value: '-80%', color: '#06B6D4' },
-            { label: 'Compliance Ready', value: '100%', color: '#8B5CF6' }
+            { label: 'Breach Attempts Stopped', value: '18', color: 'var(--accent-light)' },
+            { label: 'Manual Review Reduced', value: '-80%', color: 'var(--accent-light)' },
+            { label: 'Compliance Ready', value: '100%', color: 'var(--accent)' }
         ],
         documentation: 'https://docs.google.com/presentation/d/1IIfr6lcu3sIxv53Zau9pIhEbGrj-O4OyULdqnui3PiA/embed'
     },
@@ -110,9 +110,9 @@ const projectsData: Record<string, {
             '25% cost savings through optimization'
         ],
         stack: [
-            { name: 'Node.js', color: '#339933' },
-            { name: 'React', color: '#61DAFB' },
-            { name: 'AWS SDK', color: '#FF9900' },
+            { name: 'Node.js', color: 'var(--accent-light)' },
+            { name: 'React', color: 'var(--accent-light)' },
+            { name: 'AWS SDK', color: 'var(--accent)' },
             { name: 'Azure SDK', color: '#0078D4' },
             { name: 'GCP SDK', color: '#4285F4' },
             { name: 'Telegram API', color: '#26A5E4' }
@@ -130,9 +130,9 @@ const projectsData: Record<string, {
             { title: 'Telegram Bot', desc: 'Alert Notifications', icon: '📱' }
         ],
         impact: [
-            { label: 'Manual Monitoring Reduced', value: '-80%', color: '#10B981' },
-            { label: 'Decision Speed', value: '+50%', color: '#3B82F6' },
-            { label: 'Cost Visibility', value: '100%', color: '#8B5CF6' }
+            { label: 'Manual Monitoring Reduced', value: '-80%', color: 'var(--accent-light)' },
+            { label: 'Decision Speed', value: '+50%', color: 'var(--accent-light)' },
+            { label: 'Cost Visibility', value: '100%', color: 'var(--accent)' }
         ]
     },
     'heart-disease-predictor': {
@@ -150,8 +150,8 @@ const projectsData: Record<string, {
             'Early diagnosis support system'
         ],
         stack: [
-            { name: 'Python', color: '#3776AB' },
-            { name: 'Amazon SageMaker', color: '#FF9900' },
+            { name: 'Python', color: 'var(--accent-light)' },
+            { name: 'Amazon SageMaker', color: 'var(--accent)' },
             { name: 'Pandas', color: '#150458' },
             { name: 'Scikit-learn', color: '#F7931E' },
             { name: 'Matplotlib', color: '#11557C' }
@@ -169,9 +169,9 @@ const projectsData: Record<string, {
             { title: 'Inference', desc: 'Risk Prediction', icon: '💓' }
         ],
         impact: [
-            { label: 'Early Detection Rate', value: '+35%', color: '#10B981' },
-            { label: 'Diagnosis Time Saved', value: '60%', color: '#06B6D4' },
-            { label: 'False Positives', value: '<8%', color: '#8B5CF6' }
+            { label: 'Early Detection Rate', value: '+35%', color: 'var(--accent-light)' },
+            { label: 'Diagnosis Time Saved', value: '60%', color: 'var(--accent-light)' },
+            { label: 'False Positives', value: '<8%', color: 'var(--accent)' }
         ]
     }
 };

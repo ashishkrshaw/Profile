@@ -1,7 +1,10 @@
 .projectsPage {
     padding-top: 100px;
     min-height: 100vh;
-    background: linear-gradient(180deg, #FAFBFC 0%, #F0F4FF 100%);
+    background: radial-gradient(circle at top right, var(--accent-glow), transparent),
+        radial-gradient(circle at bottom left, var(--violet-glow), transparent),
+        var(--dark);
+    color: var(--light);
 }
 
 .hero {
@@ -25,10 +28,11 @@
 }
 
 .sectionTitle {
-    font-size: clamp(36px, 6vw, 52px);
+    font-family: var(--font-jp);
+    font-size: clamp(32px, 6vw, 48px);
     font-weight: 800;
-    letter-spacing: -0.03em;
-    color: var(--text-primary);
+    letter-spacing: -2px;
+    color: var(--light);
     margin-bottom: 16px;
 }
 
@@ -46,22 +50,26 @@
 }
 
 .projectCard {
-    background: white;
-    border-radius: 24px;
+    background: var(--card);
+    border-radius: 4px;
+    /* Minimalist */
     overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    transition: all 0.4s ease;
+    border: 1px solid var(--border);
+    transition: all 0.4s var(--transition-smooth);
+    position: relative;
 }
 
 .projectCard:hover {
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-light);
+    background: rgba(13, 17, 23, 0.8);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .imageWrap {
     position: relative;
     width: 100%;
-    height: 220px;
+    height: 160px;
     overflow: hidden;
 }
 
@@ -96,14 +104,14 @@
     align-items: center;
     gap: 8px;
     padding: 14px 28px;
-    background: white;
-    color: #111;
+    background: var(--accent);
+    color: #fff;
     font-size: 14px;
     font-weight: 600;
-    border-radius: 100px;
+    border-radius: 4px;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s var(--transition-smooth);
 }
 
 .detailsBtn:hover {
@@ -111,7 +119,7 @@
 }
 
 .cardContent {
-    padding: 28px;
+    padding: 18px;
 }
 
 .cardTop {
@@ -135,9 +143,10 @@
 }
 
 .cardContent h3 {
-    font-size: 22px;
+    font-family: var(--font-jp);
+    font-size: 1.5em;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--light);
     margin-bottom: 12px;
 }
 
@@ -158,9 +167,10 @@
 .tag {
     font-size: 12px;
     padding: 6px 14px;
-    background: #F1F5F9;
-    border-radius: 100px;
-    color: #475569;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
     font-weight: 500;
 }
 
@@ -177,17 +187,18 @@
     padding: 10px 18px;
     font-size: 13px;
     font-weight: 600;
-    border-radius: 10px;
+    border-radius: 4px;
     text-decoration: none;
-    transition: all 0.3s ease;
-    background: #F1F5F9;
-    color: #334155;
-    border: none;
+    transition: all 0.3s var(--transition-smooth);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--muted);
+    border: 1px solid var(--border);
     cursor: pointer;
 }
 
 .linkBtn:hover {
-    background: #E2E8F0;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--light);
 }
 
 .linkBtn.docBtn {
@@ -204,18 +215,20 @@
 .modalOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 2000;
     padding: 20px;
 }
 
 .modal {
-    background: white;
-    border-radius: 24px;
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    /* Minimalist */
     max-width: 700px;
     width: 100%;
     max-height: 90vh;
@@ -265,14 +278,15 @@
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--accent-red);
+    color: var(--accent-light);
     font-weight: 600;
 }
 
 .modalContent h2 {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--text-primary);
+    font-family: var(--font-jp);
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--light);
     margin: 12px 0 16px;
 }
 
@@ -303,11 +317,12 @@
 
 .techTag {
     padding: 8px 16px;
-    background: linear-gradient(135deg, #F0F4FF, #E0E7FF);
-    border-radius: 10px;
+    background: rgba(26, 42, 108, 0.2);
+    border: 1px solid rgba(0, 168, 204, 0.2);
+    border-radius: 4px;
     font-size: 13px;
     font-weight: 600;
-    color: #4F46E5;
+    color: var(--accent-light);
 }
 
 .modalLinks {
@@ -321,18 +336,19 @@
     align-items: center;
     gap: 8px;
     padding: 14px 28px;
-    background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+    background: var(--accent);
     color: white;
     font-size: 14px;
     font-weight: 600;
-    border-radius: 12px;
+    border-radius: 4px;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
 }
 
 .modalBtn:hover {
+    background: var(--accent-light);
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 168, 204, 0.3);
 }
 
 .modalBtnOutline {
@@ -341,18 +357,18 @@
     gap: 8px;
     padding: 14px 28px;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--light);
     font-size: 14px;
     font-weight: 600;
-    border-radius: 12px;
-    border: 2px solid #E2E8F0;
+    border-radius: 4px;
+    border: 1px solid var(--border);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
 }
 
 .modalBtnOutline:hover {
-    border-color: #CBD5E1;
-    background: #F8FAFC;
+    border-color: var(--accent-light);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 @media (max-width: 900px) {

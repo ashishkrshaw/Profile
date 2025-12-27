@@ -3,13 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Matter from 'matter-js';
 import {
-    FaAws, FaDocker, FaShieldAlt, FaGithub, FaLinkedin,
+    FaAws, FaDocker, FaGithub, FaLinkedin,
     FaEnvelope, FaExternalLinkAlt, FaTimes, FaWhatsapp, FaArrowDown,
-    FaBriefcase, FaServer, FaCode, FaUsers, FaComments, FaCheck, FaSpinner,
-    FaGraduationCap, FaAward, FaGoogle, FaHome, FaCog, FaFolderOpen,
-    FaPaperPlane, FaBook, FaYoutube, FaInfoCircle
+    FaBriefcase, FaCheck, FaSpinner, FaCode, FaServer, FaShieldAlt,
+    FaGraduationCap, FaAward, FaGoogle, FaCog, FaFolderOpen,
+    FaPaperPlane, FaBook, FaYoutube, FaInfoCircle, FaComments, FaTools, FaCloud
 } from 'react-icons/fa';
 import { SiOracle } from 'react-icons/si';
+import LottieSocialIcon from '../components/LottieSocialIcon';
 import styles from './Home.module.css';
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzTu9IbuxizIZ5p8IQEkPTli2Sjsf8On_WZoQ-efiTZdGqImukSq-s-rLcWWQF4vUS-/exec';
@@ -35,6 +36,43 @@ const academics = [
     { degree: 'Secondary (10th)', institution: 'High School Baddiha Jamua • JAC Board', year: '2021', status: 'Completed' },
 ];
 
+// TypeWriter Component for animated role text
+const roles = [
+    'Aspiring Cloud & Backend Engineer',
+    'Python & AWS Developer',
+    'Junior Cloud Developer',
+];
+
+function TypeWriter() {
+    const [roleIndex, setRoleIndex] = useState(0);
+    const [text, setText] = useState('');
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    useEffect(() => {
+        const currentRole = roles[roleIndex];
+        const speed = isDeleting ? 50 : 100;
+
+        if (!isDeleting && text === currentRole) {
+            setTimeout(() => setIsDeleting(true), 2000);
+            return;
+        }
+
+        if (isDeleting && text === '') {
+            setIsDeleting(false);
+            setRoleIndex((prev) => (prev + 1) % roles.length);
+            return;
+        }
+
+        const timeout = setTimeout(() => {
+            setText(isDeleting ? currentRole.slice(0, text.length - 1) : currentRole.slice(0, text.length + 1));
+        }, speed);
+
+        return () => clearTimeout(timeout);
+    }, [text, isDeleting, roleIndex]);
+
+    return <span>{text}<span className={styles.cursor}>|</span></span>;
+}
+
 function ParticleCanvas() {
     const canvasRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -47,8 +85,9 @@ function ParticleCanvas() {
         World.add(engine.world, attractiveBody);
         for (let i = 0; i < 50; i++) {
             const x = Common.random(0, width), y = Common.random(0, height);
-            World.add(engine.world, Bodies.polygon(x, y, Math.floor(Common.random(3, 6)), Common.random(5, 40), { friction: 0, frictionAir: 0.02, render: { fillStyle: '#222', strokeStyle: '#333', lineWidth: 1 } }));
-            World.add(engine.world, Bodies.circle(x, y, Common.random(3, 15), { friction: 0, frictionAir: 0.01, render: { fillStyle: '#27292d', strokeStyle: '#111', lineWidth: 1 } }));
+            const color = i % 2 === 0 ? '#8b0000' : '#00a8cc';
+            World.add(engine.world, Bodies.polygon(x, y, Math.floor(Common.random(3, 6)), Common.random(5, 40), { friction: 0, frictionAir: 0.02, render: { fillStyle: color, strokeStyle: color, lineWidth: 1, opacity: 0.6 } }));
+            World.add(engine.world, Bodies.circle(x, y, Common.random(3, 15), { friction: 0, frictionAir: 0.01, render: { fillStyle: color, strokeStyle: color, lineWidth: 1, opacity: 0.8 } }));
         }
         // Track mouse via window, not canvas - allows scroll to work
         const mousePos = { x: width / 2, y: height / 2 };
@@ -56,7 +95,7 @@ function ParticleCanvas() {
         window.addEventListener('mousemove', handleMouseMove);
         Events.on(engine, 'afterUpdate', () => {
             Body.translate(attractiveBody, { x: (mousePos.x - attractiveBody.position.x) * 0.1, y: (mousePos.y - attractiveBody.position.y) * 0.1 });
-            engine.world.bodies.forEach((b: any) => { if (b !== attractiveBody && !b.isStatic) Body.applyForce(b, b.position, { x: (attractiveBody.position.x - b.position.x) * 1e-6, y: (attractiveBody.position.y - b.position.y) * 1e-6 }); });
+            engine.world.bodies.forEach((b: any) => { if (b !== attractiveBody && !b.isStatic) Body.applyForce(b, b.position, { x: (attractiveBody.position.x - b.position.x) * 1e-6, y: (attractiveBody.position.y - b.position.y) * 1e-6 }); }); // eslint-disable-line @typescript-eslint/no-explicit-any
         });
         const runner = Runner.create(); Runner.run(runner, engine); Render.run(render);
         return () => { window.removeEventListener('mousemove', handleMouseMove); Render.stop(render); Runner.stop(runner); World.clear(engine.world, false); Engine.clear(engine); render.canvas?.remove(); };
@@ -76,6 +115,7 @@ export default function Home() {
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
     const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
+    const [aboutExpanded, setAboutExpanded] = useState(false);
 
     const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
@@ -96,7 +136,7 @@ export default function Home() {
             <nav className={styles.navbar}>
                 <a href="#" className={styles.logo} onClick={() => scrollTo('hero')}>AKS</a>
                 <div className={styles.navLinks}>
-                    <a onClick={() => scrollTo('hero')}><FaHome /> <span>Home</span></a>
+
                     <a onClick={() => scrollTo('about')}><FaCode /> <span>About</span></a>
                     <a onClick={() => scrollTo('skills')}><FaCog /> <span>Skills</span></a>
                     <a onClick={() => scrollTo('projects')}><FaFolderOpen /> <span>Projects</span></a>
@@ -104,8 +144,12 @@ export default function Home() {
                     <a onClick={() => scrollTo('contact')}><FaPaperPlane /> <span>Contact</span></a>
                 </div>
                 <div className={styles.navSocial}>
-                    <a href="https://linkedin.com/in/asksaw" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-                    <a href="https://github.com/ashishkrshaw" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                    <a href="https://linkedin.com/in/asksaw" target="_blank" rel="noopener noreferrer">
+                        <FaLinkedin />
+                    </a>
+                    <a href="https://github.com/ashishkrshaw" target="_blank" rel="noopener noreferrer">
+                        <LottieSocialIcon type="github" size={35} />
+                    </a>
                 </div>
             </nav>
 
@@ -115,7 +159,7 @@ export default function Home() {
                 <motion.div className={styles.heroContent} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
                     <img src="/images/profile/ashish1.png" alt="Ashish" className={styles.profilePic} onError={(e) => { (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=AKS&background=1595b6&color=fff&size=200'; }} />
                     <h1>Ashish Kumar Shaw</h1>
-                    <p className={styles.role}>Cloud & Backend Developer</p>
+                    <p className={styles.role}><TypeWriter /></p>
                     <p className={styles.tagline}>Building secure APIs with Python. Deploying on AWS.</p>
                     <div className={styles.heroBtns}>
                         <a href="/Ashish Kumar Shaw.pdf" target="_blank" className={styles.btnPrimary}>Resume</a>
@@ -125,13 +169,39 @@ export default function Home() {
                 <div className={styles.scrollDown} onClick={() => scrollTo('about')}><FaArrowDown /></div>
             </section>
 
-            {/* ABOUT ME - Europass Style */}
+            {/* ABOUT ME - Europass + Japanese Concept */}
             <section id="about" className={styles.section}>
                 <h2>About Me</h2>
                 <div className={styles.aboutContent}>
-                    <p>I'm a <strong>BCA student specializing in Cloud Computing & Security</strong> at Amity University Online (2023-2026). Passionate about building secure, scalable backend systems.</p>
-                    <p>I develop <strong>REST APIs with Python/FastAPI</strong>, deploy serverless applications on <strong>AWS</strong>, and follow <strong>OWASP security guidelines</strong>. Strong believer in clean code, automation, and collaborative teamwork.</p>
-                    <p><strong>Multilingual:</strong> Hindi (Native), English (Professional), Japanese (N3), German (Elementary). Open to international opportunities.</p>
+                    <div className={styles.aboutPersonal}>
+                        <p>I am a dedicated practitioner of software engineering, specializing in the architecture of <strong>secure, high-performance backend systems</strong> and <strong>robust cloud deployments</strong>. My journey is driven by a desire to master the core foundation of scalable environments where security is the primary directive, not an afterthought.</p>
+                        <p>I actively <strong>conduct deep research</strong> in my work projects, leveraging data-driven insights to architect solutions that are both innovative and resilient. I believe that true engineering excellence comes from understanding the "why" behind every line of code, ensuring that every project I touch is optimized for performance and security.</p>
+
+                        <div className={styles.mobileReadMoreContent}>
+                            <AnimatePresence>
+                                {(aboutExpanded || typeof window !== 'undefined' && window.innerWidth > 768) && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        style={{ overflow: 'hidden' }}
+                                    >
+                                        <p>Beyond the terminal, I am deeply rooted in linguistic and cultural exploration. From the poetic depth of my native <strong>Hindi</strong> to the professional clarity of <strong>English</strong>, I have expanded my horizons to include <strong>Japanese (N3)</strong> and <strong>German (Elementary)</strong>. I see software development as a craft: it requires the same patience, precision, and discipline as mastering a new language.</p>
+                                        <p>I have successfully engineered and deployed <strong>secured cloud infrastructure</strong>, integrating automated CI/CD pipelines with a relentless focus on <strong>OWASP standards</strong> and <strong>clean code</strong>. I am now seeking opportunities to further challenge my architectural capabilities and contribute to high-impact projects as a lifelong learner.</p>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+
+                        <button
+                            className={styles.readMoreBtn}
+                            onClick={() => setAboutExpanded(!aboutExpanded)}
+                        >
+                            {aboutExpanded ? 'Read Less' : 'Read More...'}
+                        </button>
+                    </div>
+                    <div className={styles.scrollDownTip}>Scroll down for my skills and my projects <FaArrowDown /></div>
                     <div className={styles.aboutCtas}>
                         <Link to="/research" className={styles.btnOutline}><FaBook /> Academic Assignments & Research</Link>
                     </div>
@@ -142,75 +212,55 @@ export default function Home() {
             <section id="skills" className={styles.section}>
                 <h2>Skills & Expertise</h2>
                 <div className={styles.skillCategories}>
-                    {/* Programming Languages */}
+                    {/* Programming & Backend */}
                     <div className={styles.skillCategory}>
-                        <h3><FaCode /> Programming</h3>
+                        <h3><FaCode /> Programming & Backend</h3>
                         <div className={styles.skillTags}>
                             <span>Python</span>
                             <span>SQL</span>
-                        </div>
-                    </div>
-
-                    {/* Backend */}
-                    <div className={styles.skillCategory}>
-                        <h3><FaServer /> Backend</h3>
-                        <div className={styles.skillTags}>
+                            <span>Bash/Shell</span>
                             <span>FastAPI</span>
-                            <span>REST APIs</span>
-                            <span>Microservices</span>
-                            <span>Monolithic</span>
+                            <span>RESTful APIs</span>
+                            <span>Asynchronous Programming</span>
                             <span>JWT Auth</span>
                         </div>
                     </div>
 
-                    {/* Cloud Technologies */}
+                    {/* Cloud Infrastructure (AWS) */}
                     <div className={styles.skillCategory}>
-                        <h3><FaAws /> Cloud (AWS)</h3>
+                        <h3><FaCloud /> Cloud Infrastructure (AWS)</h3>
                         <div className={styles.skillTags}>
-                            <span>EC2</span>
-                            <span>Lambda</span>
+                            <span>Lambda (Serverless)</span>
                             <span>S3</span>
-                            <span>API Gateway</span>
-                            <span>IAM</span>
+                            <span>EC2</span>
                             <span>VPC</span>
-                            <span>Security Groups</span>
-                            <span>Load Balancing</span>
+                            <span>Terraform (IaC)</span>
                             <span>CloudWatch</span>
+                            <span>Load Balancing</span>
                         </div>
                     </div>
 
-                    {/* Security */}
+                    {/* Cloud & Application Security */}
                     <div className={styles.skillCategory}>
-                        <h3><FaShieldAlt /> Security</h3>
+                        <h3><FaShieldAlt /> Cloud & Application Security</h3>
                         <div className={styles.skillTags}>
-                            <span>OWASP</span>
-                            <span>Risk Assessment</span>
-                            <span>Compliance</span>
-                            <span>Encryption (Transit/Rest)</span>
+                            <span>AWS IAM (Least Privilege)</span>
+                            <span>Security Groups/NACLs</span>
+                            <span>OWASP Top 10</span>
                             <span>Cryptography</span>
+                            <span>Container Security</span>
+                            <span>Encryption (Transit/Rest)</span>
                         </div>
                     </div>
 
-                    {/* DevOps & Tools */}
+                    {/* Tools & DevOps */}
                     <div className={styles.skillCategory}>
-                        <h3><FaDocker />Tools</h3>
+                        <h3><FaTools /> Tools & DevOps</h3>
                         <div className={styles.skillTags}>
-                            <span>Git</span>
-                            <span>GitHub Actions</span>
-                            <span>Linux</span>
                             <span>Docker</span>
-                        </div>
-                    </div>
-
-                    {/* Soft Skills */}
-                    <div className={styles.skillCategory}>
-                        <h3><FaUsers /> Soft Skills</h3>
-                        <div className={styles.skillTags}>
-                            <span>Team Work</span>
-                            <span>Communication</span>
-                            <span>Problem Solving</span>
-                            <span>Analytical Thinking</span>
-                            <span>Open-Minded</span>
+                            <span>Linux CLI</span>
+                            <span>Git</span>
+                            <span>GitHub Actions (CI/CD)</span>
                         </div>
                     </div>
 
@@ -317,10 +367,21 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* EDUCATION */}
-            <section className={styles.section}>
+            {/* EDUCATION & TRAINING - Europass Layout */}
+            <section id="education" className={styles.section}>
                 <h2>Education</h2>
-                <div className={styles.academicsList}>{academics.map(a => <div key={a.degree} className={styles.academicCard}><FaGraduationCap /><div><h4>{a.degree}</h4><p>{a.institution} • {a.year} • {a.status}</p></div></div>)}</div>
+                <div className={styles.academicsList}>
+                    {academics.map(a => (
+                        <div key={a.degree} className={styles.academicCard}>
+                            <FaGraduationCap />
+                            <div className={styles.academicInfo}>
+                                <h4>{a.degree}</h4>
+                                <p className={styles.institution}>{a.institution}</p>
+                                <p className={styles.year}>{a.year} • <span className={styles.status}>{a.status}</span></p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </section>
 
             {/* CONTACT */}
@@ -329,9 +390,18 @@ export default function Home() {
                 <p>Available for Backend/Cloud roles</p>
                 <div className={styles.contactBtns}>
                     <button onClick={() => setContactOpen(true)} className={styles.btnPrimary}><FaEnvelope /> Send Message</button>
-                    <a href="https://linkedin.com/in/asksaw" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-                    <a href="https://github.com/ashishkrshaw" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-                    <a href="https://wa.me/917482947099" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
+                    <a href="https://linkedin.com/in/asksaw" target="_blank" rel="noopener noreferrer" className={`${styles.lottieLink} ${styles.linkedin}`}>
+                        <FaLinkedin />
+                    </a>
+                    <a href="https://github.com/ashishkrshaw" target="_blank" rel="noopener noreferrer" className={`${styles.lottieLink} ${styles.github}`}>
+                        <LottieSocialIcon type="github" size={32} />
+                    </a>
+                    <a href="mailto:ashishkrshaw5@gmail.com" className={`${styles.lottieLink} ${styles.gmail}`}>
+                        <LottieSocialIcon type="gmail" size={32} />
+                    </a>
+                    <a href="https://wa.me/917482947099" target="_blank" rel="noopener noreferrer" className={`${styles.lottieLink} ${styles.whatsapp}`}>
+                        <FaWhatsapp />
+                    </a>
                 </div>
                 <p className={styles.copyright}>© {new Date().getFullYear()} Ashish Kumar Shaw</p>
             </section>
