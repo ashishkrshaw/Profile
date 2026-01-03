@@ -24,7 +24,7 @@ export default function Research() {
 
             <div className={styles.footer}>
                 <FaGraduationCap className={styles.footerIcon} />
-                <p>Jharkhand Rai University • 2022-2025</p>
+                <p>Amity University Online, Noida • 2023-2026</p>
             </div>
         </div>
     );
