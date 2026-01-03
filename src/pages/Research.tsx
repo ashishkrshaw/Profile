@@ -1,15 +1,20 @@
 import { FaArrowLeft, FaGraduationCap, FaClock } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import styles from './Research.module.css';
 
 export default function Research() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div className={styles.page}>
             <header className={styles.header}>
                 <Link to="/" className={styles.backBtn}><FaArrowLeft /> Back to Home</Link>
                 <div>
                     <h1>Academic Assignments & Research</h1>
-                    <p className={styles.subtitle}>B.Sc Computer Science • Cloud Security Specialization</p>
+                    <p className={styles.subtitle}>BCA (Cloud & Security) • Amity University Online</p>
                 </div>
             </header>
 

@@ -1,8 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { FaArrowLeft, FaExternalLinkAlt, FaGithub, FaYoutube } from 'react-icons/fa';
+import { useEffect } from 'react';
 import styles from './ProjectDetails.module.css';
-
-// Full project data with details
 const projectsData: Record<string, {
     title: string; tagline: string; image: string; demo: string; github: string; video: string;
     whyItMatters: string; highlights: string[]; stack: { name: string; color: string }[];
@@ -179,6 +178,10 @@ const projectsData: Record<string, {
 export default function ProjectDetails() {
     const { slug } = useParams<{ slug: string }>();
     const project = slug ? projectsData[slug] : null;
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     if (!project) {
         return (

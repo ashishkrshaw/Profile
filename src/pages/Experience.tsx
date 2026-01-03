@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FaArrowLeft, FaBriefcase, FaServer, FaCloud, FaDocker, FaCheckCircle } from 'react-icons/fa';
+import { useEffect } from 'react';
 import styles from './Experience.module.css';
 
 const experiences = [
@@ -52,6 +53,10 @@ const experiences = [
 ];
 
 export default function Experience() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div className={styles.page}>
             <header className={styles.header}>

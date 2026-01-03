@@ -2,9 +2,8 @@ import { FaAws, FaDocker, FaShieldAlt, FaLock, FaArrowLeft, FaExternalLinkAlt, F
 import { SiOracle } from 'react-icons/si';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 import styles from './Certifications.module.css';
-
-// All certifications with links
 const certifications = [
     { id: 1, title: 'Applied Cloud Computing', issuer: 'TCS iON', year: '2024', icon: <FaAws />, link: 'https://drive.google.com/file/d/17U_8ECPIvD-4K4L0o2mXJUZdOFDq0gMk/view', image: 'https://drive.google.com/thumbnail?id=17U_8ECPIvD-4K4L0o2mXJUZdOFDq0gMk&sz=w1000', skills: ['Cloud Computing', 'AWS', 'Azure'], color: '#FF9900' },
     { id: 2, title: 'Secure Docker on AWS', issuer: 'TCS iON', year: '2024', icon: <FaDocker />, link: 'https://drive.google.com/file/d/17jnV_AjFHyuRf8yyK8_Uuq75Dgqifio_/view', image: 'https://drive.google.com/thumbnail?id=17jnV_AjFHyuRf8yyK8_Uuq75Dgqifio_&sz=w1000', skills: ['Docker', 'AWS Security', 'Nmap', 'Metasploit'], color: '#2496ED' },
@@ -41,6 +40,10 @@ const itemVariants = {
 };
 
 export default function Certifications() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div className={styles.page}>
             <header className={styles.header}>
