@@ -401,27 +401,90 @@ html {
     overflow: hidden;
 }
 
+/* Premium About Card */
+.aboutContent {
+    background: linear-gradient(145deg, rgba(13, 17, 23, 0.95), rgba(20, 28, 40, 0.9));
+    border: 1px solid rgba(0, 168, 204, 0.2);
+    border-radius: 16px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 168, 204, 0.05);
+}
+
+.aboutContent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light), var(--violet));
+    opacity: 0.8;
+}
+
+.aboutContent::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 168, 204, 0.03), transparent 60%);
+    pointer-events: none;
+}
+
 .aboutPersonal {
-    border-left: 3px solid var(--accent);
-    padding-left: 30px;
-    margin-bottom: 2em;
+    border-left: 3px solid transparent;
+    border-image: linear-gradient(180deg, var(--accent-light), var(--violet)) 1;
+    padding-left: 25px;
+    margin-bottom: 1.5em;
+    position: relative;
 }
 
 .scrollDownTip {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 0.95em;
+    font-size: 0.9em;
     color: var(--accent-light);
-    font-weight: 600;
+    font-weight: 500;
     font-family: var(--font-jp);
-    margin-top: 2em;
-    opacity: 0.8;
-    animation: bounce 2s infinite;
+    margin-top: 1.5em;
+    padding: 12px 20px;
+    background: rgba(0, 168, 204, 0.08);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 168, 204, 0.15);
+    animation: pulse 3s ease-in-out infinite;
 }
 
 .scrollDownTip svg {
-    font-size: 1.2em;
+    font-size: 1.1em;
+    animation: bounceArrow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.8;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceArrow {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
 }
 
 @keyframes bounce {
@@ -445,23 +508,64 @@ html {
 
 .aboutContent p {
     color: #e2e8f0;
-    /* Zen White for better pop/readability */
-    font-size: 1.1em;
-    line-height: 1.8;
-    margin-bottom: 1.5em;
+    font-size: 1.05em;
+    line-height: 1.85;
+    margin-bottom: 1.2em;
     text-align: justify;
+    letter-spacing: 0.01em;
 }
 
 .aboutContent strong {
-    color: var(--accent-light);
+    color: #00d4ff;
     font-weight: 600;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
 }
 
 .aboutCtas {
-    margin-top: 1.5em;
+    margin-top: 2em;
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
+}
+
+.aboutCtas a,
+.aboutCtas .btnOutline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    color: #fff;
+    font-size: 0.95em;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 8px 25px rgba(0, 168, 204, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.aboutCtas a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.aboutCtas a:hover::before {
+    left: 100%;
+}
+
+.aboutCtas a:hover,
+.aboutCtas .btnOutline:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 168, 204, 0.4), 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 .readMoreBtn {
@@ -1024,6 +1128,46 @@ html {
 .ctaCenter {
     text-align: center;
     margin-top: 30px;
+}
+
+.ctaCenter a,
+.ctaCenter .btnOutline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    color: #fff;
+    font-size: 0.95em;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 8px 25px rgba(0, 168, 204, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ctaCenter a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.ctaCenter a:hover::before {
+    left: 100%;
+}
+
+.ctaCenter a:hover,
+.ctaCenter .btnOutline:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 168, 204, 0.4), 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 /* === ACADEMICS === */
