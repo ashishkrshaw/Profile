@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Certifications from './pages/Certifications';
 import Research from './pages/Research';
@@ -8,6 +9,7 @@ import Experience from './pages/Experience';
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/certifications" element={<Certifications />} />

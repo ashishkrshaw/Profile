@@ -1,176 +1,196 @@
 import { useParams, Link } from 'react-router-dom';
-import { FaArrowLeft, FaExternalLinkAlt, FaGithub, FaYoutube } from 'react-icons/fa';
+import {
+    FaArrowLeft, FaGithub, FaYoutube, FaExternalLinkAlt,
+    FaKey, FaCloud, FaLock, FaUnlock, FaUserShield,
+    FaHandPaper, FaChartLine, FaShieldAlt, FaBolt,
+    FaCogs, FaRedo, FaHtml5, FaBrain
+} from 'react-icons/fa';
+import {
+    SiRedis, SiAwslambda, SiAmazonapigateway
+} from 'react-icons/si';
 import { useEffect } from 'react';
 import styles from './ProjectDetails.module.css';
+
+// Icon Mapping
+const iconMap: Record<string, React.ReactNode> = {
+    'FaKey': <FaKey />,
+    'FaCloud': <FaCloud />,
+    'FaLock': <FaLock />,
+    'SiRedis': <SiRedis />,
+    'FaUnlock': <FaUnlock />,
+    'FaUserShield': <FaUserShield />,
+    'FaHandPaper': <FaHandPaper />,
+    'FaChartLine': <FaChartLine />,
+    'FaShieldAlt': <FaShieldAlt />,
+    'FaBolt': <FaBolt />,
+    'FaCogs': <FaCogs />,
+    'FaRedo': <FaRedo />,
+    'FaHtml5': <FaHtml5 />,
+    'SiAmazonapigateway': <SiAmazonapigateway />,
+    'SiAwslambda': <SiAwslambda />,
+    'FaBrain': <FaBrain />
+};
+
 const projectsData: Record<string, {
-    title: string; tagline: string; image: string; demo: string; github: string; video: string;
+    title: string; tagline: string; image: string; demo: string | null; github: string; video?: string;
     whyItMatters: string; highlights: string[]; stack: { name: string; color: string }[];
     stats: { label: string; value: string; desc: string }[];
-    architecture: { title: string; desc: string; icon: string }[];
+    architecture: { title: string; desc: string; iconKey: string }[];
     impact: { label: string; value: string; color: string }[];
     documentation?: string;
 }> = {
+    'kavro': {
+        title: 'Kavro',
+        tagline: 'End-to-End Encrypted Messaging Protocol',
+        image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&auto=format&fit=crop',
+        demo: 'https://kavro.duckdns.org/docs',
+        github: 'https://github.com/ashishkrshaw/kavro.git',
+        video: undefined,
+        whyItMatters: 'Demonstrates a secure messaging architecture where the server acts solely as a blind relay. Messages are encrypted on the client using NaCl (TweetNaCl) before transmission, ensuring the server never possesses the decryption keys.',
+        highlights: [
+            'Client-side Key Generation (NaCl)',
+            'Blind Relay Server Architecture',
+            'Ephemeral Redis Storage',
+            'Dockerized Deployment'
+        ],
+        stack: [
+            { name: 'Python', color: 'var(--accent)' },
+            { name: 'FastAPI', color: '#009688' },
+            { name: 'NaCl', color: '#eab308' },
+            { name: 'Redis', color: '#dc2626' },
+            { name: 'Docker', color: '#2496ed' }
+        ],
+        stats: [
+            { label: 'Latency', value: '<50ms', desc: 'Message delivery' },
+            { label: 'Server Access', value: 'Blob', desc: 'Encrypted data only' },
+            { label: 'Test Coverage', value: '85%', desc: 'Unit & Integration' },
+            { label: 'Deployment', value: 'Container', desc: 'Docker Compose' }
+        ],
+        architecture: [
+            { title: 'Client', desc: 'Key Gen', iconKey: 'FaKey' },
+            { title: 'API', desc: 'Relay', iconKey: 'FaCloud' },
+            { title: 'Sender', desc: 'Encrypt', iconKey: 'FaLock' },
+            { title: 'Store', desc: 'Redis TTL', iconKey: 'SiRedis' },
+            { title: 'Receiver', desc: 'Decrypt', iconKey: 'FaUnlock' }
+        ],
+        impact: [
+            { label: 'Security Model', value: 'E2EE', color: 'var(--accent)' },
+            { label: 'Storage', value: 'Ephemeral', color: 'var(--accent-light)' },
+            { label: 'Cryptography', value: 'NaCl', color: 'var(--accent-light)' }
+        ]
+    },
+    'session-guard': {
+        title: 'Session Guard',
+        tagline: 'Context-Aware Authentication Middleware',
+        image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&auto=format&fit=crop',
+        demo: null,
+        github: 'https://github.com/ashishkrshaw/session-guard.git',
+        video: undefined,
+        whyItMatters: 'Enhances standard session management by validating request context (IP subnet, User-Agent) on every call. If the context changes drastically during an active session, it challenges or invalidates the token to prevent session hijacking.',
+        highlights: [
+            'Heuristic Anomaly Detection',
+            'Context-Aware Middleware',
+            'Request Fingerprinting',
+            'Automated Token Revocation'
+        ],
+        stack: [
+            { name: 'Python', color: 'var(--accent)' },
+            { name: 'FastAPI', color: '#009688' },
+            { name: 'Redis', color: '#dc2626' },
+            { name: 'JWT', color: '#2496ed' }
+        ],
+        stats: [
+            { label: 'Overhead', value: '<5ms', desc: 'Per request check' },
+            { label: 'False Positives', value: 'Low', desc: 'Tunable heuristics' },
+            { label: 'Detection', value: 'Real-time', desc: 'On request' },
+            { label: 'Scope', value: 'Global', desc: 'All protected routes' }
+        ],
+        architecture: [
+            { title: 'Login', desc: 'Issue Token', iconKey: 'FaUserShield' },
+            { title: 'Middleware', desc: 'Inspect', iconKey: 'FaHandPaper' },
+            { title: 'Logic', desc: 'Validate', iconKey: 'FaChartLine' },
+            { title: 'Action', desc: 'Allow/401', iconKey: 'FaShieldAlt' }
+        ],
+        impact: [
+            { label: 'Security', value: 'Improved', color: 'var(--accent)' },
+            { label: 'UX Impact', value: 'Minimal', color: 'var(--accent-light)' },
+            { label: 'Integration', value: 'Middleware', color: 'var(--accent-light)' }
+        ]
+    },
+    'event-flow': {
+        title: 'EventFlow',
+        tagline: 'Asynchronous Task Processing System',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop',
+        demo: 'https://eventdriven.duckdns.org/docs',
+        github: 'https://github.com/ashishkrshaw/Event_Driven.git',
+        whyItMatters: 'Decouples high-latency operations (like email sending or report generation) from the main API response loop interactively. Uses a Redis List as a message broker to queue tasks for background workers.',
+        highlights: [
+            'Producer-Consumer Pattern',
+            'Redis List as Message Queue',
+            'Dead Letter Queue (DLQ)',
+            'Worker Process Isolation'
+        ],
+        stack: [
+            { name: 'FastAPI', color: '#009688' },
+            { name: 'Redis', color: '#dc2626' },
+            { name: 'Python', color: 'var(--accent)' },
+            { name: 'Docker', color: '#2496ed' }
+        ],
+        stats: [
+            { label: 'API Latency', value: '<20ms', desc: 'Task enqueue only' },
+            { label: 'Throughput', value: 'Scalable', desc: 'Horizontal workers' },
+            { label: 'Reliability', value: 'Retry', desc: 'On worker failure' },
+            { label: 'Monitoring', value: 'Basic', desc: 'Queue depth' }
+        ],
+        architecture: [
+            { title: 'API', desc: 'Enqueue', iconKey: 'FaBolt' },
+            { title: 'Broker', desc: 'Redis List', iconKey: 'SiRedis' },
+            { title: 'Worker', desc: 'Dequeue', iconKey: 'FaCogs' },
+            { title: 'DLQ', desc: 'Failures', iconKey: 'FaRedo' }
+        ],
+        impact: [
+            { label: 'Responsiveness', value: 'High', color: 'var(--accent)' },
+            { label: 'Coupling', value: 'Loose', color: 'var(--accent-light)' },
+            { label: 'Resilience', value: 'Robust', color: 'var(--accent-light)' }
+        ]
+    },
     'cloud-fun-fact-generator': {
         title: 'Cloud Fun Fact Generator',
-        tagline: 'Serverless AWS app with Perplexity AI integration for fun cloud facts.',
+        tagline: 'Serverless Application with AI Integration',
         image: '/images/Screenshot 2025-11-17 170323.png',
         demo: 'https://staging.d2qhlpatspoxmm.amplifyapp.com/',
         github: 'https://github.com/ashishkrshaw/Cloud-FunFacts.git',
         video: 'https://youtu.be/KbsVKpe41Hk',
-        whyItMatters: 'Generates unique cloud computing facts using AI. Built entirely serverless on AWS with React frontend.',
+        whyItMatters: 'A serverless playground to explore AWS primitives. Connects a static frontend hosted on S3/Amplify to a Lambda function via API Gateway, which queries a text-gen AI (Perplexity) and caches results in DynamoDB.',
         highlights: [
-            'Perplexity AI integration for unique fact generation',
-            '1000+ unique cloud facts delivered',
-            '60% increase in user engagement',
-            '90% reduction in manual content effort'
+            'API Gateway + Lambda Integration',
+            'DynamoDB for Caching/Storage',
+            'Perplexity API for Content',
+            'Infrastructure as Code (SAM/CDK)'
         ],
         stack: [
-            { name: 'React', color: 'var(--accent-light)' },
-            { name: 'AWS Amplify', color: 'var(--accent)' },
-            { name: 'API Gateway', color: 'var(--accent)' },
-            { name: 'Lambda', color: 'var(--accent)' },
-            { name: 'DynamoDB', color: 'var(--accent-light)' },
-            { name: 'Perplexity AI', color: '#7C3AED' }
+            { name: 'HTML5', color: '#E34F26' },
+            { name: 'CSS3', color: '#1572B6' },
+            { name: 'JavaScript', color: '#F7DF1E' },
+            { name: 'AWS Lambda', color: '#FF9900' },
+            { name: 'DynamoDB', color: '#4053D6' }
         ],
         stats: [
-            { label: 'Facts Generated', value: '1000+', desc: 'Unique cloud facts' },
-            { label: 'User Engagement', value: '+60%', desc: 'Increase vs static content' },
-            { label: 'Latency', value: '<2s', desc: 'Average response time' },
-            { label: 'Uptime', value: '99.9%', desc: 'Serverless reliability' }
+            { label: 'Architecture', value: 'Serverless', desc: 'Pay-per-use' },
+            { label: 'Availability', value: 'High', desc: 'AWS Managed' },
+            { label: 'Latency', value: 'Variable', desc: 'Cold starts possible' },
+            { label: 'Maintainability', value: 'High', desc: 'No servers' }
         ],
         architecture: [
-            { title: 'User Interface', desc: 'React / AWS Amplify', icon: '🖥️' },
-            { title: 'API Gateway', desc: 'REST Endpoint', icon: '🔗' },
-            { title: 'Lambda', desc: 'Python Handler', icon: '⚡' },
-            { title: 'Perplexity AI', desc: 'Fact Generation', icon: '🤖' },
-            { title: 'DynamoDB', desc: 'Facts Storage', icon: '💾' }
+            { title: 'UI', desc: 'Amplify', iconKey: 'FaHtml5' },
+            { title: 'Gateway', desc: 'REST API', iconKey: 'SiAmazonapigateway' },
+            { title: 'Function', desc: 'Lambda', iconKey: 'SiAwslambda' },
+            { title: 'AI', desc: 'External', iconKey: 'FaBrain' }
         ],
         impact: [
-            { label: 'Manual Effort Saved', value: '90%', color: 'var(--accent-light)' },
-            { label: 'Content Freshness', value: 'Daily', color: 'var(--accent-light)' },
-            { label: 'Cost per Request', value: '$0.0001', color: 'var(--accent)' }
-        ]
-    },
-    'secure-s3-file-uploader': {
-        title: 'Secure S3 File Uploader',
-        tagline: 'Serverless malware scanner that blocks unsafe uploads before S3.',
-        image: '/images/Screenshot 2025-11-17 172803.png',
-        demo: 'https://d48fldudi0fyu.cloudfront.net/',
-        github: 'https://github.com/ashishkrshaw/secure-file-uploader.git',
-        video: 'https://youtu.be/047FKrPQBCM',
-        whyItMatters: 'Every upload is treated as hostile. Files are hashed, scanned by 56+ engines, and only delivered via CloudFront if CLEAN.',
-        highlights: [
-            'Zero-trust: scan → verdict → upload → signed delivery',
-            'SHA256 fingerprinting prevents duplicate reviews',
-            'Per-user daily caps via localStorage + DynamoDB',
-            'JSON scan reports with 56-engine summaries'
-        ],
-        stack: [
-            { name: 'AWS S3', color: 'var(--accent)' },
-            { name: 'Lambda', color: 'var(--accent)' },
-            { name: 'VirusTotal API', color: '#DC2626' },
-            { name: 'CloudFront', color: 'var(--accent)' },
-            { name: 'Terraform', color: '#7B42BC' },
-            { name: 'Jenkins CI/CD', color: '#D33833' }
-        ],
-        stats: [
-            { label: 'Files Scanned/Day', value: '500', desc: 'Front-end rate limiting' },
-            { label: 'Threats Blocked', value: '37', desc: 'Auto-reject + audit trail' },
-            { label: 'Avg Scan Time', value: '3.2s', desc: 'Parallel VirusTotal lookups' },
-            { label: 'Delivery SLA', value: '99.95%', desc: 'CloudFront edge caching' }
-        ],
-        architecture: [
-            { title: 'User Interface', desc: 'HTML / JS / Drag & Drop', icon: '🖥️' },
-            { title: 'localStorage', desc: 'Rate Limit (15/day)', icon: '📦' },
-            { title: 'API Gateway', desc: 'Receives File + Metadata', icon: '🔗' },
-            { title: 'Lambda', desc: 'Python File Scanner', icon: '⚡' },
-            { title: 'VirusTotal', desc: '56+ Engine Scan', icon: '🛡️' },
-            { title: 'S3 + CloudFront', desc: 'Clean Files Only', icon: '☁️' }
-        ],
-        impact: [
-            { label: 'Breach Attempts Stopped', value: '18', color: 'var(--accent-light)' },
-            { label: 'Manual Review Reduced', value: '-80%', color: 'var(--accent-light)' },
-            { label: 'Compliance Ready', value: '100%', color: 'var(--accent)' }
-        ],
-        documentation: 'https://docs.google.com/presentation/d/1IIfr6lcu3sIxv53Zau9pIhEbGrj-O4OyULdqnui3PiA/embed'
-    },
-    'multi-cloud-management-dashboard': {
-        title: 'MultiCloud Dashboard',
-        tagline: 'Unified AWS, Azure, GCP dashboard with AI insights and Telegram alerts.',
-        image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600',
-        demo: 'https://multicloud-management-dashboard.onrender.com/',
-        github: 'https://github.com/ashishkrshaw/multicloud-management-dashboard',
-        video: '',
-        whyItMatters: 'Single pane of glass for multi-cloud operations. Telegram notifications and AI-driven insights for resource optimization.',
-        highlights: [
-            'AWS, Azure, GCP integration in one dashboard',
-            '40% operational efficiency boost',
-            'Telegram alerts for critical events',
-            '25% cost savings through optimization'
-        ],
-        stack: [
-            { name: 'Node.js', color: 'var(--accent-light)' },
-            { name: 'React', color: 'var(--accent-light)' },
-            { name: 'AWS SDK', color: 'var(--accent)' },
-            { name: 'Azure SDK', color: '#0078D4' },
-            { name: 'GCP SDK', color: '#4285F4' },
-            { name: 'Telegram API', color: '#26A5E4' }
-        ],
-        stats: [
-            { label: 'Cloud Providers', value: '3', desc: 'AWS, Azure, GCP' },
-            { label: 'Efficiency Boost', value: '+40%', desc: 'Cross-platform visibility' },
-            { label: 'Cost Savings', value: '25%', desc: 'Resource optimization' },
-            { label: 'Alert Latency', value: '<5s', desc: 'Real-time Telegram' }
-        ],
-        architecture: [
-            { title: 'React Dashboard', desc: 'Unified UI', icon: '📊' },
-            { title: 'Node.js API', desc: 'Backend Aggregator', icon: '🔧' },
-            { title: 'AWS / Azure / GCP', desc: 'SDK Integration', icon: '☁️' },
-            { title: 'Telegram Bot', desc: 'Alert Notifications', icon: '📱' }
-        ],
-        impact: [
-            { label: 'Manual Monitoring Reduced', value: '-80%', color: 'var(--accent-light)' },
-            { label: 'Decision Speed', value: '+50%', color: 'var(--accent-light)' },
-            { label: 'Cost Visibility', value: '100%', color: 'var(--accent)' }
-        ]
-    },
-    'heart-disease-predictor': {
-        title: 'Heart Disease Predictor',
-        tagline: 'ML model achieving 92% accuracy for heart disease risk detection.',
-        image: 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=600',
-        demo: 'https://aiml-2ffm.onrender.com/',
-        github: 'https://github.com/ashishkrshaw/heart-disease-predictor',
-        video: '',
-        whyItMatters: 'Predictive ML model for heart disease risk. Built on Amazon SageMaker with automated data preprocessing.',
-        highlights: [
-            '92% prediction accuracy',
-            'Amazon SageMaker deployment',
-            'Automated data preprocessing pipeline',
-            'Early diagnosis support system'
-        ],
-        stack: [
-            { name: 'Python', color: 'var(--accent-light)' },
-            { name: 'Amazon SageMaker', color: 'var(--accent)' },
-            { name: 'Pandas', color: '#150458' },
-            { name: 'Scikit-learn', color: '#F7931E' },
-            { name: 'Matplotlib', color: '#11557C' }
-        ],
-        stats: [
-            { label: 'Prediction Accuracy', value: '92%', desc: 'Random Forest model' },
-            { label: 'Features Analyzed', value: '13', desc: 'Medical indicators' },
-            { label: 'Training Time', value: '<5min', desc: 'SageMaker optimized' },
-            { label: 'Inference Latency', value: '<1s', desc: 'Real-time prediction' }
-        ],
-        architecture: [
-            { title: 'Data Input', desc: 'Patient Records', icon: '📋' },
-            { title: 'Preprocessing', desc: 'Pandas Pipeline', icon: '🔄' },
-            { title: 'SageMaker', desc: 'Model Training', icon: '🧠' },
-            { title: 'Inference', desc: 'Risk Prediction', icon: '💓' }
-        ],
-        impact: [
-            { label: 'Early Detection Rate', value: '+35%', color: 'var(--accent-light)' },
-            { label: 'Diagnosis Time Saved', value: '60%', color: 'var(--accent-light)' },
-            { label: 'False Positives', value: '<8%', color: 'var(--accent)' }
+            { label: 'Ops', value: 'Zero', color: 'var(--accent)' },
+            { label: 'Cost', value: 'Micro', color: 'var(--accent-light)' },
+            { label: 'Scale', value: 'Auto', color: 'var(--accent-light)' }
         ]
     }
 };
@@ -210,7 +230,7 @@ export default function ProjectDetails() {
                     <div className={styles.heroInfo}>
                         <p className={styles.tagline}>{project.tagline}</p>
                         <div className={styles.links}>
-                            <a href={project.demo} target="_blank" rel="noopener noreferrer" className={styles.demoBtn}><FaExternalLinkAlt /> Live Demo</a>
+                            {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer" className={styles.demoBtn}><FaExternalLinkAlt /> Live Demo</a>}
                             {project.video && <a href={project.video} target="_blank" rel="noopener noreferrer" className={styles.videoBtn}><FaYoutube /> Video</a>}
                             <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.githubBtn}><FaGithub /> Source</a>
                         </div>
@@ -244,11 +264,13 @@ export default function ProjectDetails() {
                 <section className={styles.section}>
                     <h2>System Architecture</h2>
                     <div className={styles.archFlow}>
-                        {project.architecture.map((a, i) => (
-                            <div key={i} className={styles.archCard}>
-                                <span className={styles.archIcon}>{a.icon}</span>
-                                <span className={styles.archTitle}>{a.title}</span>
-                                <span className={styles.archDesc}>{a.desc}</span>
+                        {project.architecture.map((step, index) => (
+                            <div key={index} className={styles.archCard}>
+                                <div className={styles.archIcon}>
+                                    {iconMap[step.iconKey] || step.iconKey}
+                                </div>
+                                <span className={styles.archTitle}>{step.title}</span>
+                                <span className={styles.archDesc}>{step.desc}</span>
                             </div>
                         ))}
                     </div>

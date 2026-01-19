@@ -1,27 +1,24 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Matter from 'matter-js';
+
 import {
     FaAws, FaDocker, FaGithub, FaLinkedin,
-    FaEnvelope, FaExternalLinkAlt, FaTimes, FaWhatsapp, FaArrowDown,
-    FaBriefcase, FaCheck, FaSpinner, FaCode, FaServer, FaShieldAlt,
+    FaEnvelope, FaExternalLinkAlt, FaTimes, FaArrowDown,
+    FaCheck, FaSpinner, FaCode, FaShieldAlt,
     FaGraduationCap, FaAward, FaGoogle, FaCog, FaFolderOpen,
-    FaPaperPlane, FaBook, FaYoutube, FaInfoCircle, FaComments, FaTools, FaCloud
+    FaPaperPlane, FaBook, FaComments, FaTrophy, FaYoutube,
+    FaPython, FaLinux
 } from 'react-icons/fa';
-import { SiOracle } from 'react-icons/si';
+import { SiOracle, SiFastapi, SiMysql, SiRedis, SiTerraform } from 'react-icons/si';
 import LottieSocialIcon from '../components/LottieSocialIcon';
+import MobileNav from '../components/layout/MobileNav';
+import CursorGlow from '../components/CursorGlow';
 import styles from './Home.module.css';
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzTu9IbuxizIZ5p8IQEkPTli2Sjsf8On_WZoQ-efiTZdGqImukSq-s-rLcWWQF4vUS-/exec';
 
-// Projects with video URLs and alternating positions
-const projects = [
-    { id: 1, slug: 'cloud-fun-fact-generator', title: 'Cloud Fun Fact Generator', description: 'Serverless AWS app with Perplexity AI. 1000+ cloud facts, 60% user engagement.', tags: ['AWS', 'Lambda', 'DynamoDB'], demo: 'https://staging.d2qhlpatspoxmm.amplifyapp.com/', github: 'https://github.com/ashishkrshaw/Cloud-FunFacts.git', video: 'https://youtu.be/KbsVKpe41Hk', image: '/images/Screenshot 2025-11-17 170323.png', color: '#fc815c' },
-    { id: 2, slug: 'secure-s3-file-uploader', title: 'Secure S3 File Uploader', description: 'Encrypted uploads with VirusTotal scanning, CloudFront delivery. 100% secure.', tags: ['S3', 'CloudFront', 'Security'], demo: 'https://d48fldudi0fyu.cloudfront.net/', github: 'https://github.com/ashishkrshaw/secure-file-uploader.git', video: 'https://youtu.be/047FKrPQBCM', image: '/images/Screenshot 2025-11-17 172803.png', color: '#639' },
-    { id: 3, slug: 'multi-cloud-management-dashboard', title: 'MultiCloud Dashboard', description: 'AWS, Azure, GCP unified dashboard. 40% efficiency boost, Telegram alerts.', tags: ['AWS', 'Azure', 'GCP'], demo: 'https://multicloud-management-dashboard.onrender.com/', github: 'https://github.com/ashishkrshaw/multicloud-management-dashboard', video: '', image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600', color: '#47afa1' },
-    { id: 4, slug: 'heart-disease-predictor', title: 'Heart Disease Predictor', description: 'ML model with 92% accuracy on Amazon SageMaker. Early diagnosis support.', tags: ['Python', 'SageMaker', 'ML'], demo: 'https://aiml-2ffm.onrender.com/', github: 'https://github.com/ashishkrshaw/heart-disease-predictor', video: '', image: 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?w=600', color: '#2694d4' },
-];
+
 
 const certifications = [
     { id: 1, title: 'Applied Cloud Computing', issuer: 'TCS iON', icon: <FaAws />, link: 'https://drive.google.com/file/d/17U_8ECPIvD-4K4L0o2mXJUZdOFDq0gMk/view' },
@@ -43,65 +40,174 @@ const roles = [
     'Junior Cloud Developer',
 ];
 
+const skillsData = [
+    {
+        name: 'Python',
+        icon: <FaPython />,
+        color: '#3776AB',
+        details: ['Async/Await', 'Pydantic Models', 'OOP Design', 'Type Hints']
+    },
+    {
+        name: 'AWS',
+        icon: <FaAws />,
+        color: '#FF9900',
+        details: ['EC2 Deployment', 'Lambda + API GW', 'IAM Policies', 'S3 Buckets']
+    },
+    {
+        name: 'FastAPI',
+        icon: <SiFastapi />,
+        color: '#009688',
+        details: ['REST Endpoints', 'Dependency Injection', 'Middleware', 'OpenAPI Docs']
+    },
+    {
+        name: 'Linux',
+        icon: <FaLinux />,
+        color: '#FCC624',
+        details: ['Ubuntu Server', 'Nginx Reverse Proxy', 'Systemd Services', 'SSH']
+    },
+    {
+        name: 'GitHub',
+        icon: <FaGithub />,
+        color: '#ffffff',
+        details: ['Git Workflow', 'Actions CI/CD', 'Branch Strategy', 'Code Review']
+    },
+    {
+        name: 'MySQL',
+        icon: <SiMysql />,
+        color: '#4479A1',
+        details: ['Schema Design', 'Complex Queries', 'Indexes', 'Transactions']
+    },
+    {
+        name: 'Docker',
+        icon: <FaDocker />,
+        color: '#2496ED',
+        details: ['Multi-Stage Builds', 'Docker Compose', 'Volumes', 'Networking']
+    },
+    {
+        name: 'Redis',
+        icon: <SiRedis />,
+        color: '#DC382D',
+        details: ['Pub/Sub Messaging', 'Key Expiry (TTL)', 'Queue Pattern', 'Caching']
+    },
+    {
+        name: 'Terraform',
+        icon: <SiTerraform />,
+        color: '#7B42BC',
+        details: ['IaC Modules', 'State Management', 'AWS Provider', 'Variables']
+    },
+    {
+        name: 'Cybersecurity',
+        icon: <FaShieldAlt />,
+        color: '#00D1FF',
+        details: ['E2E Encryption', 'OWASP Top 10', 'Risk Scoring', 'Threat Modeling']
+    }
+];
+
+// Projects: Kavro, Session Guard, EventFlow, Cloud Fun Facts
+const projects = [
+    {
+        id: 1,
+        slug: 'kavro',
+        title: 'Kavro',
+        tagline: 'End-to-End Encrypted Messaging Protocol',
+        description: 'A "Signal-like" messaging architecture proving the server cannot read messages. Uses NaCl for encryption and Redis for ephemeral storage.',
+        tags: ['FastAPI: API', 'NaCl: Encryption', 'Redis: PubSub', 'Docker: Container'],
+        demo: 'https://kavro.duckdns.org/docs',
+        github: 'https://github.com/ashishkrshaw/kavro.git',
+        video: null,
+        image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=600&auto=format&fit=crop',
+        color: '#10b981'
+    },
+    {
+        id: 2,
+        slug: 'session-guard',
+        title: 'Session Guard',
+        tagline: 'Continuous Authentication System',
+        description: 'Beyond Login: A risk-scoring engine that detects session hijacking by analyzing device fingerprint and IP context changes on every request.',
+        tags: ['Python: Logic', 'Risk Scoring: Security', 'FastAPI: Middleware'],
+        demo: null,
+        github: 'https://github.com/ashishkrshaw/session-guard.git',
+        video: null,
+        image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&auto=format&fit=crop',
+        color: '#f43f5e'
+    },
+    {
+        id: 3,
+        slug: 'event-flow',
+        title: 'EventFlow',
+        tagline: 'Event-Driven Background Processing',
+        description: 'Decoupling slow tasks from APIs. A robust notification system using Redis queues, separate workers, and Dead Letter retry logic.',
+        tags: ['Redis: Broker', 'Worker: Background', 'Docker: Compose'],
+        demo: 'https://eventdriven.duckdns.org/docs',
+        github: 'https://github.com/ashishkrshaw/Event_Driven.git',
+        video: null,
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop',
+        color: '#3b82f6'
+    },
+    {
+        id: 4,
+        slug: 'cloud-fun-fact-generator',
+        title: 'Cloud Fun Fact Generator',
+        tagline: 'Serverless AI Application',
+        description: 'Serverless architecture integrating Perplexity AI to generate unique cloud facts. Handles 1000+ facts with zero server management.',
+        tags: ['Lambda: Compute', 'DynamoDB: NoSQL', 'Amplify: Hosting'],
+        demo: 'https://staging.d2qhlpatspoxmm.amplifyapp.com/',
+        github: 'https://github.com/ashishkrshaw/Cloud-FunFacts.git',
+        video: 'https://youtu.be/KbsVKpe41Hk',
+        image: '/images/Screenshot 2025-11-17 170323.png',
+        color: '#8b5cf6'
+    }
+];
+
 function TypeWriter() {
     const [roleIndex, setRoleIndex] = useState(0);
-    const [text, setText] = useState('');
+    const [text, setText] = useState(roles[0]); // Start with full first role visible
     const [isDeleting, setIsDeleting] = useState(false);
+    const [isPaused, setIsPaused] = useState(true); // Start paused to show first role
 
     useEffect(() => {
         const currentRole = roles[roleIndex];
-        const speed = isDeleting ? 50 : 100;
 
-        if (!isDeleting && text === currentRole) {
-            setTimeout(() => setIsDeleting(true), 2000);
-            return;
+        // Faster deletion, smoother typing
+        const typingSpeed = isDeleting ? 35 : 70;
+
+        // Handle pause after completing a word
+        if (isPaused) {
+            const pauseTimeout = setTimeout(() => {
+                setIsPaused(false);
+                setIsDeleting(true);
+            }, 2500); // Show complete text for 2.5 seconds
+            return () => clearTimeout(pauseTimeout);
         }
 
+        // Finished deleting - move to next role
         if (isDeleting && text === '') {
             setIsDeleting(false);
             setRoleIndex((prev) => (prev + 1) % roles.length);
             return;
         }
 
+        // Finished typing - pause
+        if (!isDeleting && text === currentRole) {
+            setIsPaused(true);
+            return;
+        }
+
+        // Type or delete characters
         const timeout = setTimeout(() => {
-            setText(isDeleting ? currentRole.slice(0, text.length - 1) : currentRole.slice(0, text.length + 1));
-        }, speed);
+            setText(isDeleting
+                ? currentRole.slice(0, text.length - 1)
+                : currentRole.slice(0, text.length + 1)
+            );
+        }, typingSpeed);
 
         return () => clearTimeout(timeout);
-    }, [text, isDeleting, roleIndex]);
+    }, [text, isDeleting, roleIndex, isPaused]);
 
     return <span>{text}<span className={styles.cursor}>|</span></span>;
 }
 
-function ParticleCanvas() {
-    const canvasRef = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        if (!canvasRef.current) return;
-        const { Engine, Render, Runner, Bodies, World, Events, Body, Common } = Matter;
-        const width = window.innerWidth, height = window.innerHeight;
-        const engine = Engine.create(); engine.world.gravity.y = 0; engine.world.gravity.x = 0;
-        const render = Render.create({ element: canvasRef.current, engine, options: { width, height, wireframes: false, background: 'transparent' } });
-        const attractiveBody = Bodies.circle(width / 2, height / 2, 0, { isStatic: true, render: { fillStyle: 'transparent' } });
-        World.add(engine.world, attractiveBody);
-        for (let i = 0; i < 50; i++) {
-            const x = Common.random(0, width), y = Common.random(0, height);
-            const color = i % 2 === 0 ? '#8b0000' : '#00a8cc';
-            World.add(engine.world, Bodies.polygon(x, y, Math.floor(Common.random(3, 6)), Common.random(5, 40), { friction: 0, frictionAir: 0.02, render: { fillStyle: color, strokeStyle: color, lineWidth: 1, opacity: 0.6 } }));
-            World.add(engine.world, Bodies.circle(x, y, Common.random(3, 15), { friction: 0, frictionAir: 0.01, render: { fillStyle: color, strokeStyle: color, lineWidth: 1, opacity: 0.8 } }));
-        }
-        // Track mouse via window, not canvas - allows scroll to work
-        const mousePos = { x: width / 2, y: height / 2 };
-        const handleMouseMove = (e: MouseEvent) => { mousePos.x = e.clientX; mousePos.y = e.clientY; };
-        window.addEventListener('mousemove', handleMouseMove);
-        Events.on(engine, 'afterUpdate', () => {
-            Body.translate(attractiveBody, { x: (mousePos.x - attractiveBody.position.x) * 0.1, y: (mousePos.y - attractiveBody.position.y) * 0.1 });
-            engine.world.bodies.forEach((b: any) => { if (b !== attractiveBody && !b.isStatic) Body.applyForce(b, b.position, { x: (attractiveBody.position.x - b.position.x) * 1e-6, y: (attractiveBody.position.y - b.position.y) * 1e-6 }); }); // eslint-disable-line @typescript-eslint/no-explicit-any
-        });
-        const runner = Runner.create(); Runner.run(runner, engine); Render.run(render);
-        return () => { window.removeEventListener('mousemove', handleMouseMove); Render.stop(render); Runner.stop(runner); World.clear(engine.world, false); Engine.clear(engine); render.canvas?.remove(); };
-    }, []);
-    return <div ref={canvasRef} className={styles.particleCanvas} />;
-}
+
 
 // YouTube embed helper
 function getYouTubeEmbedUrl(url: string): string {
@@ -132,11 +238,13 @@ export default function Home() {
 
     return (
         <div className={styles.app}>
+            {/* Cursor Glow Effect */}
+            <CursorGlow />
+
             {/* NAVBAR */}
             <nav className={styles.navbar}>
                 <a href="#" className={styles.logo} onClick={() => scrollTo('hero')}>AKS</a>
                 <div className={styles.navLinks}>
-
                     <a onClick={() => scrollTo('about')}><FaCode /> <span>About</span></a>
                     <a onClick={() => scrollTo('skills')}><FaCog /> <span>Skills</span></a>
                     <a onClick={() => scrollTo('projects')}><FaFolderOpen /> <span>Projects</span></a>
@@ -144,205 +252,234 @@ export default function Home() {
                     <a onClick={() => scrollTo('contact')}><FaPaperPlane /> <span>Contact</span></a>
                 </div>
                 <div className={styles.navSocial}>
-                    <a href="https://linkedin.com/in/asksaw" target="_blank" rel="noopener noreferrer">
+                    <a href="https://linkedin.com/in/asksaw" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                         <FaLinkedin />
                     </a>
-                    <a href="https://github.com/ashishkrshaw" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/ashishkrshaw" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                         <LottieSocialIcon type="github" size={35} />
                     </a>
                 </div>
+                {/* Mobile Navigation */}
+                <MobileNav scrollTo={scrollTo} />
             </nav>
 
-            {/* HERO */}
-            <section id="hero" className={styles.hero}>
-                <ParticleCanvas />
-                <motion.div className={styles.heroContent} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-                    <img src="/images/profile/ashish1.png" alt="Ashish" className={styles.profilePic} onError={(e) => { (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=AKS&background=1595b6&color=fff&size=200'; }} />
-                    <h1>Ashish Kumar Shaw</h1>
-                    <p className={styles.role}><TypeWriter /></p>
-                    <p className={styles.tagline}>Building secure APIs with Python. Deploying on AWS.</p>
-                    <div className={styles.heroBtns}>
-                        <a href="/Ashish Kumar Shaw.pdf" target="_blank" className={styles.btnPrimary}>Resume</a>
-                        <button onClick={() => setContactOpen(true)} className={styles.btnOutline}>Contact Me</button>
-                    </div>
+            {/* HERO - Professional Cloud/Backend Focus */}
+            <section id="hero" className={styles.heroBackground}>
+                {/* Professional Server Background Image */}
+                <div className={styles.heroBgImage}>
+                    <img
+                        src="https://images.unsplash.com/photo-1558494949-ef2e0fd8c3bc?q=80&w=1920&auto=format&fit=crop"
+                        alt="Server Room Background"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.3) contrast(1.2)' }}
+                    />
+                    <div className={styles.heroBgOverlay} style={{
+                        background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95))',
+                    }}></div>
+                </div>
+
+                {/* Hero Content */}
+                <motion.div
+                    className={styles.heroOverlayContent}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+                >
+                    {/* Profile Picture with AKS Background */}
+                    <motion.div
+                        className={styles.heroAvatar}
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.1, duration: 0.6 }}
+                    >
+                        <span className={styles.aksBg}>AKS</span>
+                        <img
+                            src="/images/profile/ashish1.png"
+                            alt="Ashish Kumar Shaw"
+                            className={styles.profilePic}
+                            onError={(e) => { (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=AKS&background=1595b6&color=fff&size=200'; }}
+                        />
+                    </motion.div>
+
+                    {/* Name */}
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3, duration: 0.6 }}
+                    >
+                        Ashish Kumar Shaw
+                    </motion.h1>
+
+                    {/* TypeWriter Role */}
+                    <motion.p
+                        className={styles.role}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4, duration: 0.6 }}
+                    >
+                        <TypeWriter />
+                    </motion.p>
+
+                    {/* Simplified Subtitle */}
+                    <motion.p
+                        className={styles.heroSubtitle}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5, duration: 0.6 }}
+                    >
+                        Building secure APIs & scalable cloud solutions.
+                    </motion.p>
+
+                    {/* CTA Buttons */}
+                    <motion.div
+                        className={styles.heroBtns}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.6, duration: 0.6 }}
+                    >
+                        <a href="/Ashish Kumar Shaw.pdf" target="_blank" className={styles.btnPrimary}>
+                            <FaAward /> View Resume
+                        </a>
+                        <button onClick={() => scrollTo('contact')} className={styles.btnOutline}>
+                            <FaComments /> Let's Talk
+                        </button>
+                    </motion.div>
+
+                    {/* Tech Stack Pills */}
+                    <motion.div
+                        className={styles.heroTechStack}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.8, duration: 0.6 }}
+                    >
+                        <span><FaAws /> AWS</span>
+                        <span><FaCode /> Python</span>
+                        <span><FaDocker /> Docker</span>
+                        <span><FaShieldAlt /> Security</span>
+                    </motion.div>
                 </motion.div>
-                <div className={styles.scrollDown} onClick={() => scrollTo('about')}><FaArrowDown /></div>
+
+                {/* Scroll Down Indicator */}
+                <motion.div
+                    className={styles.scrollDown}
+                    onClick={() => scrollTo('about')}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1, duration: 0.6 }}
+                >
+                    <FaArrowDown />
+                </motion.div>
             </section>
 
-            {/* ABOUT ME - Europass + Japanese Concept */}
+
+            {/* ABOUT ME - Concise Summary */}
             <section id="about" className={styles.section}>
                 <h2>About Me</h2>
                 <div className={styles.aboutContent}>
                     <div className={styles.aboutPersonal}>
-                        <p>I am a dedicated practitioner of software engineering, specializing in the architecture of <strong>secure, high-performance backend systems</strong> and <strong>robust cloud deployments</strong>. My journey is driven by a desire to master the core foundation of scalable environments where security is the primary directive, not an afterthought.</p>
-                        <p>I actively <strong>conduct deep research</strong> in my work projects, leveraging data-driven insights to architect solutions that are both innovative and resilient. I believe that true engineering excellence comes from understanding the "why" behind every line of code, ensuring that every project I touch is optimized for performance and security.</p>
-
-                        <div className={styles.mobileReadMoreContent}>
-                            <AnimatePresence>
-                                {(aboutExpanded || typeof window !== 'undefined' && window.innerWidth > 768) && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: 'auto', opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        style={{ overflow: 'hidden' }}
-                                    >
-                                        <p>Beyond the terminal, I am deeply rooted in linguistic and cultural exploration. From the poetic depth of my native <strong>Hindi</strong> to the professional clarity of <strong>English</strong>, I have expanded my horizons to include <strong>Japanese (N3)</strong> and <strong>German (Elementary)</strong>. I see software development as a craft: it requires the same patience, precision, and discipline as mastering a new language.</p>
-                                        <p>I have successfully engineered and deployed <strong>secured cloud infrastructure</strong>, integrating automated CI/CD pipelines with a relentless focus on <strong>OWASP standards</strong> and <strong>clean code</strong>. I am now seeking opportunities to further challenge my architectural capabilities and contribute to high-impact projects as a lifelong learner.</p>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </div>
-
-                        <button
-                            className={styles.readMoreBtn}
-                            onClick={() => setAboutExpanded(!aboutExpanded)}
-                        >
-                            {aboutExpanded ? 'Read Less' : 'Read More...'}
-                        </button>
+                        <p>BCA Cloud & Security student at <strong>Amity University</strong>, focused on building <strong>secure backend systems</strong> and <strong>scalable cloud infrastructure</strong>. I architect solutions with security-first thinking, applying OWASP standards and clean code principles.</p>
+                        <p>Passionate about <strong>Python, AWS, and Docker</strong>. Currently exploring advanced cloud patterns and continuous authentication mechanisms.</p>
                     </div>
-                    <div className={styles.scrollDownTip}>Scroll down for my skills and my projects <FaArrowDown /></div>
                     <div className={styles.aboutCtas}>
-                        <Link to="/research" className={styles.btnOutline}><FaBook /> Academic Assignments & Research</Link>
+                        <Link to="/research" className={styles.btnOutline}><FaBook /> View My Assignments</Link>
                     </div>
                 </div>
             </section>
 
-            {/* SKILLS - Categorized */}
+
             <section id="skills" className={styles.section}>
                 <h2>Skills & Expertise</h2>
-                <div className={styles.skillCategories}>
-                    {/* Programming & Backend */}
-                    <div className={styles.skillCategory}>
-                        <h3><FaCode /> Programming & Backend</h3>
-                        <div className={styles.skillTags}>
-                            <span>Python</span>
-                            <span>SQL</span>
-                            <span>Bash/Shell</span>
-                            <span>FastAPI</span>
-                            <span>RESTful APIs</span>
-                            <span>Asynchronous Programming</span>
-                            <span>JWT Auth</span>
-                        </div>
-                    </div>
+                <div className={styles.skillsGrid}>
+                    {skillsData.map((skill) => (
+                        <div key={skill.name} className={styles.skillCard} style={{ '--skill-color': skill.color } as React.CSSProperties}>
+                            <div className={styles.skillIcon}>
+                                {skill.icon}
+                            </div>
+                            <h3>{skill.name}</h3>
 
-                    {/* Cloud Infrastructure (AWS) */}
-                    <div className={styles.skillCategory}>
-                        <h3><FaCloud /> Cloud Infrastructure (AWS)</h3>
-                        <div className={styles.skillTags}>
-                            <span>Lambda (Serverless)</span>
-                            <span>S3</span>
-                            <span>EC2</span>
-                            <span>VPC</span>
-                            <span>Terraform (IaC)</span>
-                            <span>CloudWatch</span>
-                            <span>Load Balancing</span>
+                            {/* Hover Overlay */}
+                            <div className={styles.skillOverlay}>
+                                <div className={styles.skillOverlayContent}>
+                                    <ul>
+                                        {skill.details.map((detail, i) => (
+                                            <li key={i}>{detail}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    {/* Cloud & Application Security */}
-                    <div className={styles.skillCategory}>
-                        <h3><FaShieldAlt /> Cloud & Application Security</h3>
-                        <div className={styles.skillTags}>
-                            <span>AWS IAM (Least Privilege)</span>
-                            <span>Security Groups/NACLs</span>
-                            <span>OWASP Top 10</span>
-                            <span>Cryptography</span>
-                            <span>Container Security</span>
-                            <span>Encryption (Transit/Rest)</span>
-                        </div>
-                    </div>
-
-                    {/* Tools & DevOps */}
-                    <div className={styles.skillCategory}>
-                        <h3><FaTools /> Tools & DevOps</h3>
-                        <div className={styles.skillTags}>
-                            <span>Docker</span>
-                            <span>Linux CLI</span>
-                            <span>Git</span>
-                            <span>GitHub Actions (CI/CD)</span>
-                        </div>
-                    </div>
-
-                    {/* Languages */}
-                    <div className={styles.skillCategory}>
-                        <h3><FaComments /> Languages</h3>
-                        <div className={styles.langTags}>
-                            <span>🇮🇳 Hindi <em>Native</em></span>
-                            <span>🇬🇧 English <em>Professional</em></span>
-                            <span>🇯🇵 Japanese <em>N3</em></span>
-                            <span>🇩🇪 German <em>Elementary</em></span>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </section>
 
-            {/* EXPERIENCE */}
-            <section className={styles.section}>
-                <h2>Experience</h2>
-                <div className={styles.expGrid}>
-                    <div className={styles.expCard}>
-                        <div className={styles.expIcon}><FaBriefcase /></div>
-                        <div>
-                            <h3>Cloud Security Intern</h3>
-                            <p className={styles.expMeta}>TCS iON • 2024</p>
-                            <p>Secured Docker on AWS. IAM policies, Security Groups, Trivy scanning.</p>
-                            <Link to="/experience" className={styles.expDetailsBtn}><FaInfoCircle /> Details</Link>
-                        </div>
-                    </div>
-                    <div className={styles.expCard}>
-                        <div className={styles.expIcon}><FaServer /></div>
-                        <div>
-                            <h3>Personal Cloud Infrastructure</h3>
-                            <p className={styles.expMeta}>Self-Hosted • 2023-Present</p>
-                            <p>Built & managed home lab with AWS, Docker. Deployed serverless apps, CI/CD pipelines.</p>
-                            <Link to="/experience" className={styles.expDetailsBtn}><FaInfoCircle /> Details</Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            {/* PROJECTS with Video + Details buttons */}
+
+
+
+            {/* PROJECTS - Creative IDE Gallery */}
             <section id="projects" className={styles.workSection}>
                 <h2>Latest Works</h2>
                 <div className={styles.projectsContainer}>
-                    <div className={styles.verticalLine} />
                     {projects.map((p, i) => (
                         <motion.div
                             key={p.id}
-                            className={`${styles.project} ${i % 2 === 0 ? styles.left : styles.right}`}
-                            initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
+                            className={styles.project}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ delay: i * 0.1, duration: 0.5 }}
                         >
-                            {/* Laptop Mockup */}
-                            <div className={styles.laptop}>
-                                <div className={styles.laptopScreen}>
-                                    <div className={styles.laptopHeader}>
-                                        <span className={styles.dots}>
-                                            <span style={{ background: '#ff5f56' }} />
-                                            <span style={{ background: '#ffbd2e' }} />
-                                            <span style={{ background: '#27ca40' }} />
-                                        </span>
-                                    </div>
-                                    <a href={p.demo} target="_blank" rel="noopener noreferrer">
-                                        <img src={p.image} alt={p.title} onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/191919/666?text=Project'; }} />
-                                    </a>
+                            {/* IDE Window Header */}
+                            <div className={styles.laptopHeader}>
+                                <div className={styles.dots}>
+                                    <span style={{ background: '#ff5f56' }} />
+                                    <span style={{ background: '#ffbd2e' }} />
+                                    <span style={{ background: '#27ca40' }} />
                                 </div>
-                                <div className={styles.laptopBase} />
+                                <span className={styles.projectTitleSmall}>
+                                    {p.title.toLowerCase().replace(/\s+/g, '-')}
+                                </span>
                             </div>
 
-                            {/* Project Info */}
+                            {/* Project Image */}
+                            <div className={styles.laptopScreen}>
+                                {p.demo ? (
+                                    <a href={p.demo} target="_blank" rel="noopener noreferrer">
+                                        <img src={p.image} alt={p.title} onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/0f172a/cbd5e1?text=Project'; }} />
+                                    </a>
+                                ) : (
+                                    <img src={p.image} alt={p.title} onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/0f172a/cbd5e1?text=Project'; }} />
+                                )}
+                            </div>
+
+                            {/* Content Panel */}
                             <div className={styles.projectInfo}>
-                                <span className={styles.circleDot} style={{ borderColor: p.color }} />
-                                <h3 style={{ color: p.color }}>{p.title}</h3>
-                                <p>{p.description}</p>
-                                <div className={styles.tags}>{p.tags.map(t => <span key={t}>{t}</span>)}</div>
+                                <div>
+                                    <h3>{p.title}</h3>
+                                    <p className={styles.projectTagline} style={{ color: p.color, fontSize: '0.9em', marginBottom: '10px', fontWeight: 600 }}>{p.tagline}</p>
+                                    <div className={styles.tags}>
+                                        {p.tags.map(t => {
+                                            const [tech, use] = t.split(':');
+                                            return (
+                                                <span key={t} style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+                                                    <strong>{tech}</strong>{use && <span style={{ opacity: 0.7 }}>: {use}</span>}
+                                                </span>
+                                            );
+                                        })}
+                                    </div>
+                                    <p>{p.description}</p>
+                                </div>
                                 <div className={styles.projectLinks}>
-                                    <a href={p.demo} target="_blank" rel="noopener noreferrer" style={{ background: p.color }}><FaExternalLinkAlt /> Demo</a>
-                                    {p.video && <button onClick={() => setVideoOpen(p.video)} className={styles.videoBtn}><FaYoutube /> Video</button>}
-                                    <Link to={`/project/${p.slug}`} className={styles.detailsBtn}><FaInfoCircle /> Details</Link>
-                                    <a href={p.github} target="_blank" rel="noopener noreferrer"><FaGithub /> Code</a>
+                                    {p.demo && <a href={p.demo} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /> Live Demo</a>}
+                                    {p.video && (
+                                        <button onClick={() => setVideoOpen(p.video)}><FaYoutube /> Preview</button>
+                                    )}
+                                    {/* Handle External Docs Link vs Internal Project Page */}
+                                    {(p as any).docsLink ? (
+                                        <a href={(p as any).docsLink} target="_blank" rel="noopener noreferrer"><FaCode /> View Solution</a>
+                                    ) : (
+                                        <Link to={`/project/${p.slug}`}><FaCode /> Details</Link>
+                                    )}
+                                    <a href={p.github} target="_blank" rel="noopener noreferrer"><FaGithub /> Source</a>
                                 </div>
                             </div>
                         </motion.div>
@@ -350,20 +487,24 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* CERTIFICATIONS */}
+            {/* CERTIFICATIONS - Creative Redesign */}
             <section id="certifications" className={styles.section}>
-                <h2>Certifications</h2>
-                <div className={styles.certsGrid}>
+                <h2><FaTrophy style={{ color: '#fbbf24', marginRight: '10px' }} /> Certifications</h2>
+                <div className={styles.certGrid}>
                     {certifications.map(c => (
-                        <a key={c.id} href={c.link} target="_blank" rel="noopener noreferrer" className={styles.certCard}>
-                            <span className={styles.certIcon}>{c.icon}</span>
-                            <div><h4>{c.title}</h4><p>{c.issuer}</p></div>
-                            <FaExternalLinkAlt className={styles.certLink} />
+                        <a key={c.id} href={c.link} target="_blank" rel="noopener noreferrer" className={styles.certItem}>
+                            <div className={styles.certIconBg}>{c.icon}</div>
+                            <div className={styles.certContent}>
+                                <h4>{c.title}</h4>
+                                <p>{c.issuer}</p>
+                            </div>
+                            <div className={styles.certGlow}></div>
+                            <FaExternalLinkAlt className={styles.certArrow} />
                         </a>
                     ))}
                 </div>
                 <div className={styles.ctaCenter}>
-                    <Link to="/certifications" className={styles.btnOutline}><FaAward /> View All Certifications & Badges</Link>
+                    <Link to="/certifications" className={styles.btnOutline}><FaAward /> View All Credentials</Link>
                 </div>
             </section>
 
@@ -382,50 +523,67 @@ export default function Home() {
                         </div>
                     ))}
                 </div>
-            </section>
-
-            {/* CONTACT */}
-            <section id="contact" className={styles.contactSection}>
-                <h2>Let's Connect</h2>
-                <p>Available for Backend/Cloud roles</p>
-                <div className={styles.contactBtns}>
-                    <button onClick={() => setContactOpen(true)} className={styles.btnPrimary}><FaEnvelope /> Send Message</button>
-                    <a href="https://linkedin.com/in/asksaw" target="_blank" rel="noopener noreferrer" className={`${styles.lottieLink} ${styles.linkedin}`}>
-                        <FaLinkedin />
-                    </a>
-                    <a href="https://github.com/ashishkrshaw" target="_blank" rel="noopener noreferrer" className={`${styles.lottieLink} ${styles.github}`}>
-                        <LottieSocialIcon type="github" size={32} />
-                    </a>
-                    <a href="mailto:ashishkrshaw5@gmail.com" className={`${styles.lottieLink} ${styles.gmail}`}>
-                        <LottieSocialIcon type="gmail" size={32} />
-                    </a>
-                    <a href="https://wa.me/917482947099" target="_blank" rel="noopener noreferrer" className={`${styles.lottieLink} ${styles.whatsapp}`}>
-                        <FaWhatsapp />
-                    </a>
+                <div className={styles.ctaCenter} style={{ marginTop: '30px' }}>
+                    <Link to="/research" className={styles.btnOutline}><FaBook /> View Academic Assignments</Link>
                 </div>
-                <p className={styles.copyright}>© {new Date().getFullYear()} Ashish Kumar Shaw</p>
             </section>
 
-            {/* CONTACT MODAL */}
-            <AnimatePresence>
-                {contactOpen && (
-                    <motion.div className={styles.overlay} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setContactOpen(false)}>
-                        <motion.div className={styles.modal} initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} onClick={e => e.stopPropagation()}>
-                            <button className={styles.closeBtn} onClick={() => setContactOpen(false)}><FaTimes /></button>
-                            <h3>Send Message</h3>
-                            {sent ? <div className={styles.sent}><FaCheck /> Message Sent!</div> : (
-                                <form onSubmit={handleContact}>
-                                    <input type="text" placeholder="Full Name *" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} />
-                                    <input type="email" placeholder="Email *" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
-                                    <input type="text" placeholder="Subject *" required value={formData.subject} onChange={e => setFormData({ ...formData, subject: e.target.value })} />
-                                    <textarea placeholder="Message *" rows={4} required value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} />
-                                    <button type="submit" disabled={sending}>{sending ? <><FaSpinner className={styles.spin} /> Sending...</> : 'Send'}</button>
-                                </form>
-                            )}
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* CONTACT - Creative Redesign */}
+            <section id="contact" className={styles.contactSection}>
+                <div className={styles.contactContent}>
+                    <h2>Ready to Scale?</h2>
+                    <p>
+                        Let's build secure, high-performance cloud solutions together.
+                        <br />Currently available for backend & cloud engineering roles.
+                    </p>
+
+                    <div className={styles.contactCardWrapper}>
+                        {/* Email Card to sawashishkumar327@gmail.com */}
+                        <a href="mailto:sawashishkumar327@gmail.com" className={styles.contactCard}>
+                            <div className={styles.contactIconBox}><FaEnvelope /></div>
+                            <h3>Email Me</h3>
+                            <span>sawashishkumar327@gmail.com</span>
+                        </a>
+
+                        {/* LinkedIn Card */}
+                        <a href="https://linkedin.com/in/asksaw" target="_blank" rel="noopener noreferrer" className={styles.contactCard}>
+                            <div className={styles.contactIconBox}><FaLinkedin /></div>
+                            <h3>LinkedIn</h3>
+                            <span>Let's connect & chat</span>
+                        </a>
+
+                        {/* GitHub Card */}
+                        <a href="https://github.com/ashishkrshaw" target="_blank" rel="noopener noreferrer" className={styles.contactCard}>
+                            <div className={styles.contactIconBox}><FaGithub /></div>
+                            <h3>GitHub</h3>
+                            <span>View my code repositories</span>
+                        </a>
+                    </div>
+
+                    {/* Embedded Contact Form */}
+                    <div className={styles.contactFormEmbedded}>
+                        {sent ? (
+                            <div className={styles.sent}><FaCheck /> Message Sent! Thank you.</div>
+                        ) : (
+                            <form onSubmit={handleContact}>
+                                <input type="text" placeholder="Full Name" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} />
+                                <input type="email" placeholder="Email Address" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
+                                <input type="text" placeholder="Subject" required value={formData.subject} onChange={e => setFormData({ ...formData, subject: e.target.value })} />
+                                <textarea placeholder="Your Message..." rows={5} required value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} />
+                                <button type="submit" disabled={sending}>
+                                    {sending ? <><FaSpinner className={styles.spin} /> Sending...</> : <><FaPaperPlane /> Send Message</>}
+                                </button>
+                            </form>
+                        )}
+                    </div>
+
+                    <p className={styles.copyright} style={{ marginTop: '3em' }}>
+                        © {new Date().getFullYear()} Ashish Kumar Shaw. Built with React & AWS.
+                    </p>
+                </div>
+            </section>
+
+
 
             {/* VIDEO MODAL */}
             <AnimatePresence>

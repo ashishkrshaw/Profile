@@ -1,0 +1,173 @@
+/* Mobile Navigation Styles */
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 1100;
+    transition: all 0.3s ease;
+}
+
+.hamburger:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #f1f5f9;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger span:nth-child(1) {
+    margin-bottom: 5px;
+}
+
+.hamburger span:nth-child(3) {
+    margin-top: 5px;
+}
+
+/* Hamburger to X animation */
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Backdrop overlay */
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.backdrop.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Slide-in drawer */
+.drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(320px, 85vw);
+    height: 100vh;
+    background: linear-gradient(180deg, rgba(5, 7, 10, 0.98) 0%, rgba(13, 17, 23, 0.98) 100%);
+    border-left: 1px solid rgba(0, 168, 204, 0.2);
+    z-index: 1050;
+    padding: 100px 30px 40px;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+}
+
+.drawer.open {
+    right: 0;
+}
+
+/* Navigation links in drawer */
+.navLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.navLinks a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    color: #b3c1d1;
+    font-size: 1.05em;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.navLinks a:hover,
+.navLinks a:focus {
+    color: #00a8cc;
+    background: rgba(0, 168, 204, 0.08);
+    border-color: rgba(0, 168, 204, 0.2);
+    transform: translateX(5px);
+}
+
+.navLinks a svg {
+    font-size: 1.3em;
+    color: #00a8cc;
+    opacity: 0.8;
+}
+
+/* Social links in drawer */
+.socialLinks {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: auto;
+}
+
+.socialLinks a {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #f1f5f9;
+    font-size: 1.4em;
+    transition: all 0.3s ease;
+}
+
+.socialLinks a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 168, 204, 0.3);
+}
+
+.socialLinks a.linkedin:hover {
+    background: linear-gradient(145deg, #0A66C2, #0077b5);
+    border-color: #0A66C2;
+}
+
+.socialLinks a.github:hover {
+    background: linear-gradient(145deg, #24292e, #4b5563);
+    border-color: #333;
+}
+
+/* Show hamburger on mobile */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+}
