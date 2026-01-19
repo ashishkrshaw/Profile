@@ -216,12 +216,10 @@ function getYouTubeEmbedUrl(url: string): string {
 }
 
 export default function Home() {
-    const [contactOpen, setContactOpen] = useState(false);
     const [videoOpen, setVideoOpen] = useState<string | null>(null);
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
     const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
-    const [aboutExpanded, setAboutExpanded] = useState(false);
 
     const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
@@ -231,7 +229,7 @@ export default function Home() {
         try {
             await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...formData, timestamp: new Date().toLocaleString() }) });
             setSent(true);
-            setTimeout(() => { setContactOpen(false); setSent(false); setFormData({ name: '', email: '', subject: '', message: '' }); }, 2000);
+            setTimeout(() => { setSent(false); setFormData({ name: '', email: '', subject: '', message: '' }); }, 2000);
         } catch { alert('Failed to send'); }
         setSending(false);
     };
