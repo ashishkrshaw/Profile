@@ -192,6 +192,51 @@ const projectsData: Record<string, {
             { label: 'Cost', value: 'Micro', color: 'var(--accent-light)' },
             { label: 'Scale', value: 'Auto', color: 'var(--accent-light)' }
         ]
+    },
+    'aws-portfolio-hosting': {
+        title: 'AWS Cloud Portfolio',
+        tagline: 'Secure CI/CD Static Hosting Architecture',
+        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&auto=format&fit=crop',
+        demo: null,
+        github: '',
+        video: undefined,
+        documentation: 'https://docs.google.com/document/d/1t4u7Gt1bdUH-cHazerUBN6VjV0-UMhILLKlmDBY-xwM/edit?usp=sharing',
+        whyItMatters: 'Production-grade portfolio hosting demonstrating Cloud Security Architecture, IAM Least-Privilege Design, and automated CI/CD deployment. Uses private S3 bucket with CloudFront OAC, ensuring zero public access while delivering content globally via HTTPS.',
+        highlights: [
+            'Private S3 + CloudFront OAC',
+            'IAM Least-Privilege CI/CD User',
+            'GitHub Actions Automation',
+            'SSL/TLS via ACM',
+            'Route 53 DNS Management',
+            'CloudFront Cache Invalidation'
+        ],
+        stack: [
+            { name: 'S3', color: '#569A31' },
+            { name: 'CloudFront', color: '#8C4FFF' },
+            { name: 'Route 53', color: '#8C4FFF' },
+            { name: 'ACM', color: '#DD344C' },
+            { name: 'IAM', color: '#DD344C' },
+            { name: 'GitHub Actions', color: '#2088FF' }
+        ],
+        stats: [
+            { label: 'Access Control', value: 'Private', desc: 'S3 blocked publicly' },
+            { label: 'CDN', value: 'Global', desc: 'Edge locations' },
+            { label: 'Deploy', value: 'Auto', desc: 'On git push' },
+            { label: 'Security', value: 'OAC', desc: 'Origin Access Control' }
+        ],
+        architecture: [
+            { title: 'IAM', desc: 'Least Privilege', iconKey: 'FaUserShield' },
+            { title: 'S3', desc: 'Private Storage', iconKey: 'FaCloud' },
+            { title: 'CloudFront', desc: 'CDN + OAC', iconKey: 'FaShieldAlt' },
+            { title: 'Route 53', desc: 'DNS', iconKey: 'FaCogs' },
+            { title: 'ACM', desc: 'HTTPS', iconKey: 'FaLock' },
+            { title: 'GitHub', desc: 'CI/CD', iconKey: 'FaBolt' }
+        ],
+        impact: [
+            { label: 'Security', value: 'Enterprise', color: '#FF9900' },
+            { label: 'Automation', value: 'Full CI/CD', color: 'var(--accent-light)' },
+            { label: 'Cost', value: 'Minimal', color: 'var(--accent-light)' }
+        ]
     }
 };
 
@@ -232,7 +277,8 @@ export default function ProjectDetails() {
                         <div className={styles.links}>
                             {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer" className={styles.demoBtn}><FaExternalLinkAlt /> Live Demo</a>}
                             {project.video && <a href={project.video} target="_blank" rel="noopener noreferrer" className={styles.videoBtn}><FaYoutube /> Video</a>}
-                            <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.githubBtn}><FaGithub /> Source</a>
+                            {project.documentation && <a href={project.documentation} target="_blank" rel="noopener noreferrer" className={styles.demoBtn}><FaExternalLinkAlt /> Read Documentation</a>}
+                            {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.githubBtn}><FaGithub /> Source</a>}
                         </div>
                     </div>
                 </section>

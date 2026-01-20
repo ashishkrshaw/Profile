@@ -242,23 +242,76 @@
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
     .header {
-        padding-top: 80px;
+        padding: 80px 16px 30px;
     }
 
     .header h1 {
-        font-size: 2em;
+        font-size: 1.8em;
+    }
+
+    .subtitle {
+        font-size: 0.95em;
+    }
+
+    .backBtn {
+        padding: 8px 16px;
+        font-size: 0.85em;
+    }
+
+    .section {
+        padding: 20px 16px 40px;
     }
 
     .grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px;
     }
 
     .cardTop {
-        padding: 20px;
+        padding: 18px;
+        gap: 14px;
+    }
+
+    .cardIcon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.1em;
+    }
+
+    .course {
+        font-size: 0.65em;
+        padding: 4px 8px;
+    }
+
+    .card h3 {
+        font-size: 1em;
+    }
+
+    .card p {
+        font-size: 0.85em;
     }
 
     .cardActions {
-        padding: 14px 20px;
+        padding: 12px 18px;
+    }
+
+    .date {
+        font-size: 0.75em;
+    }
+
+    .link {
+        font-size: 0.8em;
+    }
+
+    .footer {
+        padding: 30px 16px;
+    }
+
+    .footer p {
+        font-size: 0.85em;
+    }
+
+    .footerIcon {
+        font-size: 1.6em;
     }
 }

@@ -103,7 +103,7 @@ const skillsData = [
     }
 ];
 
-// Projects: Kavro, Session Guard, EventFlow, Cloud Fun Facts
+// Projects: Kavro, Session Guard, EventFlow, Cloud Fun Facts, AWS Portfolio
 const projects = [
     {
         id: 1,
@@ -156,6 +156,20 @@ const projects = [
         video: 'https://youtu.be/KbsVKpe41Hk',
         image: '/images/Screenshot 2025-11-17 170323.png',
         color: '#8b5cf6'
+    },
+    {
+        id: 5,
+        slug: 'aws-portfolio-hosting',
+        title: 'AWS Cloud Portfolio',
+        tagline: 'Secure CI/CD Static Hosting',
+        description: 'Production-grade portfolio hosting using S3, CloudFront, Route 53, ACM, and GitHub Actions with IAM least-privilege access.',
+        tags: ['S3: Storage', 'CloudFront: CDN', 'GitHub Actions: CI/CD', 'IAM: Security'],
+        demo: null,
+        github: null,
+        video: null,
+        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&auto=format&fit=crop',
+        color: '#FF9900',
+        docsLink: 'https://docs.google.com/document/d/1t4u7Gt1bdUH-cHazerUBN6VjV0-UMhILLKlmDBY-xwM/edit?usp=sharing'
     }
 ];
 
@@ -468,16 +482,13 @@ export default function Home() {
                                 </div>
                                 <div className={styles.projectLinks}>
                                     {p.demo && <a href={p.demo} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /> Live Demo</a>}
-                                    {p.video && (
-                                        <button onClick={() => setVideoOpen(p.video)}><FaYoutube /> Preview</button>
-                                    )}
                                     {/* Handle External Docs Link vs Internal Project Page */}
                                     {(p as any).docsLink ? (
                                         <a href={(p as any).docsLink} target="_blank" rel="noopener noreferrer"><FaCode /> View Solution</a>
                                     ) : (
                                         <Link to={`/project/${p.slug}`}><FaCode /> Details</Link>
                                     )}
-                                    <a href={p.github} target="_blank" rel="noopener noreferrer"><FaGithub /> Source</a>
+                                    {p.github && <a href={p.github} target="_blank" rel="noopener noreferrer"><FaGithub /> Source</a>}
                                 </div>
                             </div>
                         </motion.div>
