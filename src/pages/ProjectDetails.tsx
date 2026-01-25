@@ -41,17 +41,17 @@ const projectsData: Record<string, {
 }> = {
     'kavro': {
         title: 'Kavro',
-        tagline: 'End-to-End Encrypted Messaging Protocol',
+        tagline: 'End-to-End Encrypted Messaging API',
         image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1200&auto=format&fit=crop',
         demo: 'https://kavro.duckdns.org/docs',
         github: 'https://github.com/ashishkrshaw/kavro.git',
         video: undefined,
-        whyItMatters: 'Demonstrates a secure messaging architecture where the server acts solely as a blind relay. Messages are encrypted on the client using NaCl (TweetNaCl) before transmission, ensuring the server never possesses the decryption keys.',
+        whyItMatters: 'A messaging API where messages are encrypted client-side before reaching the server. Built to learn cryptography concepts using NaCl library and Redis for temporary message storage.',
         highlights: [
-            'Client-side Key Generation (NaCl)',
-            'Blind Relay Server Architecture',
-            'Ephemeral Redis Storage',
-            'Dockerized Deployment'
+            'NaCl Encryption Library',
+            'Redis Message Storage',
+            'FastAPI REST API',
+            'Docker Deployment'
         ],
         stack: [
             { name: 'Python', color: 'var(--accent)' },
@@ -61,37 +61,36 @@ const projectsData: Record<string, {
             { name: 'Docker', color: '#2496ed' }
         ],
         stats: [
-            { label: 'Latency', value: '<50ms', desc: 'Message delivery' },
-            { label: 'Server Access', value: 'Blob', desc: 'Encrypted data only' },
-            { label: 'Test Coverage', value: '85%', desc: 'Unit & Integration' },
-            { label: 'Deployment', value: 'Container', desc: 'Docker Compose' }
+            { label: 'Type', value: 'Backend', desc: 'REST API' },
+            { label: 'Encryption', value: 'NaCl', desc: 'TweetNaCl' },
+            { label: 'Storage', value: 'Redis', desc: 'Temporary' },
+            { label: 'Deploy', value: 'Docker', desc: 'Containerized' }
         ],
         architecture: [
             { title: 'Client', desc: 'Key Gen', iconKey: 'FaKey' },
-            { title: 'API', desc: 'Relay', iconKey: 'FaCloud' },
-            { title: 'Sender', desc: 'Encrypt', iconKey: 'FaLock' },
-            { title: 'Store', desc: 'Redis TTL', iconKey: 'SiRedis' },
-            { title: 'Receiver', desc: 'Decrypt', iconKey: 'FaUnlock' }
+            { title: 'API', desc: 'FastAPI', iconKey: 'FaCloud' },
+            { title: 'Encrypt', desc: 'NaCl', iconKey: 'FaLock' },
+            { title: 'Store', desc: 'Redis', iconKey: 'SiRedis' }
         ],
         impact: [
-            { label: 'Security Model', value: 'E2EE', color: 'var(--accent)' },
-            { label: 'Storage', value: 'Ephemeral', color: 'var(--accent-light)' },
-            { label: 'Cryptography', value: 'NaCl', color: 'var(--accent-light)' }
+            { label: 'Learning', value: 'Cryptography', color: 'var(--accent)' },
+            { label: 'Type', value: 'Backend API', color: 'var(--accent-light)' },
+            { label: 'Status', value: 'Deployed', color: 'var(--accent-light)' }
         ]
     },
     'session-guard': {
         title: 'Session Guard',
-        tagline: 'Context-Aware Authentication Middleware',
+        tagline: 'Session Security Middleware',
         image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&auto=format&fit=crop',
         demo: null,
         github: 'https://github.com/ashishkrshaw/session-guard.git',
         video: undefined,
-        whyItMatters: 'Enhances standard session management by validating request context (IP subnet, User-Agent) on every call. If the context changes drastically during an active session, it challenges or invalidates the token to prevent session hijacking.',
+        whyItMatters: 'A FastAPI middleware that adds extra security checks to user sessions. Validates IP address and browser fingerprint on each request to detect suspicious activity.',
         highlights: [
-            'Heuristic Anomaly Detection',
-            'Context-Aware Middleware',
-            'Request Fingerprinting',
-            'Automated Token Revocation'
+            'IP Address Validation',
+            'Browser Fingerprinting',
+            'FastAPI Middleware',
+            'JWT Token Handling'
         ],
         stack: [
             { name: 'Python', color: 'var(--accent)' },
@@ -100,35 +99,35 @@ const projectsData: Record<string, {
             { name: 'JWT', color: '#2496ed' }
         ],
         stats: [
-            { label: 'Overhead', value: '<5ms', desc: 'Per request check' },
-            { label: 'False Positives', value: 'Low', desc: 'Tunable heuristics' },
-            { label: 'Detection', value: 'Real-time', desc: 'On request' },
-            { label: 'Scope', value: 'Global', desc: 'All protected routes' }
+            { label: 'Type', value: 'Middleware', desc: 'Security layer' },
+            { label: 'Auth', value: 'JWT', desc: 'Token-based' },
+            { label: 'Cache', value: 'Redis', desc: 'Session store' },
+            { label: 'Status', value: 'No Demo', desc: 'Code only' }
         ],
         architecture: [
-            { title: 'Login', desc: 'Issue Token', iconKey: 'FaUserShield' },
-            { title: 'Middleware', desc: 'Inspect', iconKey: 'FaHandPaper' },
-            { title: 'Logic', desc: 'Validate', iconKey: 'FaChartLine' },
-            { title: 'Action', desc: 'Allow/401', iconKey: 'FaShieldAlt' }
+            { title: 'Login', desc: 'JWT Token', iconKey: 'FaUserShield' },
+            { title: 'Middleware', desc: 'Check IP', iconKey: 'FaHandPaper' },
+            { title: 'Validate', desc: 'Fingerprint', iconKey: 'FaChartLine' },
+            { title: 'Action', desc: 'Allow/Block', iconKey: 'FaShieldAlt' }
         ],
         impact: [
-            { label: 'Security', value: 'Improved', color: 'var(--accent)' },
-            { label: 'UX Impact', value: 'Minimal', color: 'var(--accent-light)' },
-            { label: 'Integration', value: 'Middleware', color: 'var(--accent-light)' }
+            { label: 'Learning', value: 'Security', color: 'var(--accent)' },
+            { label: 'Type', value: 'Backend', color: 'var(--accent-light)' },
+            { label: 'Demo', value: 'Code Only', color: 'var(--accent-light)' }
         ]
     },
     'event-flow': {
         title: 'EventFlow',
-        tagline: 'Asynchronous Task Processing System',
+        tagline: 'Background Task Queue System',
         image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop',
         demo: 'https://eventdriven.duckdns.org/docs',
         github: 'https://github.com/ashishkrshaw/Event_Driven.git',
-        whyItMatters: 'Decouples high-latency operations (like email sending or report generation) from the main API response loop interactively. Uses a Redis List as a message broker to queue tasks for background workers.',
+        whyItMatters: 'A background task processing system using Redis as a message queue. API endpoints push tasks to Redis, and worker processes pick them up for execution.',
         highlights: [
-            'Producer-Consumer Pattern',
-            'Redis List as Message Queue',
-            'Dead Letter Queue (DLQ)',
-            'Worker Process Isolation'
+            'Redis Message Queue',
+            'Worker Process Pattern',
+            'FastAPI Endpoints',
+            'Docker Compose Setup'
         ],
         stack: [
             { name: 'FastAPI', color: '#009688' },
@@ -137,120 +136,113 @@ const projectsData: Record<string, {
             { name: 'Docker', color: '#2496ed' }
         ],
         stats: [
-            { label: 'API Latency', value: '<20ms', desc: 'Task enqueue only' },
-            { label: 'Throughput', value: 'Scalable', desc: 'Horizontal workers' },
-            { label: 'Reliability', value: 'Retry', desc: 'On worker failure' },
-            { label: 'Monitoring', value: 'Basic', desc: 'Queue depth' }
+            { label: 'Type', value: 'Backend', desc: 'Task queue' },
+            { label: 'Broker', value: 'Redis', desc: 'Message queue' },
+            { label: 'Workers', value: 'Python', desc: 'Background jobs' },
+            { label: 'Deploy', value: 'Docker', desc: 'Compose' }
         ],
         architecture: [
             { title: 'API', desc: 'Enqueue', iconKey: 'FaBolt' },
-            { title: 'Broker', desc: 'Redis List', iconKey: 'SiRedis' },
-            { title: 'Worker', desc: 'Dequeue', iconKey: 'FaCogs' },
-            { title: 'DLQ', desc: 'Failures', iconKey: 'FaRedo' }
+            { title: 'Broker', desc: 'Redis', iconKey: 'SiRedis' },
+            { title: 'Worker', desc: 'Process', iconKey: 'FaCogs' },
+            { title: 'Retry', desc: 'On Fail', iconKey: 'FaRedo' }
         ],
         impact: [
-            { label: 'Responsiveness', value: 'High', color: 'var(--accent)' },
-            { label: 'Coupling', value: 'Loose', color: 'var(--accent-light)' },
-            { label: 'Resilience', value: 'Robust', color: 'var(--accent-light)' }
+            { label: 'Learning', value: 'Queues', color: 'var(--accent)' },
+            { label: 'Pattern', value: 'Producer-Consumer', color: 'var(--accent-light)' },
+            { label: 'Status', value: 'Deployed', color: 'var(--accent-light)' }
         ]
     },
     'cloud-fun-fact-generator': {
         title: 'Cloud Fun Fact Generator',
-        tagline: 'Serverless Application with AI Integration',
+        tagline: 'AI-Powered Fact Generator',
         image: '/images/Screenshot 2025-11-17 170323.png',
         demo: 'https://cfunfact.onrender.com/',
         github: 'https://github.com/ashishkrshaw/Cloud-FunFacts.git',
         video: 'https://youtu.be/KbsVKpe41Hk',
-        whyItMatters: 'A serverless playground to explore AWS primitives. Connects a static frontend hosted on S3/Amplify to a Lambda function via API Gateway, which queries a text-gen AI (Perplexity) and caches results in DynamoDB.',
+        whyItMatters: 'A fun web app that generates cloud computing facts using Perplexity AI API. Built with Node.js and Express backend, MongoDB for storage, deployed on Render.',
         highlights: [
-            'API Gateway + Lambda Integration',
-            'DynamoDB for Caching/Storage',
-            'Perplexity API for Content',
-            'Infrastructure as Code (SAM/CDK)'
+            'Perplexity AI Integration',
+            'Node.js + Express API',
+            'MongoDB Database',
+            'Render Deployment'
         ],
         stack: [
-            { name: 'HTML5', color: '#E34F26' },
-            { name: 'CSS3', color: '#1572B6' },
-            { name: 'JavaScript', color: '#F7DF1E' },
-            { name: 'AWS Lambda', color: '#FF9900' },
-            { name: 'DynamoDB', color: '#4053D6' }
+            { name: 'Node.js', color: '#339933' },
+            { name: 'Express', color: '#000000' },
+            { name: 'MongoDB', color: '#47A248' },
+            { name: 'JavaScript', color: '#F7DF1E' }
         ],
         stats: [
-            { label: 'Architecture', value: 'Serverless', desc: 'Pay-per-use' },
-            { label: 'Availability', value: 'High', desc: 'AWS Managed' },
-            { label: 'Latency', value: 'Variable', desc: 'Cold starts possible' },
-            { label: 'Maintainability', value: 'High', desc: 'No servers' }
+            { label: 'Type', value: 'Full-Stack', desc: 'Node.js app' },
+            { label: 'AI', value: 'Perplexity', desc: 'Text generation' },
+            { label: 'Database', value: 'MongoDB', desc: 'Fact storage' },
+            { label: 'Hosting', value: 'Render', desc: 'Free tier' }
         ],
         architecture: [
-            { title: 'UI', desc: 'Amplify', iconKey: 'FaHtml5' },
-            { title: 'Gateway', desc: 'REST API', iconKey: 'SiAmazonapigateway' },
-            { title: 'Function', desc: 'Lambda', iconKey: 'SiAwslambda' },
-            { title: 'AI', desc: 'External', iconKey: 'FaBrain' }
+            { title: 'Frontend', desc: 'HTML/JS', iconKey: 'FaHtml5' },
+            { title: 'API', desc: 'Express', iconKey: 'FaCogs' },
+            { title: 'AI', desc: 'Perplexity', iconKey: 'FaBrain' },
+            { title: 'DB', desc: 'MongoDB', iconKey: 'SiRedis' }
         ],
         impact: [
-            { label: 'Ops', value: 'Zero', color: 'var(--accent)' },
-            { label: 'Cost', value: 'Micro', color: 'var(--accent-light)' },
-            { label: 'Scale', value: 'Auto', color: 'var(--accent-light)' }
+            { label: 'Learning', value: 'AI APIs', color: 'var(--accent)' },
+            { label: 'Stack', value: 'Node.js', color: 'var(--accent-light)' },
+            { label: 'Status', value: 'Deployed', color: 'var(--accent-light)' }
         ]
     },
     'aws-portfolio-hosting': {
         title: 'AWS Cloud Portfolio',
-        tagline: 'Secure CI/CD Static Hosting Architecture',
+        tagline: 'Static Site Hosting on AWS',
         image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&auto=format&fit=crop',
         demo: null,
         github: '',
         video: undefined,
         documentation: 'https://docs.google.com/document/d/1t4u7Gt1bdUH-cHazerUBN6VjV0-UMhILLKlmDBY-xwM/edit?usp=sharing',
-        whyItMatters: 'Production-grade portfolio hosting demonstrating Cloud Security Architecture, IAM Least-Privilege Design, and automated CI/CD deployment. Uses private S3 bucket with CloudFront OAC, ensuring zero public access while delivering content globally via HTTPS.',
+        whyItMatters: 'My portfolio website hosted on AWS using S3 for storage, CloudFront for CDN, and GitHub Actions for automated deployment. Configured with HTTPS and custom domain.',
         highlights: [
-            'Private S3 + CloudFront OAC',
-            'IAM Least-Privilege CI/CD User',
-            'GitHub Actions Automation',
-            'SSL/TLS via ACM',
-            'Route 53 DNS Management',
-            'CloudFront Cache Invalidation'
+            'S3 Static Hosting',
+            'CloudFront CDN',
+            'GitHub Actions CI/CD',
+            'HTTPS with ACM'
         ],
         stack: [
             { name: 'S3', color: '#569A31' },
             { name: 'CloudFront', color: '#8C4FFF' },
             { name: 'Route 53', color: '#8C4FFF' },
-            { name: 'ACM', color: '#DD344C' },
-            { name: 'IAM', color: '#DD344C' },
             { name: 'GitHub Actions', color: '#2088FF' }
         ],
         stats: [
-            { label: 'Access Control', value: 'Private', desc: 'S3 blocked publicly' },
-            { label: 'CDN', value: 'Global', desc: 'Edge locations' },
+            { label: 'Type', value: 'Static', desc: 'HTML/CSS/JS' },
+            { label: 'CDN', value: 'CloudFront', desc: 'Global cache' },
             { label: 'Deploy', value: 'Auto', desc: 'On git push' },
-            { label: 'Security', value: 'OAC', desc: 'Origin Access Control' }
+            { label: 'SSL', value: 'ACM', desc: 'Free HTTPS' }
         ],
         architecture: [
-            { title: 'IAM', desc: 'Least Privilege', iconKey: 'FaUserShield' },
-            { title: 'S3', desc: 'Private Storage', iconKey: 'FaCloud' },
-            { title: 'CloudFront', desc: 'CDN + OAC', iconKey: 'FaShieldAlt' },
-            { title: 'Route 53', desc: 'DNS', iconKey: 'FaCogs' },
-            { title: 'ACM', desc: 'HTTPS', iconKey: 'FaLock' },
-            { title: 'GitHub', desc: 'CI/CD', iconKey: 'FaBolt' }
+            { title: 'Code', desc: 'GitHub', iconKey: 'FaBolt' },
+            { title: 'Storage', desc: 'S3', iconKey: 'FaCloud' },
+            { title: 'CDN', desc: 'CloudFront', iconKey: 'FaShieldAlt' },
+            { title: 'DNS', desc: 'Route 53', iconKey: 'FaCogs' }
         ],
         impact: [
-            { label: 'Security', value: 'Enterprise', color: '#FF9900' },
-            { label: 'Automation', value: 'Full CI/CD', color: 'var(--accent-light)' },
-            { label: 'Cost', value: 'Minimal', color: 'var(--accent-light)' }
+            { label: 'Learning', value: 'AWS', color: '#FF9900' },
+            { label: 'Type', value: 'DevOps', color: 'var(--accent-light)' },
+            { label: 'Cost', value: 'Low', color: 'var(--accent-light)' }
         ]
     },
     'ai-weather-forecasting': {
         title: 'AI Weather Forecasting',
-        tagline: 'Real-Time Weather with AI Predictions',
+        tagline: 'Real-Time Weather App',
         image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=1200&auto=format&fit=crop',
         demo: 'https://sd-sb8h.onrender.com',
         github: 'https://github.com/ashishkrshaw/Ai-powered-Weather.git',
         video: 'https://www.youtube.com/watch?v=MIYQR-Ybrn4',
-        whyItMatters: 'A sleek weather app that fetches real-time data from OpenWeather API and uses AI to enhance forecast accuracy. Features a responsive design that works beautifully on all devices.',
+        whyItMatters: 'A clean weather application that fetches live data from OpenWeather API. Built to practice API integration, DOM manipulation, and responsive design.',
         highlights: [
-            'Real-Time Weather Data',
-            'AI-Enhanced Predictions',
-            '20% Better Accuracy',
-            'Responsive UI Design'
+            'OpenWeather API Integration',
+            'City Search Functionality',
+            'Responsive Design',
+            'Clean UI/UX'
         ],
         stack: [
             { name: 'JavaScript', color: '#F7DF1E' },
@@ -259,60 +251,58 @@ const projectsData: Record<string, {
             { name: 'OpenWeather API', color: '#EB6E4B' }
         ],
         stats: [
-            { label: 'Accuracy', value: '+20%', desc: 'Improved predictions' },
-            { label: 'Search Time', value: '-35%', desc: 'Faster results' },
-            { label: 'Design', value: 'Responsive', desc: 'All devices' },
-            { label: 'API', value: 'Real-time', desc: 'Live data' }
+            { label: 'Type', value: 'Frontend', desc: 'Client-side app' },
+            { label: 'API', value: 'REST', desc: 'OpenWeather' },
+            { label: 'Hosting', value: 'Render', desc: 'Free tier' },
+            { label: 'Design', value: 'Responsive', desc: 'Mobile-friendly' }
         ],
         architecture: [
             { title: 'UI', desc: 'HTML/CSS', iconKey: 'FaHtml5' },
             { title: 'Logic', desc: 'JavaScript', iconKey: 'FaCogs' },
-            { title: 'Data', desc: 'OpenWeather', iconKey: 'FaCloud' },
-            { title: 'AI', desc: 'Predictions', iconKey: 'FaBrain' }
+            { title: 'Data', desc: 'OpenWeather', iconKey: 'FaCloud' }
         ],
         impact: [
-            { label: 'UX', value: 'Intuitive', color: '#f59e0b' },
-            { label: 'Speed', value: 'Fast', color: 'var(--accent-light)' },
-            { label: 'Accuracy', value: 'AI-Enhanced', color: 'var(--accent-light)' }
+            { label: 'Learning', value: 'API Skills', color: '#f59e0b' },
+            { label: 'Type', value: 'Frontend', color: 'var(--accent-light)' },
+            { label: 'Status', value: 'Deployed', color: 'var(--accent-light)' }
         ]
     },
     'multi-cloud-dashboard': {
         title: 'Multi-Cloud Dashboard',
-        tagline: 'Unified AWS, Azure & GCP Monitoring Console',
+        tagline: 'Cloud Monitoring Dashboard',
         image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&auto=format&fit=crop',
         demo: 'https://multicloud-management-dashboard.onrender.com/',
         github: 'https://github.com/ashishkrshaw/multicloud-management-dashboard',
         video: undefined,
-        whyItMatters: 'Managing multiple cloud providers is chaotic. This dashboard unifies AWS, Azure, and GCP monitoring into one view with AI-powered insights and instant Telegram alerts for critical issues.',
+        whyItMatters: 'A dashboard UI for visualizing cloud metrics from AWS, Azure, and GCP. Built to learn React, Node.js, and MongoDB — showcasing MERN stack capabilities.',
         highlights: [
-            'Multi-Cloud Unified View',
-            'AI-Generated Insights',
-            'Telegram Bot Alerts',
-            'Cost Optimization Tips'
+            'React Frontend',
+            'Node.js API',
+            'MongoDB Database',
+            'Multi-Cloud UI'
         ],
         stack: [
             { name: 'React', color: '#61DAFB' },
             { name: 'Node.js', color: '#339933' },
             { name: 'MongoDB', color: '#47A248' },
-            { name: 'AWS/Azure/GCP', color: '#FF9900' }
+            { name: 'Express', color: '#000000' }
         ],
         stats: [
+            { label: 'Stack', value: 'MERN', desc: 'Full-stack' },
             { label: 'Clouds', value: '3', desc: 'AWS, Azure, GCP' },
-            { label: 'Cost Savings', value: '25%', desc: 'Waste reduction' },
-            { label: 'Alerts', value: '<30s', desc: 'Telegram delivery' },
-            { label: 'Uptime', value: '99.9%', desc: 'Dashboard availability' }
+            { label: 'Hosting', value: 'Render', desc: 'Free tier' },
+            { label: 'Type', value: 'Dashboard', desc: 'Monitoring UI' }
         ],
         architecture: [
-            { title: 'Clouds', desc: 'AWS/Azure/GCP', iconKey: 'FaCloud' },
+            { title: 'Frontend', desc: 'React', iconKey: 'FaHtml5' },
             { title: 'API', desc: 'Node.js', iconKey: 'FaCogs' },
-            { title: 'DB', desc: 'MongoDB', iconKey: 'SiRedis' },
-            { title: 'AI', desc: 'Insights', iconKey: 'FaBrain' },
-            { title: 'Alerts', desc: 'Telegram', iconKey: 'FaBolt' }
+            { title: 'Database', desc: 'MongoDB', iconKey: 'SiRedis' },
+            { title: 'Deploy', desc: 'Render', iconKey: 'FaCloud' }
         ],
         impact: [
-            { label: 'Efficiency', value: '+40%', color: '#2563eb' },
-            { label: 'MTTR', value: '-32%', color: 'var(--accent-light)' },
-            { label: 'Visibility', value: 'Unified', color: 'var(--accent-light)' }
+            { label: 'Stack', value: 'MERN', color: '#2563eb' },
+            { label: 'Type', value: 'Full-Stack', color: 'var(--accent-light)' },
+            { label: 'Status', value: 'Deployed', color: 'var(--accent-light)' }
         ]
     }
 };
