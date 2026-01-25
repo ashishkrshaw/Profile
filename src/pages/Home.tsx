@@ -10,7 +10,7 @@ import {
     FaPaperPlane, FaBook, FaComments, FaTrophy,
     FaPython, FaLinux
 } from 'react-icons/fa';
-import { SiOracle, SiFastapi, SiMysql, SiRedis, SiTerraform } from 'react-icons/si';
+import { SiOracle, SiFastapi, SiMysql, SiRedis, SiTerraform, SiMongodb, SiNodedotjs, SiJavascript, SiReact } from 'react-icons/si';
 import LottieSocialIcon from '../components/LottieSocialIcon';
 import MobileNav from '../components/layout/MobileNav';
 import CursorGlow from '../components/CursorGlow';
@@ -35,9 +35,10 @@ const academics = [
 
 // TypeWriter Component for animated role text
 const roles = [
-    'Aspiring Cloud & Backend Engineer',
-    'Python & AWS Developer',
-    'Junior Cloud Developer',
+    'Final Year BCA Student',
+    'Tech Enthusiast & Problem Solver',
+    'Full Stack Developer in Making',
+    'Cloud & DevOps Learner',
 ];
 
 const skillsData = [
@@ -100,6 +101,30 @@ const skillsData = [
         icon: <FaShieldAlt />,
         color: '#00D1FF',
         details: ['E2E Encryption', 'OWASP Top 10', 'Risk Scoring', 'Threat Modeling']
+    },
+    {
+        name: 'Node.js',
+        icon: <SiNodedotjs />,
+        color: '#339933',
+        details: ['Express.js', 'REST APIs', 'Async Patterns', 'NPM Ecosystem']
+    },
+    {
+        name: 'JavaScript',
+        icon: <SiJavascript />,
+        color: '#F7DF1E',
+        details: ['ES6+ Features', 'DOM Manipulation', 'Async/Await', 'Functional JS']
+    },
+    {
+        name: 'MongoDB',
+        icon: <SiMongodb />,
+        color: '#47A248',
+        details: ['NoSQL Design', 'Aggregation', 'Mongoose ODM', 'Atlas Cloud']
+    },
+    {
+        name: 'React.js',
+        icon: <SiReact />,
+        color: '#61DAFB',
+        details: ['Hooks & Context', 'Component Design', 'State Management', 'React Router']
     }
 ];
 
@@ -150,12 +175,38 @@ const projects = [
         title: 'Cloud Fun Fact Generator',
         tagline: 'Serverless AI Application',
         description: 'Serverless architecture integrating Perplexity AI to generate unique cloud facts. Handles 1000+ facts with zero server management.',
-        tags: ['Lambda: Compute', 'DynamoDB: NoSQL', 'Amplify: Hosting'],
-        demo: 'https://staging.d2qhlpatspoxmm.amplifyapp.com/',
+        tags: ['Node.js: Backend', 'Express: API', 'MongoDB: NoSQL', 'Render: Hosting'],
+        demo: 'https://cfunfact.onrender.com/',
         github: 'https://github.com/ashishkrshaw/Cloud-FunFacts.git',
         video: 'https://youtu.be/KbsVKpe41Hk',
         image: '/images/Screenshot 2025-11-17 170323.png',
         color: '#8b5cf6'
+    },
+    {
+        id: 6,
+        slug: 'ai-weather-forecasting',
+        title: 'AI Weather Forecasting',
+        tagline: 'Real-Time Weather with AI Predictions',
+        description: 'Real-time weather app with AI-enhanced predictions. Improved forecast accuracy by 20% and reduced user search time by 35% with a responsive, intuitive interface.',
+        tags: ['JavaScript: Logic', 'OpenWeather API: Data', 'HTML5/CSS3: UI', 'AI: Predictions'],
+        demo: 'https://sd-sb8h.onrender.com',
+        github: 'https://github.com/ashishkrshaw/Ai-powered-Weather.git',
+        video: 'https://www.youtube.com/watch?v=MIYQR-Ybrn4',
+        image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&auto=format&fit=crop',
+        color: '#f59e0b'
+    },
+    {
+        id: 7,
+        slug: 'multi-cloud-dashboard',
+        title: 'Multi-Cloud Dashboard',
+        tagline: 'Unified AWS, Azure & GCP Console',
+        description: 'Single console to monitor AWS, Azure, and GCP spend, health, and security signals with AI-generated remediation tips and Telegram alerts.',
+        tags: ['React: Frontend', 'Node.js: Backend', 'MongoDB: Database', 'AI: Insights'],
+        demo: 'https://multicloud-management-dashboard.onrender.com/',
+        github: 'https://github.com/ashishkrshaw/multicloud-management-dashboard',
+        video: null,
+        image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&auto=format&fit=crop',
+        color: '#2563eb'
     },
     {
         id: 5,
@@ -388,8 +439,8 @@ export default function Home() {
                 <h2>About Me</h2>
                 <div className={styles.aboutContent}>
                     <div className={styles.aboutPersonal}>
-                        <p>BCA Cloud & Security student at <strong>Amity University</strong>, focused on building <strong>secure backend systems</strong> and <strong>scalable cloud infrastructure</strong>. I architect solutions with security-first thinking, applying OWASP standards and clean code principles.</p>
-                        <p>Passionate about <strong>Python, AWS, and Docker</strong>. Currently exploring advanced cloud patterns and continuous authentication mechanisms.</p>
+                        <p>Final year <strong>BCA Cloud & Security</strong> student with <strong>7 deployed projects</strong> — from encrypted messaging APIs to multi-cloud dashboards. I build things that work, not just things that compile.</p>
+                        <p>Strong in <strong>Python + FastAPI</strong> for backend, comfortable with <strong>React + Node.js</strong> for full-stack, and hands-on with <strong>AWS, Docker, and CI/CD</strong>. Currently seeking opportunities to contribute real code from day one.</p>
                     </div>
                     <div className={styles.aboutCtas}>
                         <Link to="/research" className={styles.btnOutline}><FaBook /> View My Assignments</Link>

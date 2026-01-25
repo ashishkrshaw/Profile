@@ -158,7 +158,7 @@ const projectsData: Record<string, {
         title: 'Cloud Fun Fact Generator',
         tagline: 'Serverless Application with AI Integration',
         image: '/images/Screenshot 2025-11-17 170323.png',
-        demo: 'https://staging.d2qhlpatspoxmm.amplifyapp.com/',
+        demo: 'https://cfunfact.onrender.com/',
         github: 'https://github.com/ashishkrshaw/Cloud-FunFacts.git',
         video: 'https://youtu.be/KbsVKpe41Hk',
         whyItMatters: 'A serverless playground to explore AWS primitives. Connects a static frontend hosted on S3/Amplify to a Lambda function via API Gateway, which queries a text-gen AI (Perplexity) and caches results in DynamoDB.',
@@ -236,6 +236,83 @@ const projectsData: Record<string, {
             { label: 'Security', value: 'Enterprise', color: '#FF9900' },
             { label: 'Automation', value: 'Full CI/CD', color: 'var(--accent-light)' },
             { label: 'Cost', value: 'Minimal', color: 'var(--accent-light)' }
+        ]
+    },
+    'ai-weather-forecasting': {
+        title: 'AI Weather Forecasting',
+        tagline: 'Real-Time Weather with AI Predictions',
+        image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=1200&auto=format&fit=crop',
+        demo: 'https://sd-sb8h.onrender.com',
+        github: 'https://github.com/ashishkrshaw/Ai-powered-Weather.git',
+        video: 'https://www.youtube.com/watch?v=MIYQR-Ybrn4',
+        whyItMatters: 'A sleek weather app that fetches real-time data from OpenWeather API and uses AI to enhance forecast accuracy. Features a responsive design that works beautifully on all devices.',
+        highlights: [
+            'Real-Time Weather Data',
+            'AI-Enhanced Predictions',
+            '20% Better Accuracy',
+            'Responsive UI Design'
+        ],
+        stack: [
+            { name: 'JavaScript', color: '#F7DF1E' },
+            { name: 'HTML5', color: '#E34F26' },
+            { name: 'CSS3', color: '#1572B6' },
+            { name: 'OpenWeather API', color: '#EB6E4B' }
+        ],
+        stats: [
+            { label: 'Accuracy', value: '+20%', desc: 'Improved predictions' },
+            { label: 'Search Time', value: '-35%', desc: 'Faster results' },
+            { label: 'Design', value: 'Responsive', desc: 'All devices' },
+            { label: 'API', value: 'Real-time', desc: 'Live data' }
+        ],
+        architecture: [
+            { title: 'UI', desc: 'HTML/CSS', iconKey: 'FaHtml5' },
+            { title: 'Logic', desc: 'JavaScript', iconKey: 'FaCogs' },
+            { title: 'Data', desc: 'OpenWeather', iconKey: 'FaCloud' },
+            { title: 'AI', desc: 'Predictions', iconKey: 'FaBrain' }
+        ],
+        impact: [
+            { label: 'UX', value: 'Intuitive', color: '#f59e0b' },
+            { label: 'Speed', value: 'Fast', color: 'var(--accent-light)' },
+            { label: 'Accuracy', value: 'AI-Enhanced', color: 'var(--accent-light)' }
+        ]
+    },
+    'multi-cloud-dashboard': {
+        title: 'Multi-Cloud Dashboard',
+        tagline: 'Unified AWS, Azure & GCP Monitoring Console',
+        image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&auto=format&fit=crop',
+        demo: 'https://multicloud-management-dashboard.onrender.com/',
+        github: 'https://github.com/ashishkrshaw/multicloud-management-dashboard',
+        video: undefined,
+        whyItMatters: 'Managing multiple cloud providers is chaotic. This dashboard unifies AWS, Azure, and GCP monitoring into one view with AI-powered insights and instant Telegram alerts for critical issues.',
+        highlights: [
+            'Multi-Cloud Unified View',
+            'AI-Generated Insights',
+            'Telegram Bot Alerts',
+            'Cost Optimization Tips'
+        ],
+        stack: [
+            { name: 'React', color: '#61DAFB' },
+            { name: 'Node.js', color: '#339933' },
+            { name: 'MongoDB', color: '#47A248' },
+            { name: 'AWS/Azure/GCP', color: '#FF9900' }
+        ],
+        stats: [
+            { label: 'Clouds', value: '3', desc: 'AWS, Azure, GCP' },
+            { label: 'Cost Savings', value: '25%', desc: 'Waste reduction' },
+            { label: 'Alerts', value: '<30s', desc: 'Telegram delivery' },
+            { label: 'Uptime', value: '99.9%', desc: 'Dashboard availability' }
+        ],
+        architecture: [
+            { title: 'Clouds', desc: 'AWS/Azure/GCP', iconKey: 'FaCloud' },
+            { title: 'API', desc: 'Node.js', iconKey: 'FaCogs' },
+            { title: 'DB', desc: 'MongoDB', iconKey: 'SiRedis' },
+            { title: 'AI', desc: 'Insights', iconKey: 'FaBrain' },
+            { title: 'Alerts', desc: 'Telegram', iconKey: 'FaBolt' }
+        ],
+        impact: [
+            { label: 'Efficiency', value: '+40%', color: '#2563eb' },
+            { label: 'MTTR', value: '-32%', color: 'var(--accent-light)' },
+            { label: 'Visibility', value: 'Unified', color: 'var(--accent-light)' }
         ]
     }
 };
