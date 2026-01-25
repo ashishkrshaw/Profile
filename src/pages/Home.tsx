@@ -439,8 +439,8 @@ export default function Home() {
                 <h2>About Me</h2>
                 <div className={styles.aboutContent}>
                     <div className={styles.aboutPersonal}>
-                        <p>Final year <strong>BCA Cloud & Security</strong> student with <strong>7 deployed projects</strong> — from encrypted messaging APIs to multi-cloud dashboards. I build things that work, not just things that compile.</p>
-                        <p>Strong in <strong>Python + FastAPI</strong> for backend, comfortable with <strong>React + Node.js</strong> for full-stack, and hands-on with <strong>AWS, Docker, and CI/CD</strong>. Currently seeking opportunities to contribute real code from day one.</p>
+                        <p>Final year <strong>BCA Cloud & Security</strong> student who doesn't just study cloud — I <strong>build on it</strong>. Deployed apps on <strong>AWS (S3, CloudFront, Lambda)</strong>, containerized with <strong>Docker</strong>, and automated with <strong>GitHub Actions CI/CD</strong>.</p>
+                        <p><strong>7 live projects</strong> including encrypted messaging APIs, multi-cloud dashboards, and AI-powered apps. Comfortable with <strong>Python, FastAPI, Node.js, React, and MongoDB</strong>. Ready to contribute real code from day one.</p>
                     </div>
                     <div className={styles.aboutCtas}>
                         <Link to="/research" className={styles.btnOutline}><FaBook /> View My Assignments</Link>
