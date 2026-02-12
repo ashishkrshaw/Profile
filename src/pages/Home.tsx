@@ -10,7 +10,7 @@ import {
     FaPaperPlane, FaBook, FaComments, FaTrophy,
     FaPython, FaLinux
 } from 'react-icons/fa';
-import { SiOracle, SiFastapi, SiMysql, SiRedis, SiTerraform, SiMongodb, SiNodedotjs, SiJavascript, SiReact } from 'react-icons/si';
+import { SiOracle, SiFastapi, SiMysql, SiRedis, SiTerraform, SiMongodb, SiJavascript, SiReact } from 'react-icons/si';
 import LottieSocialIcon from '../components/LottieSocialIcon';
 import MobileNav from '../components/layout/MobileNav';
 import CursorGlow from '../components/CursorGlow';
@@ -46,85 +46,80 @@ const skillsData = [
         name: 'Python',
         icon: <FaPython />,
         color: '#3776AB',
-        details: ['Async/Await', 'Pydantic Models', 'OOP Design', 'Type Hints']
+        details: ['REST API development (Kavro, EventFlow)', 'Async programming & background workers', 'Data validation with Pydantic models', 'Clean code with type hints & OOP']
     },
     {
         name: 'AWS',
         icon: <FaAws />,
         color: '#FF9900',
-        details: ['EC2 Deployment', 'Lambda + API GW', 'IAM Policies', 'S3 Buckets']
+        details: ['EC2 instance setup & management', 'S3 + CloudFront CDN deployment', 'IAM roles & security policies', 'CI/CD pipelines with GitHub Actions']
     },
     {
         name: 'FastAPI',
         icon: <SiFastapi />,
         color: '#009688',
-        details: ['REST Endpoints', 'Dependency Injection', 'Middleware', 'OpenAPI Docs']
+        details: ['RESTful API design & development', 'Authentication & middleware layers', 'Request validation & error handling', 'Auto-generated Swagger/OpenAPI docs']
     },
     {
         name: 'Linux',
         icon: <FaLinux />,
         color: '#FCC624',
-        details: ['Ubuntu Server', 'Nginx Reverse Proxy', 'Systemd Services', 'SSH']
+        details: ['Server administration (Ubuntu)', 'Nginx reverse proxy configuration', 'Process management with Systemd', 'Shell scripting & SSH access']
     },
     {
         name: 'GitHub',
         icon: <FaGithub />,
         color: '#ffffff',
-        details: ['Git Workflow', 'Actions CI/CD', 'Branch Strategy', 'Code Review']
+        details: ['Git version control & branching', 'CI/CD with GitHub Actions', 'Pull requests & code reviews', 'Automated build & deploy workflows']
     },
     {
         name: 'MySQL',
         icon: <SiMysql />,
         color: '#4479A1',
-        details: ['Schema Design', 'Complex Queries', 'Indexes', 'Transactions']
+        details: ['Database schema design', 'Complex queries & joins', 'Indexing for query optimization', 'Transaction management & ACID']
     },
     {
         name: 'Docker',
         icon: <FaDocker />,
         color: '#2496ED',
-        details: ['Multi-Stage Builds', 'Docker Compose', 'Volumes', 'Networking']
+        details: ['Containerization of microservices', 'Docker Compose multi-container apps', 'Multi-stage builds for optimization', 'Volume & network management']
     },
     {
         name: 'Redis',
         icon: <SiRedis />,
         color: '#DC382D',
-        details: ['Pub/Sub Messaging', 'Key Expiry (TTL)', 'Queue Pattern', 'Caching']
+        details: ['Caching for API performance', 'Message queues & job processing', 'Session storage with TTL expiry', 'Pub/Sub real-time messaging']
     },
     {
         name: 'Terraform',
         icon: <SiTerraform />,
         color: '#7B42BC',
-        details: ['IaC Modules', 'State Management', 'AWS Provider', 'Variables']
+        details: ['Infrastructure as Code (IaC)', 'AWS resource provisioning', 'State management & modules', 'Environment configuration']
     },
     {
         name: 'Cybersecurity',
         icon: <FaShieldAlt />,
         color: '#00D1FF',
-        details: ['E2E Encryption', 'OWASP Top 10', 'Risk Scoring', 'Threat Modeling']
+        details: ['End-to-end encryption (NaCl)', 'OWASP Top 10 security practices', 'JWT auth & session management', 'Input validation & threat prevention']
     },
-    {
-        name: 'Node.js',
-        icon: <SiNodedotjs />,
-        color: '#339933',
-        details: ['Express.js', 'REST APIs', 'Async Patterns', 'NPM Ecosystem']
-    },
+
     {
         name: 'JavaScript',
         icon: <SiJavascript />,
         color: '#F7DF1E',
-        details: ['ES6+ Features', 'DOM Manipulation', 'Async/Await', 'Functional JS']
+        details: ['ES6+ modern syntax & features', 'DOM manipulation & event handling', 'Async/Await & Fetch API', 'Frontend-backend integration']
     },
     {
         name: 'MongoDB',
         icon: <SiMongodb />,
         color: '#47A248',
-        details: ['NoSQL Design', 'Aggregation', 'Mongoose ODM', 'Atlas Cloud']
+        details: ['NoSQL schema design', 'CRUD operations & aggregation', 'Mongoose ODM integration', 'Cloud hosting with Atlas']
     },
     {
         name: 'React.js',
         icon: <SiReact />,
         color: '#61DAFB',
-        details: ['Hooks & Context', 'Component Design', 'State Management', 'React Router']
+        details: ['Component-based architecture', 'Hooks, Context & state management', 'React Router for SPA navigation', 'Responsive UI development']
     }
 ];
 
@@ -182,19 +177,7 @@ const projects = [
         image: '/images/Screenshot 2025-11-17 170323.png',
         color: '#8b5cf6'
     },
-    {
-        id: 6,
-        slug: 'ai-weather-forecasting',
-        title: 'AI Weather Forecasting',
-        tagline: 'Real-Time Weather App',
-        description: 'Search any city and get instant weather updates. Clean UI, live data from OpenWeather API, and works great on mobile.',
-        tags: ['JavaScript: Logic', 'OpenWeather API: Data', 'HTML5/CSS3: UI'],
-        demo: 'https://sd-sb8h.onrender.com',
-        github: 'https://github.com/ashishkrshaw/Ai-powered-Weather.git',
-        video: 'https://www.youtube.com/watch?v=MIYQR-Ybrn4',
-        image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?w=600&auto=format&fit=crop',
-        color: '#f59e0b'
-    },
+
     {
         id: 7,
         slug: 'multi-cloud-dashboard',
@@ -357,7 +340,7 @@ export default function Home() {
                         <span className={styles.aksBg}>AKS</span>
                         <img
                             src="/images/profile/ashish1.png"
-                            alt="Ashish Kumar Shaw"
+                            alt="Ashish Kumar Shaw - Cloud and Backend Developer"
                             className={styles.profilePic}
                             onError={(e) => { (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=AKS&background=1595b6&color=fff&size=200'; }}
                         />
@@ -389,7 +372,7 @@ export default function Home() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.6 }}
                     >
-                        Building secure APIs & scalable cloud solutions.
+                        Building secure APIs & scalable cloud solutions — Ashish Kumar Shaw
                     </motion.p>
 
                     {/* CTA Buttons */}
@@ -440,7 +423,7 @@ export default function Home() {
                 <div className={styles.aboutContent}>
                     <div className={styles.aboutPersonal}>
                         <p>Final year <strong>BCA Cloud & Security</strong> student who doesn't just study cloud — I <strong>build on it</strong>. Deployed apps on <strong>AWS (S3, CloudFront, Lambda)</strong>, containerized with <strong>Docker</strong>, and automated with <strong>GitHub Actions CI/CD</strong>.</p>
-                        <p><strong>7 live projects</strong> including encrypted messaging APIs, multi-cloud dashboards, and AI-powered apps. Comfortable with <strong>Python, FastAPI, Node.js, React, and MongoDB</strong>. Ready to contribute real code from day one.</p>
+                        <p><strong>6 live projects</strong> including encrypted messaging APIs, multi-cloud dashboards, and AI-powered apps. Comfortable with <strong>Python, FastAPI, React, and MongoDB</strong>. Ready to contribute real code from day one.</p>
                     </div>
                     <div className={styles.aboutCtas}>
                         <Link to="/research" className={styles.btnOutline}><FaBook /> View My Assignments</Link>
