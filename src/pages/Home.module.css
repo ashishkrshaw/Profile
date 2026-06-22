@@ -153,23 +153,22 @@ html {
 }
 
 .navLinks a svg {
-    font-size: 2.2em;
-    /* Much larger icon */
-    min-width: 40px;
-    /* Bigger holder */
-    min-height: 40px;
-    /* Bigger holder */
-    padding: 14px;
-    background: linear-gradient(145deg, rgba(14, 165, 233, 0.25), rgba(139, 92, 246, 0.2));
-    border-radius: 14px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 1.1em;
+    min-width: 32px;
+    min-height: 32px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--muted);
 }
 
 .navLinks a:hover svg {
-    background: linear-gradient(145deg, var(--accent), var(--violet));
-    color: #fff;
-    transform: translateY(-4px) scale(1.15);
-    box-shadow: 0 8px 16px rgba(14, 165, 233, 0.4);
+    background: rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #60a5fa;
+    transform: translateY(-2px);
 }
 
 .navLinks a span {
@@ -183,24 +182,24 @@ html {
 
 .navSocial a {
     color: var(--muted);
-    font-size: 1.6em;
-    min-width: 42px;
-    /* Holder for 35px icon */
-    min-height: 42px;
+    font-size: 1.4em;
+    min-width: 36px;
+    min-height: 36px;
     padding: 0;
-    background: linear-gradient(145deg, rgba(14, 165, 233, 0.15), rgba(139, 92, 246, 0.1));
-    border-radius: 12px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .navSocial a:hover {
-    background: linear-gradient(145deg, var(--accent), var(--violet));
-    color: #fff !important;
-    transform: translateY(-4px) scale(1.1);
-    box-shadow: 0 10px 20px rgba(14, 165, 233, 0.4);
+    background: rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #60a5fa;
+    transform: translateY(-2px);
 }
 
 .navSocial a:first-child:hover {
@@ -1770,6 +1769,137 @@ html {
     border: 1px solid rgba(251, 191, 36, 0.2);
 }
 
+/* === ACADEMIC WORK SECTION === */
+.academicIntro {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.05em;
+    max-width: 700px;
+    margin: -10px auto 36px;
+    line-height: 1.7;
+}
+
+.academicGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto 30px;
+}
+
+.academicCard2 {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 22px 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--light);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.academicCard2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.academicCard2:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(59, 130, 246, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.academicCard2:hover::before {
+    opacity: 1;
+}
+
+.academicCardIcon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    background: rgba(59, 130, 246, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    color: #60a5fa;
+    margin-top: 2px;
+    transition: all 0.3s ease;
+}
+
+.academicCard2:hover .academicCardIcon {
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+    transform: scale(1.05);
+}
+
+.academicCardBody {
+    flex: 1;
+    min-width: 0;
+}
+
+.academicTag {
+    display: inline-block;
+    font-size: 0.72em;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.academicCardBody h4 {
+    font-family: var(--font-jp);
+    font-size: 1.05em;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.academicCardBody p {
+    color: #94a3b8;
+    font-size: 0.82em;
+    line-height: 1.55;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.academicLinkIcon {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-size: 0.75em;
+    color: rgba(255, 255, 255, 0.15);
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: all 0.3s ease;
+}
+
+.academicCard2:hover .academicLinkIcon {
+    opacity: 1;
+    color: #60a5fa;
+    transform: translate(0, 0);
+}
+
 /* === CONTACT / FOOTER - Obsidian Redesign === */
 .contactSection {
     padding: 120px 8% 80px;
@@ -2550,6 +2680,27 @@ html {
     .ctaCenter a {
         width: 100%;
         justify-content: center;
+    }
+}
+
+/* Academic Grid - Mobile */
+@media (max-width: 768px) {
+    .academicGrid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .academicCard2 {
+        padding: 18px 16px;
+    }
+
+    .academicCardBody h4 {
+        font-size: 0.95em;
+    }
+
+    .academicIntro {
+        font-size: 0.9em;
+        padding: 0 8px;
     }
 }
 

@@ -155,40 +155,41 @@ const projectsData: Record<string, {
     },
     'cloud-fun-fact-generator': {
         title: 'Cloud Fun Fact Generator',
-        tagline: 'AI-Powered Fact Generator',
+        tagline: 'AI-Powered Cloud Knowledge Platform',
         image: '/images/Screenshot 2025-11-17 170323.png',
-        demo: 'https://cfunfact.onrender.com/',
+        demo: null,
         github: 'https://github.com/ashishkrshaw/Cloud-FunFacts.git',
         video: 'https://youtu.be/KbsVKpe41Hk',
-        whyItMatters: 'A fun web app that generates cloud computing facts using Perplexity AI API. Built with Node.js and Express backend, MongoDB for storage, deployed on Render.',
+        whyItMatters: 'Cloud computing concepts can feel dry when buried in documentation. This project tackles that by turning cloud knowledge into bite-sized, engaging facts generated on demand using AI. The idea was simple — what if learning about AWS, containers, or serverless could feel like scrolling through fun trivia instead of reading whitepapers?\n\nOn the backend, I built a RESTful API using Node.js and Express that handles incoming requests, forwards them to the Perplexity AI API for intelligent fact generation, and persists every generated fact in a MongoDB database so users can browse previously generated content. The Express server manages rate limiting, error handling, and clean JSON responses.\n\nThe frontend is a lightweight vanilla JavaScript interface that calls the API endpoint, displays facts with smooth transitions, and lets users save their favorites. MongoDB Atlas handles cloud-hosted persistence, which means the fact library grows organically over time.\n\nThis project taught me practical API integration patterns — handling third-party API keys securely, managing async request chains, structuring a Node.js project for maintainability, and deploying a full-stack app with environment-based configuration. It also reinforced my understanding of NoSQL data modeling, since each fact document stores metadata like category, generation timestamp, and source context.',
         highlights: [
-            'Perplexity AI Integration',
-            'Node.js + Express API',
-            'MongoDB Database',
-            'Render Deployment'
+            'Perplexity AI API integration for intelligent content generation',
+            'RESTful API design with Express.js and proper error handling',
+            'MongoDB Atlas for cloud-hosted NoSQL data persistence',
+            'End-to-end deployment with environment-based configuration'
         ],
         stack: [
             { name: 'Node.js', color: '#339933' },
             { name: 'Express', color: '#000000' },
             { name: 'MongoDB', color: '#47A248' },
-            { name: 'JavaScript', color: '#F7DF1E' }
+            { name: 'JavaScript', color: '#F7DF1E' },
+            { name: 'Perplexity AI', color: '#8b5cf6' }
         ],
         stats: [
-            { label: 'Type', value: 'Full-Stack', desc: 'Node.js app' },
-            { label: 'AI', value: 'Perplexity', desc: 'Text generation' },
-            { label: 'Database', value: 'MongoDB', desc: 'Fact storage' },
-            { label: 'Hosting', value: 'Render', desc: 'Free tier' }
+            { label: 'Type', value: 'Full-Stack', desc: 'Node.js + MongoDB' },
+            { label: 'AI Engine', value: 'Perplexity', desc: 'LLM-powered generation' },
+            { label: 'Database', value: 'MongoDB', desc: 'Atlas cloud-hosted' },
+            { label: 'API Style', value: 'REST', desc: 'Express.js endpoints' }
         ],
         architecture: [
             { title: 'Frontend', desc: 'HTML/JS', iconKey: 'FaHtml5' },
-            { title: 'API', desc: 'Express', iconKey: 'FaCogs' },
-            { title: 'AI', desc: 'Perplexity', iconKey: 'FaBrain' },
-            { title: 'DB', desc: 'MongoDB', iconKey: 'SiRedis' }
+            { title: 'API', desc: 'Express.js', iconKey: 'FaCogs' },
+            { title: 'AI Engine', desc: 'Perplexity', iconKey: 'FaBrain' },
+            { title: 'Database', desc: 'MongoDB', iconKey: 'SiRedis' }
         ],
         impact: [
-            { label: 'Learning', value: 'AI APIs', color: 'var(--accent)' },
-            { label: 'Stack', value: 'Node.js', color: 'var(--accent-light)' },
-            { label: 'Status', value: 'Deployed', color: 'var(--accent-light)' }
+            { label: 'Key Learning', value: 'AI API Integration', color: 'var(--accent)' },
+            { label: 'Architecture', value: 'Full-Stack REST', color: 'var(--accent-light)' },
+            { label: 'Data Layer', value: 'NoSQL Modeling', color: 'var(--accent-light)' }
         ]
     },
     'aws-portfolio-hosting': {

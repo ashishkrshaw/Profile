@@ -107,7 +107,6 @@ export const projects: Project[] = [
     technologies: ["React", "AWS Amplify", "API Gateway", "Lambda (Python)", "DynamoDB", "Perplexity AI"],
     links: {
       github: "https://github.com/ashishkrshaw/Cloud-FunFacts.git",
-      demo: "https://staging.d2qhlpatspoxmm.amplifyapp.com/",
       video: "https://youtu.be/KbsVKpe41Hk"
     }
   },
