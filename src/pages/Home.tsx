@@ -15,6 +15,8 @@ import LottieSocialIcon from '../components/LottieSocialIcon';
 import MobileNav from '../components/layout/MobileNav';
 import CursorGlow from '../components/CursorGlow';
 import CloudArchitecture3D from '../components/CloudArchitecture3D';
+import HeroKeyboardPortal from '../components/HeroKeyboardPortal';
+import SectionConnector from '../components/SectionConnector';
 import styles from './Home.module.css';
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzTu9IbuxizIZ5p8IQEkPTli2Sjsf8On_WZoQ-efiTZdGqImukSq-s-rLcWWQF4vUS-/exec';
@@ -339,13 +341,29 @@ export default function Home() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                 >
-                    {/* Profile Picture with AKS Background */}
+                    {/* Profile Picture with AKS Background + Ring-Burst Pop */}
                     <motion.div
                         className={styles.heroAvatar}
-                        initial={{ scale: 0.8, opacity: 0 }}
+                        initial={{ scale: 0.5, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.1, duration: 0.6 }}
+                        transition={{ delay: 0.1, duration: 0.7, type: 'spring', stiffness: 200, damping: 15 }}
+                        style={{ position: 'relative' }}
                     >
+                        {/* Pulsing ring bursts */}
+                        {[0, 1, 2].map(ring => (
+                            <motion.div
+                                key={ring}
+                                style={{
+                                    position: 'absolute', borderRadius: '50%',
+                                    border: '2px solid rgba(59,130,246,0.5)',
+                                    top: '50%', left: '50%', x: '-50%', y: '-50%',
+                                    width: '100%', height: '100%',
+                                    pointerEvents: 'none',
+                                }}
+                                animate={{ scale: [1, 2.2], opacity: [0.7, 0] }}
+                                transition={{ duration: 2.5, delay: ring * 0.8, repeat: Infinity, ease: 'easeOut' }}
+                            />
+                        ))}
                         <motion.span 
                             className={styles.aksBg}
                             animate={{ opacity: [0.1, 0.2, 0.1] }}
@@ -358,9 +376,9 @@ export default function Home() {
                             alt="Ashish Kumar Shaw - Cloud and Backend Developer"
                             className={styles.profilePic}
                             onError={(e) => { (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=AKS&background=1595b6&color=fff&size=200'; }}
-                            animate={{ y: [0, -15, 0] }}
+                            animate={{ y: [0, -12, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            whileHover={{ scale: 1.05, filter: "drop-shadow(0 0 25px rgba(59, 130, 246, 0.5))" }}
+                            whileHover={{ scale: 1.08, filter: "drop-shadow(0 0 30px rgba(59, 130, 246, 0.7))" }}
                         />
                     </motion.div>
 
@@ -439,6 +457,16 @@ export default function Home() {
                         </motion.span>
                         <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(0, 209, 255, 0.15)", color: "#00D1FF" }}><FaShieldAlt /> Security</motion.span>
                     </motion.div>
+                </motion.div>
+
+                {/* Keyboard Portal — Desktop right panel */}
+                <motion.div
+                    className={styles.heroKeyboardPanel}
+                    initial={{ opacity: 0, x: 60 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1.2, duration: 0.7 }}
+                >
+                    <HeroKeyboardPortal />
                 </motion.div>
 
                 {/* Scroll Down Indicator */}
@@ -618,6 +646,9 @@ export default function Home() {
                 </div>
             </section>
 
+            {/* SECTION CONNECTOR: Projects → Academic Work */}
+            <SectionConnector fromLabel="Projects" toLabel="Academic Work" color="#3b82f6" />
+
             {/* ACADEMIC WORK — Industry-Weighted Assignments */}
             <section id="academic-work" className={styles.section}>
                 <motion.h2
@@ -709,6 +740,9 @@ export default function Home() {
                 </div>
             </section>
 
+            {/* SECTION CONNECTOR: Academic Work → Certifications */}
+            <SectionConnector fromLabel="Academic Work" toLabel="Certifications" color="#a78bfa" />
+
             {/* CERTIFICATIONS - Creative Redesign */}
             <section id="certifications" className={styles.section}>
                 <motion.h2
@@ -747,7 +781,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* EDUCATION & TRAINING - Europass Layout */}
+            {/* EDUCATION — Animated Vertical Timeline */}
             <section id="education" className={styles.section}>
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
@@ -757,21 +791,53 @@ export default function Home() {
                 >
                     Education
                 </motion.h2>
-                <div className={styles.academicsList}>
+
+                <div className={styles.eduTimeline}>
+                    {/* Vertical glowing track */}
+                    <div className={styles.eduTrack}>
+                        <motion.div
+                            className={styles.eduTrackFill}
+                            initial={{ scaleY: 0 }}
+                            whileInView={{ scaleY: 1 }}
+                            viewport={{ once: true, margin: '-100px' }}
+                            transition={{ duration: 1.2, ease: 'easeInOut' }}
+                        />
+                    </div>
+
                     {academics.map((a, i) => (
-                        <motion.div 
-                            key={a.degree} 
-                            className={styles.academicCard}
-                            initial={{ opacity: 0, x: -20 }}
+                        <motion.div
+                            key={a.degree}
+                            className={styles.eduItem}
+                            initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.4, delay: i * 0.1 }}
+                            viewport={{ once: true, margin: '-60px' }}
+                            transition={{ duration: 0.5, delay: i * 0.15 }}
                         >
-                            <FaGraduationCap />
-                            <div className={styles.academicInfo}>
+                            {/* Glowing dot on the track */}
+                            <motion.div
+                                className={styles.eduDot}
+                                initial={{ scale: 0 }}
+                                whileInView={{ scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4, delay: i * 0.15 + 0.3, type: 'spring', stiffness: 260 }}
+                                animate={{ boxShadow: [
+                                    '0 0 0px rgba(59,130,246,0)',
+                                    '0 0 20px rgba(59,130,246,0.9)',
+                                    '0 0 0px rgba(59,130,246,0)',
+                                ] }}
+                                transition2={{ duration: 2.5, delay: i * 0.15 + 0.8, repeat: Infinity }}
+                            >
+                                <FaGraduationCap size={14} />
+                            </motion.div>
+
+                            {/* Card */}
+                            <div className={styles.eduCard}>
+                                <div className={styles.eduYear}>{a.year}</div>
                                 <h4>{a.degree}</h4>
-                                <p className={styles.institution}>{a.institution}</p>
-                                <p className={styles.year}>{a.year} • <span className={styles.status}>{a.status}</span></p>
+                                <p>{a.institution}</p>
+                                <span className={`${styles.status} ${a.status === 'Pursuing' ? styles.statusActive : ''}`}>
+                                    {a.status === 'Pursuing' ? '● Pursuing' : '✓ Completed'}
+                                </span>
                             </div>
                         </motion.div>
                     ))}
