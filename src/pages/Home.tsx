@@ -319,7 +319,7 @@ export default function Home() {
 
             {/* HERO - Professional Cloud/Backend Focus */}
             <section id="hero" className={styles.heroBackground}>
-                {/* Professional Server Background Image */}
+                {/* Background image */}
                 <div className={styles.heroBgImage}>
                     <motion.img
                         src="https://images.unsplash.com/photo-1558494949-ef2e0fd8c3bc?q=80&w=1920&auto=format&fit=crop"
@@ -334,149 +334,158 @@ export default function Home() {
                     }}></div>
                 </div>
 
-                {/* Hero Content */}
-                <motion.div
-                    className={styles.heroOverlayContent}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-                >
-                    {/* Profile Picture with AKS Background + Ring-Burst Pop */}
+                {/* Two-column hero layout */}
+                <div className={styles.heroTwoCol}>
+
+                    {/* LEFT: Profile + text content */}
                     <motion.div
-                        className={styles.heroAvatar}
-                        initial={{ scale: 0.5, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.1, duration: 0.7, type: 'spring', stiffness: 200, damping: 15 }}
-                        style={{ position: 'relative' }}
+                        className={styles.heroOverlayContent}
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                     >
-                        {/* Pulsing ring bursts */}
-                        {[0, 1, 2].map(ring => (
-                            <motion.div
-                                key={ring}
-                                style={{
-                                    position: 'absolute', borderRadius: '50%',
-                                    border: '2px solid rgba(59,130,246,0.5)',
-                                    top: '50%', left: '50%', x: '-50%', y: '-50%',
-                                    width: '100%', height: '100%',
-                                    pointerEvents: 'none',
-                                }}
-                                animate={{ scale: [1, 2.2], opacity: [0.7, 0] }}
-                                transition={{ duration: 2.5, delay: ring * 0.8, repeat: Infinity, ease: 'easeOut' }}
+                        {/* Profile Picture with ring-burst pop */}
+                        <motion.div
+                            className={styles.heroAvatar}
+                            initial={{ scale: 0.5, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ delay: 0.1, duration: 0.7, type: 'spring', stiffness: 200, damping: 15 }}
+                        >
+                            {/* Pulsing ring bursts — overflow:visible on .heroAvatar lets these show */}
+                            {[0, 1, 2].map(ring => (
+                                <motion.div
+                                    key={ring}
+                                    style={{
+                                        position: 'absolute',
+                                        borderRadius: '50%',
+                                        border: '2px solid rgba(59,130,246,0.5)',
+                                        top: '50%',
+                                        left: '50%',
+                                        width: '100%',
+                                        height: '100%',
+                                        pointerEvents: 'none',
+                                        translateX: '-50%',
+                                        translateY: '-50%',
+                                    }}
+                                    animate={{ scale: [1, 2.5], opacity: [0.6, 0] }}
+                                    transition={{ duration: 2.5, delay: ring * 0.85, repeat: Infinity, ease: 'easeOut' }}
+                                />
+                            ))}
+                            <motion.span
+                                className={styles.aksBg}
+                                animate={{ opacity: [0.1, 0.2, 0.1] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                            >
+                                AKS
+                            </motion.span>
+                            <motion.img
+                                src="/images/profile/ashish1.png"
+                                alt="Ashish Kumar Shaw - Cloud and Backend Developer"
+                                className={styles.profilePic}
+                                onError={(e) => { (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=AKS&background=1595b6&color=fff&size=200'; }}
+                                animate={{ y: [0, -12, 0] }}
+                                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                whileHover={{ scale: 1.08, filter: "drop-shadow(0 0 30px rgba(59, 130, 246, 0.7))" }}
                             />
-                        ))}
-                        <motion.span 
-                            className={styles.aksBg}
-                            animate={{ opacity: [0.1, 0.2, 0.1] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        </motion.div>
+
+                        {/* Name */}
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3, duration: 0.6 }}
                         >
-                            AKS
-                        </motion.span>
-                        <motion.img
-                            src="/images/profile/ashish1.png"
-                            alt="Ashish Kumar Shaw - Cloud and Backend Developer"
-                            className={styles.profilePic}
-                            onError={(e) => { (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=AKS&background=1595b6&color=fff&size=200'; }}
-                            animate={{ y: [0, -12, 0] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            whileHover={{ scale: 1.08, filter: "drop-shadow(0 0 30px rgba(59, 130, 246, 0.7))" }}
-                        />
+                            Ashish Kumar Shaw
+                        </motion.h1>
+
+                        {/* TypeWriter Role */}
+                        <motion.p
+                            className={styles.role}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.6 }}
+                        >
+                            <TypeWriter />
+                        </motion.p>
+
+                        {/* Subtitle */}
+                        <motion.p
+                            className={styles.heroSubtitle}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5, duration: 0.6 }}
+                        >
+                            Building secure APIs &amp; scalable cloud solutions — Ashish Kumar Shaw
+                        </motion.p>
+
+                        {/* CTA Buttons */}
+                        <motion.div
+                            className={styles.heroBtns}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.6, duration: 0.6 }}
+                        >
+                            <motion.a
+                                href="/Ashish Kumar Shaw.pdf"
+                                target="_blank"
+                                className={styles.btnPrimary}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <FaAward /> View Resume
+                            </motion.a>
+                            <motion.button
+                                onClick={() => scrollTo('contact')}
+                                className={styles.btnOutline}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <FaComments /> Let's Talk
+                            </motion.button>
+                        </motion.div>
+
+                        {/* Tech Stack Pills */}
+                        <motion.div
+                            className={styles.heroTechStack}
+                            initial="hidden"
+                            animate="visible"
+                            variants={{
+                                hidden: { opacity: 0 },
+                                visible: {
+                                    opacity: 1,
+                                    transition: { delayChildren: 0.8, staggerChildren: 0.1 }
+                                }
+                            }}
+                        >
+                            <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(255, 153, 0, 0.15)", color: "#FF9900" }}><FaAws /> AWS</motion.span>
+                            <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(55, 118, 171, 0.15)", color: "#3776AB" }}><FaCode /> Python</motion.span>
+                            <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(36, 150, 237, 0.15)", color: "#2496ED" }}>
+                                <motion.span style={{ display: 'inline-flex' }} animate={{ y: [0, -3, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}><FaDocker /></motion.span> Docker
+                            </motion.span>
+                            <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(0, 209, 255, 0.15)", color: "#00D1FF" }}><FaShieldAlt /> Security</motion.span>
+                        </motion.div>
                     </motion.div>
 
-                    {/* Name */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3, duration: 0.6 }}
-                    >
-                        Ashish Kumar Shaw
-                    </motion.h1>
-
-                    {/* TypeWriter Role */}
-                    <motion.p
-                        className={styles.role}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4, duration: 0.6 }}
-                    >
-                        <TypeWriter />
-                    </motion.p>
-
-                    {/* Simplified Subtitle */}
-                    <motion.p
-                        className={styles.heroSubtitle}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5, duration: 0.6 }}
-                    >
-                        Building secure APIs & scalable cloud solutions — Ashish Kumar Shaw
-                    </motion.p>
-
-                    {/* CTA Buttons */}
+                    {/* RIGHT: 3D Keyboard Portal */}
                     <motion.div
-                        className={styles.heroBtns}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6, duration: 0.6 }}
+                        className={styles.heroKeyboardPanel}
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.0, duration: 0.8, ease: 'easeOut' }}
                     >
-                        <motion.a 
-                            href="/Ashish Kumar Shaw.pdf" 
-                            target="_blank" 
-                            className={styles.btnPrimary}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <FaAward /> View Resume
-                        </motion.a>
-                        <motion.button 
-                            onClick={() => scrollTo('contact')} 
-                            className={styles.btnOutline}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <FaComments /> Let's Talk
-                        </motion.button>
+                        <HeroKeyboardPortal />
                     </motion.div>
 
-                    {/* Tech Stack Pills */}
-                    <motion.div
-                        className={styles.heroTechStack}
-                        initial="hidden"
-                        animate="visible"
-                        variants={{
-                            hidden: { opacity: 0 },
-                            visible: {
-                                opacity: 1,
-                                transition: { delayChildren: 0.8, staggerChildren: 0.1 }
-                            }
-                        }}
-                    >
-                        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(255, 153, 0, 0.15)", color: "#FF9900" }}><FaAws /> AWS</motion.span>
-                        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(55, 118, 171, 0.15)", color: "#3776AB" }}><FaCode /> Python</motion.span>
-                        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(36, 150, 237, 0.15)", color: "#2496ED" }}>
-                            <motion.span style={{ display: 'inline-flex' }} animate={{ y: [0, -3, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}><FaDocker /></motion.span> Docker
-                        </motion.span>
-                        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(0, 209, 255, 0.15)", color: "#00D1FF" }}><FaShieldAlt /> Security</motion.span>
-                    </motion.div>
-                </motion.div>
+                </div>
 
-                {/* Keyboard Portal — Desktop right panel */}
-                <motion.div
-                    className={styles.heroKeyboardPanel}
-                    initial={{ opacity: 0, x: 60 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 1.2, duration: 0.7 }}
-                >
-                    <HeroKeyboardPortal />
-                </motion.div>
-
-                {/* Scroll Down Indicator */}
+                {/* Scroll Down */}
                 <motion.div
                     className={styles.scrollDown}
                     onClick={() => scrollTo('about')}
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0 }}
                     animate={{ opacity: 1, y: [0, 10, 0] }}
-                    transition={{ 
-                        opacity: { delay: 1, duration: 0.6 },
+                    transition={{
+                        opacity: { delay: 1.5, duration: 0.6 },
                         y: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
                     }}
                     whileHover={{ scale: 1.2, color: "#60a5fa" }}

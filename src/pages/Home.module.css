@@ -371,7 +371,7 @@ html {
     justify-content: center;
     position: relative;
     padding: 120px 5% 60px;
-    overflow: hidden;
+    overflow: visible; /* allow ring bursts to show */
 }
 
 .heroBgImage {
@@ -497,6 +497,7 @@ html {
     position: relative;
     display: inline-block;
     margin-bottom: 1.5em;
+    overflow: visible; /* CRITICAL: allow ring bursts to bleed outside */
 }
 
 /* AKS Background Text */
@@ -2738,19 +2739,41 @@ html {
 }
 
 /* ============================================================
-   HERO KEYBOARD PANEL — positioned panel on right side of hero
+   HERO KEYBOARD PANEL — sits beside hero content on large screens
    ============================================================ */
 .heroKeyboardPanel {
-    position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 220px;
+    position: relative;
+    z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 10;
+    justify-content: center;
     pointer-events: none;
+    /* on mobile this collapses under hero content */
+}
+
+/* Two-column hero: profile+text LEFT, keyboard RIGHT */
+.heroTwoCol {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+@media (max-width: 1024px) {
+    .heroTwoCol {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .heroKeyboardPanel {
+        width: 100%;
+        max-width: 360px;
+    }
 }
 
 /* ============================================================
