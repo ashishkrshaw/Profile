@@ -433,7 +433,9 @@ export default function Home() {
                     >
                         <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(255, 153, 0, 0.15)", color: "#FF9900" }}><FaAws /> AWS</motion.span>
                         <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(55, 118, 171, 0.15)", color: "#3776AB" }}><FaCode /> Python</motion.span>
-                        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(36, 150, 237, 0.15)", color: "#2496ED" }}><FaDocker /> Docker</motion.span>
+                        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(36, 150, 237, 0.15)", color: "#2496ED" }}>
+                            <motion.span style={{ display: 'inline-flex' }} animate={{ y: [0, -3, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}><FaDocker /></motion.span> Docker
+                        </motion.span>
                         <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(0, 209, 255, 0.15)", color: "#00D1FF" }}><FaShieldAlt /> Security</motion.span>
                     </motion.div>
                 </motion.div>
