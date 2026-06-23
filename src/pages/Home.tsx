@@ -318,10 +318,13 @@ export default function Home() {
             <section id="hero" className={styles.heroBackground}>
                 {/* Professional Server Background Image */}
                 <div className={styles.heroBgImage}>
-                    <img
+                    <motion.img
                         src="https://images.unsplash.com/photo-1558494949-ef2e0fd8c3bc?q=80&w=1920&auto=format&fit=crop"
                         alt="Server Room Background"
                         style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.3) contrast(1.2)' }}
+                        initial={{ scale: 1.1 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
                     />
                     <div className={styles.heroBgOverlay} style={{
                         background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95))',
@@ -342,12 +345,21 @@ export default function Home() {
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ delay: 0.1, duration: 0.6 }}
                     >
-                        <span className={styles.aksBg}>AKS</span>
-                        <img
+                        <motion.span 
+                            className={styles.aksBg}
+                            animate={{ opacity: [0.1, 0.2, 0.1] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                            AKS
+                        </motion.span>
+                        <motion.img
                             src="/images/profile/ashish1.png"
                             alt="Ashish Kumar Shaw - Cloud and Backend Developer"
                             className={styles.profilePic}
                             onError={(e) => { (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=AKS&background=1595b6&color=fff&size=200'; }}
+                            animate={{ y: [0, -15, 0] }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                            whileHover={{ scale: 1.05, filter: "drop-shadow(0 0 25px rgba(59, 130, 246, 0.5))" }}
                         />
                     </motion.div>
 
@@ -387,25 +399,42 @@ export default function Home() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6, duration: 0.6 }}
                     >
-                        <a href="/Ashish Kumar Shaw.pdf" target="_blank" className={styles.btnPrimary}>
+                        <motion.a 
+                            href="/Ashish Kumar Shaw.pdf" 
+                            target="_blank" 
+                            className={styles.btnPrimary}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             <FaAward /> View Resume
-                        </a>
-                        <button onClick={() => scrollTo('contact')} className={styles.btnOutline}>
+                        </motion.a>
+                        <motion.button 
+                            onClick={() => scrollTo('contact')} 
+                            className={styles.btnOutline}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             <FaComments /> Let's Talk
-                        </button>
+                        </motion.button>
                     </motion.div>
 
                     {/* Tech Stack Pills */}
                     <motion.div
                         className={styles.heroTechStack}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8, duration: 0.6 }}
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            hidden: { opacity: 0 },
+                            visible: {
+                                opacity: 1,
+                                transition: { delayChildren: 0.8, staggerChildren: 0.1 }
+                            }
+                        }}
                     >
-                        <span><FaAws /> AWS</span>
-                        <span><FaCode /> Python</span>
-                        <span><FaDocker /> Docker</span>
-                        <span><FaShieldAlt /> Security</span>
+                        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(255, 153, 0, 0.15)", color: "#FF9900" }}><FaAws /> AWS</motion.span>
+                        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(55, 118, 171, 0.15)", color: "#3776AB" }}><FaCode /> Python</motion.span>
+                        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(36, 150, 237, 0.15)", color: "#2496ED" }}><FaDocker /> Docker</motion.span>
+                        <motion.span variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} whileHover={{ y: -5, backgroundColor: "rgba(0, 209, 255, 0.15)", color: "#00D1FF" }}><FaShieldAlt /> Security</motion.span>
                     </motion.div>
                 </motion.div>
 
@@ -414,8 +443,12 @@ export default function Home() {
                     className={styles.scrollDown}
                     onClick={() => scrollTo('about')}
                     initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1, duration: 0.6 }}
+                    animate={{ opacity: 1, y: [0, 10, 0] }}
+                    transition={{ 
+                        opacity: { delay: 1, duration: 0.6 },
+                        y: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
+                    }}
+                    whileHover={{ scale: 1.2, color: "#60a5fa" }}
                 >
                     <FaArrowDown />
                 </motion.div>
