@@ -14,6 +14,7 @@ import { SiOracle, SiFastapi, SiMysql, SiRedis, SiTerraform, SiMongodb, SiJavasc
 import LottieSocialIcon from '../components/LottieSocialIcon';
 import MobileNav from '../components/layout/MobileNav';
 import CursorGlow from '../components/CursorGlow';
+import CloudArchitecture3D from '../components/CloudArchitecture3D';
 import styles from './Home.module.css';
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzTu9IbuxizIZ5p8IQEkPTli2Sjsf8On_WZoQ-efiTZdGqImukSq-s-rLcWWQF4vUS-/exec';
@@ -457,7 +458,7 @@ export default function Home() {
             </section>
 
 
-            {/* ABOUT ME - Concise Summary */}
+            {/* ABOUT ME - Concise Summary with 3D Animation */}
             <section id="about" className={styles.section}>
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
@@ -467,21 +468,33 @@ export default function Home() {
                 >
                     About Me
                 </motion.h2>
-                <motion.div 
-                    className={styles.aboutContent}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.6, delay: 0.1 }}
-                >
-                    <div className={styles.aboutPersonal}>
-                        <p>Final year <strong>BCA Cloud & Security</strong> student who doesn't just study cloud — I <strong>build on it</strong>. Deployed apps on <strong>AWS (S3, CloudFront, Lambda)</strong>, containerized with <strong>Docker</strong>, and automated with <strong>GitHub Actions CI/CD</strong>.</p>
-                        <p><strong>6 live projects</strong> including encrypted messaging APIs, multi-cloud dashboards, and AI-powered apps. Comfortable with <strong>Python, FastAPI, React, and MongoDB</strong>. Ready to contribute real code from day one.</p>
-                    </div>
-                    <div className={styles.aboutCtas}>
-                        <Link to="/research" className={styles.btnOutline}><FaBook /> View My Assignments</Link>
-                    </div>
-                </motion.div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3em', alignItems: 'center' }}>
+                    <motion.div 
+                        className={styles.aboutContent}
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        style={{ margin: 0 }}
+                    >
+                        <div className={styles.aboutPersonal}>
+                            <p>Final year <strong>BCA Cloud & Security</strong> student who doesn't just study cloud — I <strong>build on it</strong>. Deployed apps on <strong>AWS (S3, CloudFront, Lambda)</strong>, containerized with <strong>Docker</strong>, and automated with <strong>GitHub Actions CI/CD</strong>.</p>
+                            <p><strong>6 live projects</strong> including encrypted messaging APIs, multi-cloud dashboards, and AI-powered apps. Comfortable with <strong>Python, FastAPI, React, and MongoDB</strong>. Ready to contribute real code from day one.</p>
+                        </div>
+                        <div className={styles.aboutCtas} style={{ justifyContent: 'flex-start' }}>
+                            <Link to="/research" className={styles.btnOutline}><FaBook /> View My Assignments</Link>
+                        </div>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                    >
+                        <CloudArchitecture3D />
+                    </motion.div>
+                </div>
             </section>
 
 
