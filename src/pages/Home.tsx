@@ -822,21 +822,21 @@ export default function Home() {
                             viewport={{ once: true, margin: '-60px' }}
                             transition={{ duration: 0.5, delay: i * 0.15 }}
                         >
-                            {/* Glowing dot on the track */}
+                            {/* Glowing dot on the track — outer: spring entrance, inner: tween glow */}
                             <motion.div
                                 className={styles.eduDot}
-                                initial={{ scale: 0 }}
-                                whileInView={{ scale: 1 }}
+                                initial={{ scale: 0, opacity: 0 }}
+                                whileInView={{ scale: 1, opacity: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.4, delay: i * 0.15 + 0.3, type: 'spring', stiffness: 260 }}
-                                animate={{ boxShadow: [
-                                    '0 0 0px rgba(59,130,246,0)',
-                                    '0 0 20px rgba(59,130,246,0.9)',
-                                    '0 0 0px rgba(59,130,246,0)',
-                                ] }}
-                                transition2={{ duration: 2.5, delay: i * 0.15 + 0.8, repeat: Infinity }}
                             >
-                                <FaGraduationCap size={14} />
+                                <motion.div
+                                    style={{ display: 'contents' }}
+                                    animate={{ opacity: [0.4, 1, 0.4] }}
+                                    transition={{ duration: 2, delay: i * 0.2, repeat: Infinity, ease: 'easeInOut', type: 'tween' }}
+                                >
+                                    <FaGraduationCap size={14} />
+                                </motion.div>
                             </motion.div>
 
                             {/* Card */}
