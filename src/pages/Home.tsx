@@ -288,7 +288,12 @@ export default function Home() {
             <CursorGlow />
 
             {/* NAVBAR */}
-            <nav className={styles.navbar}>
+            <motion.nav 
+                className={styles.navbar}
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+            >
                 <a href="#" className={styles.logo} onClick={() => scrollTo('hero')}>AKS</a>
                 <div className={styles.navLinks}>
                     <a onClick={() => scrollTo('about')}><FaCode /> <span>About</span></a>
@@ -307,7 +312,7 @@ export default function Home() {
                 </div>
                 {/* Mobile Navigation */}
                 <MobileNav scrollTo={scrollTo} />
-            </nav>
+            </motion.nav>
 
             {/* HERO - Professional Cloud/Backend Focus */}
             <section id="hero" className={styles.heroBackground}>
@@ -419,8 +424,21 @@ export default function Home() {
 
             {/* ABOUT ME - Concise Summary */}
             <section id="about" className={styles.section}>
-                <h2>About Me</h2>
-                <div className={styles.aboutContent}>
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5 }}
+                >
+                    About Me
+                </motion.h2>
+                <motion.div 
+                    className={styles.aboutContent}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                >
                     <div className={styles.aboutPersonal}>
                         <p>Final year <strong>BCA Cloud & Security</strong> student who doesn't just study cloud — I <strong>build on it</strong>. Deployed apps on <strong>AWS (S3, CloudFront, Lambda)</strong>, containerized with <strong>Docker</strong>, and automated with <strong>GitHub Actions CI/CD</strong>.</p>
                         <p><strong>6 live projects</strong> including encrypted messaging APIs, multi-cloud dashboards, and AI-powered apps. Comfortable with <strong>Python, FastAPI, React, and MongoDB</strong>. Ready to contribute real code from day one.</p>
@@ -428,15 +446,30 @@ export default function Home() {
                     <div className={styles.aboutCtas}>
                         <Link to="/research" className={styles.btnOutline}><FaBook /> View My Assignments</Link>
                     </div>
-                </div>
+                </motion.div>
             </section>
 
 
             <section id="skills" className={styles.section}>
-                <h2>Skills & Expertise</h2>
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5 }}
+                >
+                    Skills & Expertise
+                </motion.h2>
                 <div className={styles.skillsGrid}>
-                    {skillsData.map((skill) => (
-                        <div key={skill.name} className={styles.skillCard} style={{ '--skill-color': skill.color } as React.CSSProperties}>
+                    {skillsData.map((skill, i) => (
+                        <motion.div 
+                            key={skill.name} 
+                            className={styles.skillCard} 
+                            style={{ '--skill-color': skill.color } as React.CSSProperties}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.4, delay: i * 0.05 }}
+                        >
                             <div className={styles.skillIcon}>
                                 {skill.icon}
                             </div>
@@ -446,13 +479,13 @@ export default function Home() {
                             <div className={styles.skillOverlay}>
                                 <div className={styles.skillOverlayContent}>
                                     <ul>
-                                        {skill.details.map((detail, i) => (
-                                            <li key={i}>{detail}</li>
+                                        {skill.details.map((detail, j) => (
+                                            <li key={j}>{detail}</li>
                                         ))}
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </section>
@@ -463,7 +496,14 @@ export default function Home() {
 
             {/* PROJECTS - Creative IDE Gallery */}
             <section id="projects" className={styles.workSection}>
-                <h2>Latest Works</h2>
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5 }}
+                >
+                    Latest Works
+                </motion.h2>
                 <div className={styles.projectsContainer}>
                     {projects.map((p, i) => (
                         <motion.div
@@ -532,12 +572,29 @@ export default function Home() {
 
             {/* ACADEMIC WORK — Industry-Weighted Assignments */}
             <section id="academic-work" className={styles.section}>
-                <h2>Academic Work</h2>
-                <p className={styles.academicIntro}>
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5 }}
+                >
+                    Academic Work
+                </motion.h2>
+                <motion.p 
+                    className={styles.academicIntro}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                >
                     Hands-on assignments completed under TCS iON's industry-aligned curriculum — each one solving real cloud infrastructure and security challenges.
-                </p>
+                </motion.p>
                 <div className={styles.academicGrid}>
-                    <a href="https://docs.google.com/document/d/1dpvIXbkLinuFM9HmpdwrYZ3L7dKDljn87VCaHlI3B0w/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className={styles.academicCard2}>
+                    <motion.a 
+                        href="https://docs.google.com/document/d/1dpvIXbkLinuFM9HmpdwrYZ3L7dKDljn87VCaHlI3B0w/edit?usp=sharing" 
+                        target="_blank" rel="noopener noreferrer" className={styles.academicCard2}
+                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.4, delay: 0.1 }}
+                    >
                         <div className={styles.academicCardIcon}><FaCloud /></div>
                         <div className={styles.academicCardBody}>
                             <span className={styles.academicTag}>BCA Cloud & Security • TCS iON</span>
@@ -545,8 +602,12 @@ export default function Home() {
                             <p>Comparative deployment of a portfolio across three architectures — EC2 direct hosting, Docker containers, and AWS Lambda serverless — analyzing cost, scalability, and performance tradeoffs.</p>
                         </div>
                         <FaExternalLinkAlt className={styles.academicLinkIcon} />
-                    </a>
-                    <a href="https://docs.google.com/document/d/1vUFwHWiS4VcbgbffzbJkiAmckIknOuc26TRCttUfbF4/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className={styles.academicCard2}>
+                    </motion.a>
+                    <motion.a 
+                        href="https://docs.google.com/document/d/1vUFwHWiS4VcbgbffzbJkiAmckIknOuc26TRCttUfbF4/edit?usp=sharing" 
+                        target="_blank" rel="noopener noreferrer" className={styles.academicCard2}
+                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.4, delay: 0.2 }}
+                    >
                         <div className={styles.academicCardIcon}><FaShieldAlt /></div>
                         <div className={styles.academicCardBody}>
                             <span className={styles.academicTag}>BCA Cloud & Security • TCS iON</span>
@@ -554,8 +615,12 @@ export default function Home() {
                             <p>Multi-layered security implementation applying the AWS Shared Responsibility Model — covering IAM policies, VPC network isolation, encryption at rest, and security group configurations.</p>
                         </div>
                         <FaExternalLinkAlt className={styles.academicLinkIcon} />
-                    </a>
-                    <a href="https://docs.google.com/document/d/1ysDgNE4sSV5yootfFHuriPgLcSEkKbxpnH7FmgE7-5E/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className={styles.academicCard2}>
+                    </motion.a>
+                    <motion.a 
+                        href="https://docs.google.com/document/d/1ysDgNE4sSV5yootfFHuriPgLcSEkKbxpnH7FmgE7-5E/edit?usp=sharing" 
+                        target="_blank" rel="noopener noreferrer" className={styles.academicCard2}
+                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.4, delay: 0.3 }}
+                    >
                         <div className={styles.academicCardIcon}><FaShieldAlt /></div>
                         <div className={styles.academicCardBody}>
                             <span className={styles.academicTag}>BCA Cloud & Security • TCS iON</span>
@@ -563,8 +628,12 @@ export default function Home() {
                             <p>Risk assessment of a healthcare clinic covering threat analysis, vulnerability identification, incident response planning, and security recommendations aligned with industry standards.</p>
                         </div>
                         <FaExternalLinkAlt className={styles.academicLinkIcon} />
-                    </a>
-                    <a href="https://docs.google.com/document/d/1WfqUq-BmLhB3z-ON38wTVDJp9mswczW8Mgv6vY2nJfg/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className={styles.academicCard2}>
+                    </motion.a>
+                    <motion.a 
+                        href="https://docs.google.com/document/d/1WfqUq-BmLhB3z-ON38wTVDJp9mswczW8Mgv6vY2nJfg/edit?usp=sharing" 
+                        target="_blank" rel="noopener noreferrer" className={styles.academicCard2}
+                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.4, delay: 0.4 }}
+                    >
                         <div className={styles.academicCardIcon}><FaBrain /></div>
                         <div className={styles.academicCardBody}>
                             <span className={styles.academicTag}>BCA Cloud & Security • TCS iON</span>
@@ -572,8 +641,12 @@ export default function Home() {
                             <p>End-to-end ML pipeline using AWS SageMaker — from data preprocessing and model training to deployment and real-time inference monitoring in production.</p>
                         </div>
                         <FaExternalLinkAlt className={styles.academicLinkIcon} />
-                    </a>
-                    <a href="https://docs.google.com/document/d/1Gtg3pvnbflNaZn8ANywg2w1qSHNNtLn1kB4l3HyVxfw/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className={styles.academicCard2}>
+                    </motion.a>
+                    <motion.a 
+                        href="https://docs.google.com/document/d/1Gtg3pvnbflNaZn8ANywg2w1qSHNNtLn1kB4l3HyVxfw/edit?usp=sharing" 
+                        target="_blank" rel="noopener noreferrer" className={styles.academicCard2}
+                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.4, delay: 0.5 }}
+                    >
                         <div className={styles.academicCardIcon}><FaServer /></div>
                         <div className={styles.academicCardBody}>
                             <span className={styles.academicTag}>BCA Cloud & Security • TCS iON</span>
@@ -581,7 +654,7 @@ export default function Home() {
                             <p>Data management system using AWS S3 for object storage and DynamoDB for NoSQL database operations — implementing CRUD workflows and access control policies.</p>
                         </div>
                         <FaExternalLinkAlt className={styles.academicLinkIcon} />
-                    </a>
+                    </motion.a>
                 </div>
                 <div className={styles.ctaCenter}>
                     <Link to="/research" className={styles.btnOutline}><FaBook /> View All Assignments</Link>
@@ -590,10 +663,27 @@ export default function Home() {
 
             {/* CERTIFICATIONS - Creative Redesign */}
             <section id="certifications" className={styles.section}>
-                <h2>Certifications</h2>
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5 }}
+                >
+                    Certifications
+                </motion.h2>
                 <div className={styles.certGrid}>
-                    {certifications.map(c => (
-                        <a key={c.id} href={c.link} target="_blank" rel="noopener noreferrer" className={styles.certItem}>
+                    {certifications.map((c, i) => (
+                        <motion.a 
+                            key={c.id} 
+                            href={c.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className={styles.certItem}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.4, delay: i * 0.1 }}
+                        >
                             <div className={styles.certIconBg}>{c.icon}</div>
                             <div className={styles.certContent}>
                                 <h4>{c.title}</h4>
@@ -601,7 +691,7 @@ export default function Home() {
                             </div>
                             <div className={styles.certGlow}></div>
                             <FaExternalLinkAlt className={styles.certArrow} />
-                        </a>
+                        </motion.a>
                     ))}
                 </div>
                 <div className={styles.ctaCenter}>
@@ -611,55 +701,116 @@ export default function Home() {
 
             {/* EDUCATION & TRAINING - Europass Layout */}
             <section id="education" className={styles.section}>
-                <h2>Education</h2>
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5 }}
+                >
+                    Education
+                </motion.h2>
                 <div className={styles.academicsList}>
-                    {academics.map(a => (
-                        <div key={a.degree} className={styles.academicCard}>
+                    {academics.map((a, i) => (
+                        <motion.div 
+                            key={a.degree} 
+                            className={styles.academicCard}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.4, delay: i * 0.1 }}
+                        >
                             <FaGraduationCap />
                             <div className={styles.academicInfo}>
                                 <h4>{a.degree}</h4>
                                 <p className={styles.institution}>{a.institution}</p>
                                 <p className={styles.year}>{a.year} • <span className={styles.status}>{a.status}</span></p>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </section>
 
             {/* CONTACT - Creative Redesign */}
             <section id="contact" className={styles.contactSection}>
-                <div className={styles.contactContent}>
-                    <h2>Ready to Scale?</h2>
-                    <p>
+                <motion.div 
+                    className={styles.contactContent}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                    >
+                        Ready to Scale?
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                    >
                         Let's build secure, high-performance cloud solutions together.
                         <br />Currently available for backend & cloud engineering roles.
-                    </p>
+                    </motion.p>
 
                     <div className={styles.contactCardWrapper}>
                         {/* Email Card to sawashishkumar327@gmail.com */}
-                        <a href="mailto:sawashishkumar327@gmail.com" className={styles.contactCard}>
+                        <motion.a 
+                            href="mailto:sawashishkumar327@gmail.com" 
+                            className={styles.contactCard}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: 0.3 }}
+                        >
                             <div className={styles.contactIconBox}><FaEnvelope /></div>
                             <h3>Email Me</h3>
                             <span>sawashishkumar327@gmail.com</span>
-                        </a>
+                        </motion.a>
 
                         {/* LinkedIn Card */}
-                        <a href="https://linkedin.com/in/asksaw" target="_blank" rel="noopener noreferrer" className={styles.contactCard}>
+                        <motion.a 
+                            href="https://linkedin.com/in/asksaw" 
+                            target="_blank" rel="noopener noreferrer" 
+                            className={styles.contactCard}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: 0.4 }}
+                        >
                             <div className={styles.contactIconBox}><FaLinkedin /></div>
                             <h3>LinkedIn</h3>
                             <span>Let's connect & chat</span>
-                        </a>
+                        </motion.a>
 
                         {/* GitHub Card */}
-                        <a href="https://github.com/ashishkrshaw" target="_blank" rel="noopener noreferrer" className={styles.contactCard}>
+                        <motion.a 
+                            href="https://github.com/ashishkrshaw" 
+                            target="_blank" rel="noopener noreferrer" 
+                            className={styles.contactCard}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: 0.5 }}
+                        >
                             <div className={styles.contactIconBox}><FaGithub /></div>
                             <h3>GitHub</h3>
                             <span>View my code repositories</span>
-                        </a>
+                        </motion.a>
                     </div>
 
                     {/* Embedded Contact Form */}
-                    <div className={styles.contactFormEmbedded}>
+                    <motion.div 
+                        className={styles.contactFormEmbedded}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.6 }}
+                    >
                         {sent ? (
                             <div className={styles.sent}><FaCheck /> Message Sent! Thank you.</div>
                         ) : (
@@ -673,12 +824,12 @@ export default function Home() {
                                 </button>
                             </form>
                         )}
-                    </div>
+                    </motion.div>
 
                     <p className={styles.copyright} style={{ marginTop: '3em' }}>
                         © {new Date().getFullYear()} Ashish Kumar Shaw. Built with React & AWS.
                     </p>
-                </div>
+                </motion.div>
             </section>
 
 
