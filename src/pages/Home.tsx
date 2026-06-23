@@ -7,7 +7,7 @@ import {
     FaEnvelope, FaExternalLinkAlt, FaTimes, FaArrowDown,
     FaCheck, FaSpinner, FaCode, FaShieldAlt,
     FaGraduationCap, FaAward, FaGoogle, FaCog, FaFolderOpen,
-    FaPaperPlane, FaBook, FaComments, FaTrophy,
+    FaPaperPlane, FaBook, FaComments,
     FaPython, FaLinux, FaCloud, FaBrain, FaServer
 } from 'react-icons/fa';
 import { SiOracle, SiFastapi, SiMysql, SiRedis, SiTerraform, SiMongodb, SiJavascript, SiReact } from 'react-icons/si';
