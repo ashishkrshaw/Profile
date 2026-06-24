@@ -347,30 +347,11 @@ export default function Home() {
                         {/* Profile Picture with ring-burst pop */}
                         <motion.div
                             className={styles.heroAvatar}
-                            initial={{ scale: 0.5, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ delay: 0.1, duration: 0.7, type: 'spring', stiffness: 200, damping: 15 }}
+                            initial={{ y: 250, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.2, duration: 0.8, type: 'spring', stiffness: 150, damping: 12 }}
+                            style={{ position: 'relative' }}
                         >
-                            {/* Pulsing ring bursts — overflow:visible on .heroAvatar lets these show */}
-                            {[0, 1, 2].map(ring => (
-                                <motion.div
-                                    key={ring}
-                                    style={{
-                                        position: 'absolute',
-                                        borderRadius: '50%',
-                                        border: '2px solid rgba(59,130,246,0.5)',
-                                        top: '50%',
-                                        left: '50%',
-                                        width: '100%',
-                                        height: '100%',
-                                        pointerEvents: 'none',
-                                        translateX: '-50%',
-                                        translateY: '-50%',
-                                    }}
-                                    animate={{ scale: [1, 2.5], opacity: [0.6, 0] }}
-                                    transition={{ duration: 2.5, delay: ring * 0.85, repeat: Infinity, ease: 'easeOut' }}
-                                />
-                            ))}
                             <motion.span
                                 className={styles.aksBg}
                                 animate={{ opacity: [0.1, 0.2, 0.1] }}
@@ -613,13 +594,7 @@ export default function Home() {
 
                             {/* Project Image */}
                             <div className={styles.laptopScreen}>
-                                {p.demo ? (
-                                    <a href={p.demo} target="_blank" rel="noopener noreferrer">
-                                        <img src={p.image} alt={p.title} onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/0f172a/cbd5e1?text=Project'; }} />
-                                    </a>
-                                ) : (
-                                    <img src={p.image} alt={p.title} onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/0f172a/cbd5e1?text=Project'; }} />
-                                )}
+                                <img src={p.image} alt={p.title} onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x400/0f172a/cbd5e1?text=Project'; }} />
                             </div>
 
                             {/* Content Panel */}
@@ -640,7 +615,6 @@ export default function Home() {
                                     <p>{p.description}</p>
                                 </div>
                                 <div className={styles.projectLinks}>
-                                    {p.demo && <a href={p.demo} target="_blank" rel="noopener noreferrer"><FaExternalLinkAlt /> Live Demo</a>}
                                     {/* Handle External Docs Link vs Internal Project Page */}
                                     {(p as any).docsLink ? (
                                         <a href={(p as any).docsLink} target="_blank" rel="noopener noreferrer"><FaCode /> View Solution</a>

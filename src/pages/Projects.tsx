@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt, FaPlay, FaFileAlt, FaTimes } from 'react-icons/fa';
+import { FaGithub, FaPlay, FaFileAlt, FaTimes } from 'react-icons/fa';
 import { projects } from '../data';
 import styles from './Projects.module.css';
 
@@ -62,11 +62,7 @@ export default function Projects() {
                                 </div>
 
                                 <div className={styles.projectLinks}>
-                                    {project.links.demo && (
-                                        <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className={styles.linkBtn}>
-                                            <FaExternalLinkAlt /> Demo
-                                        </a>
-                                    )}
+
                                     {project.links.github && (
                                         <a href={project.links.github} target="_blank" rel="noopener noreferrer" className={styles.linkBtn}>
                                             <FaGithub /> Code
@@ -139,11 +135,7 @@ export default function Projects() {
                                 </div>
 
                                 <div className={styles.modalLinks}>
-                                    {selectedProject.links.demo && (
-                                        <a href={selectedProject.links.demo} target="_blank" rel="noopener noreferrer" className={styles.modalBtn}>
-                                            <FaExternalLinkAlt /> Live Demo
-                                        </a>
-                                    )}
+
                                     {selectedProject.links.github && (
                                         <a href={selectedProject.links.github} target="_blank" rel="noopener noreferrer" className={styles.modalBtnOutline}>
                                             <FaGithub /> View Source

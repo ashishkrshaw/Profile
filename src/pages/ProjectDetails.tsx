@@ -343,7 +343,7 @@ export default function ProjectDetails() {
                     <div className={styles.heroInfo}>
                         <p className={styles.tagline}>{project.tagline}</p>
                         <div className={styles.links}>
-                            {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer" className={styles.demoBtn}><FaExternalLinkAlt /> Live Demo</a>}
+
                             {project.video && <a href={project.video} target="_blank" rel="noopener noreferrer" className={styles.videoBtn}><FaYoutube /> Video</a>}
                             {project.documentation && <a href={project.documentation} target="_blank" rel="noopener noreferrer" className={styles.demoBtn}><FaExternalLinkAlt /> Read Documentation</a>}
                             {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.githubBtn}><FaGithub /> Source</a>}
