@@ -47,20 +47,20 @@ const CloudArchitecture3D = () => {
                 </motion.div>
 
                 {/* Orbiting Nodes */}
-                <OrbitNode icon={<FaDocker size={28} color="#2496ED" />} angle={0} radius={150} label="Docker" />
-                <OrbitNode icon={<SiKubernetes size={28} color="#326CE5" />} angle={120} radius={150} label="K8s" />
-                <OrbitNode icon={<FaAws size={28} color="#FF9900" />} angle={240} radius={150} label="AWS" />
+                <OrbitNode icon={<FaDocker size={28} color="#2496ED" />} angle={0} radius={150} />
+                <OrbitNode icon={<SiKubernetes size={28} color="#326CE5" />} angle={120} radius={150} />
+                <OrbitNode icon={<FaAws size={28} color="#FF9900" />} angle={240} radius={150} />
                 
                 {/* Inner Orbiting Data Packets */}
-                <DataPacket angle={45} radius={75} duration={3} />
-                <DataPacket angle={225} radius={75} duration={3} delay={1.5} />
+                <DataPacket angle={45} radius={75} />
+                <DataPacket angle={225} radius={75} delay={1.5} />
 
             </motion.div>
         </div>
     );
 };
 
-const OrbitNode = ({ icon, angle, radius, label }: { icon: React.ReactNode, angle: number, radius: number, label: string }) => {
+const OrbitNode = ({ icon, angle, radius }: { icon: React.ReactNode, angle: number, radius: number }) => {
     // Calculate x and y based on angle and radius
     const rad = angle * (Math.PI / 180);
     const x = radius * Math.cos(rad);
@@ -87,7 +87,7 @@ const OrbitNode = ({ icon, angle, radius, label }: { icon: React.ReactNode, angl
     );
 };
 
-const DataPacket = ({ angle, radius, duration, delay = 0 }: { angle: number, radius: number, duration: number, delay?: number }) => {
+const DataPacket = ({ angle, radius, delay = 0 }: { angle: number, radius: number, delay?: number }) => {
     const rad = angle * (Math.PI / 180);
     const x = radius * Math.cos(rad);
     const y = radius * Math.sin(rad);

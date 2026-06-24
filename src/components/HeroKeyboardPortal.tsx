@@ -228,13 +228,13 @@ export default function Keyboard3D() {
                     <div key={ri} style={{ display: 'flex', gap: KEY_GAP, justifyContent: 'center' }}>
                         {row.map((k) => {
                             const isTypedChar = !k.isSpace && !k.isEnter && pressedChars.has(k.char.toLowerCase());
-                            const isEnterActive = k.isEnter && enterPressed;
-                            const isSpaceActive = k.isSpace && pressedChars.has(' ');
+                            const isEnterActive = !!(k.isEnter && enterPressed);
+                            const isSpaceActive = !!(k.isSpace && pressedChars.has(' '));
                             return (
                                 <Key
                                     key={k.char + k.label}
                                     k={k}
-                                    pressed={isTypedChar || isEnterActive || isSpaceActive}
+                                    pressed={Boolean(isTypedChar || isEnterActive || isSpaceActive)}
                                 />
                             );
                         })}
